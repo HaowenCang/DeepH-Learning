@@ -1,0 +1,19 @@
+{
+  "schema_version": "m9-budget-start-v1",
+  "contract_sha256": "B428C01437A57F63BFD0809F31F64A6432422FE8890EC0A8FBD28B7580FEACE9",
+  "m9_01_reaudit_sha256": "25AE6446B70D31977F71475CDB3EA721BFA11ABE2966F30061E060634221180B",
+  "start_utc": "2026-08-11T14:50:05.7533015Z",
+  "deadline_utc": "2026-08-18T14:50:05.7533015Z",
+  "wall_limit_seconds": 604800,
+  "baselines": {
+    "host_vhdx_bytes": 1488977920,
+    "project_reproduction_bytes": 5607,
+    "project_m9_audit_bytes": 50600,
+    "project_control_bytes": 173482,
+    "project_allowlist_bytes": 229689,
+    "host_e_free_bytes": 395097542656
+  },
+  "linux_root": "/home/evan-williams/deeph-m9",
+  "linux_root_existed_at_start": false,
+  "first_mutation": "record_budget_start_and_set_M9_02_IN_PROGRESS"
+}

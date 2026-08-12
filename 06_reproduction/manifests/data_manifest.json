@@ -1,0 +1,105 @@
+{
+  "schema_version": "m9-data-manifest-v1",
+  "generated_utc": "2026-08-11T16:58:20.7560617Z",
+  "stage": "M9-04",
+  "status": "BLOCKED_M9_DATA_B01_OVERLAP_WORK_PACKAGE_REVIEW",
+  "source": {
+    "record": "Zenodo 6555484",
+    "doi": "10.5281/zenodo.6555484",
+    "url": "https://zenodo.org/api/records/6555484/files/graphene_dataset.zip/content",
+    "filename": "graphene_dataset.zip",
+    "bytes": 1833785660,
+    "published_md5": "348c21faacdc62433dd8f01994824916",
+    "local_md5": "348c21faacdc62433dd8f01994824916",
+    "local_sha256": "f48aee772578510b2acba77665b1adba7ee71e977c48aa7e269f9ab3b98a2ac9",
+    "runtime_path": "/home/evan-williams/deeph-m9/data/raw/graphene_dataset.zip"
+  },
+  "download": {
+    "chunk_bytes": 67108864,
+    "chunk_count": 28,
+    "accepted_bytes": 1833785660,
+    "rejected_transient_attempts": 2,
+    "chunk_manifest_runtime_path": "/home/evan-williams/deeph-m9/data/raw/graphene_dataset.zip.chunks.json",
+    "chunk_manifest_sha256": "4ce3ba2ee9aa90abd8609a3b08f7000e8db41536d150819b62ac64397179152c",
+    "failed_initial_partial": {
+      "runtime_path": "/home/evan-williams/deeph-m9/data/raw/graphene_dataset.zip.failed-curl-retry-partial",
+      "bytes": 1426243584,
+      "sha256": "841543968db331475b2117cd58b20884f1a792dc291480725b45aff4c0266d89",
+      "status": "preserved_failure_evidence_not_used"
+    }
+  },
+  "archive": {
+    "zip_test_pass": true,
+    "safe_path_validation_pass": true,
+    "member_count": 4050,
+    "directory_count": 450,
+    "file_count": 3600,
+    "compressed_member_bytes": 1833072838,
+    "uncompressed_bytes": 2360825225,
+    "top_level_paths": [
+      "processed"
+    ],
+    "extracted_runtime_path": "/home/evan-williams/deeph-m9/data/graphene/processed",
+    "archive_inspection_sha256": "67befebd7b0054c78e7de3be25b963caf9efb4b64a9ec9ddf5ac41ca88006bf9",
+    "extraction_manifest_sha256": "4210de860b48ef175a73f80e5243c9cf7d4e28e3d78659dba30b402e335f8989",
+    "inventory_sha256": "048e376ffdf52b3c3a5aba53904a00bda7f55280ed3afd8de55e8515d8247800"
+  },
+  "contract": {
+    "runtime_manifest": "/home/evan-williams/deeph-m9/manifests/graphene_data_contract.json",
+    "runtime_manifest_sha256": "a23e84db1ac3b3d496b73d3103d307619daac32c80c8c87be35a684ca12b31b0",
+    "structure_count": 450,
+    "structure_id_rule": "500..4990 inclusive, step 10",
+    "atomic_number": 6,
+    "atoms_per_structure": 72,
+    "orbitals_per_atom": 13,
+    "orbitals_per_structure": 936,
+    "matrix_keys_per_structure": 2880,
+    "hamiltonian_block_shape": [
+      13,
+      13
+    ],
+    "hamiltonian_dtype": "float64",
+    "local_rotation_shape": [
+      3,
+      3
+    ],
+    "spinful": false,
+    "isorthogonal": false,
+    "structural_training_contract_pass": true,
+    "overlap_required": true,
+    "overlap_present": false,
+    "reference_band_or_kpoint_objects_present": false,
+    "full_m9_physics_contract_pass": false,
+    "blocking_id": "M9-DATA-B01"
+  },
+  "budget_snapshot": {
+    "deadline_remaining_seconds": 597102.71135,
+    "gpu_seconds": {
+      "compatibility": 54.84820560599999,
+      "training": 0.0,
+      "physical_validation": 0.0
+    },
+    "combined_allocated_bytes": 29987569664,
+    "combined_apparent_bytes": 29687393294,
+    "host_vhdx_growth_from_start_bytes": 24259854336,
+    "violations": []
+  },
+  "implementation_sha256": {
+    "m9_range_download.py": "6697be45763e4a2b0c4230810a8e4cdcac77681c1e7c28799cbacfa415231db0",
+    "m9_dataset_archive.py": "2c4a80e54d6ec9c155f6967fa1a5f44e59f0a4f1addd5c7ce562ebca6c5ea060",
+    "m9_data_contract.py": "253bd3daeefa69dc204263074578c3659d52e26bff111afac67c2ce54ab860f4"
+  },
+  "authorization_boundary": {
+    "training_started": false,
+    "model_output_observed": false,
+    "tolerances_frozen": false,
+    "openmx_installed": false,
+    "dft_labels_generated": false,
+    "route_change_requires_user_decision": true,
+    "authorized_route_decision": "D-017",
+    "authorized_route": "overlap_only_openmx_same_basis_for_frozen_450_structures",
+    "work_package": "08_audits/M9_overlap_only_openmx_work_package.md",
+    "work_package_status": "REVIEW",
+    "training_remains_forbidden_until_M9_DATA_B01_closed": true
+  }
+}

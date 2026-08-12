@@ -1,0 +1,125 @@
+{
+  "schema_version": "m9-overlap-source-manifest-v1-project-copy",
+  "runtime_manifest": "/home/evan-williams/deeph-m9/manifests/openmx_overlap_source_manifest.json",
+  "runtime_manifest_sha256": "bdce33ea88a5214e631dd917fe6717967dd38e8bd2804ad53f3fbdc85f17397c",
+  "scope": "source_identity_only_no_extraction_build_install_or_calculation",
+  "application_order": [
+    "extract_openmx3.9_base",
+    "apply_official_patch3.9.9_into_openmx3.9/source",
+    "overwrite_openmx.c_and_truncation.c_from_overlap_only_commit",
+    "apply_frozen_makefile_contract"
+  ],
+  "archives": {
+    "openmx_base": {
+      "path": "/home/evan-williams/deeph-m9/downloads/overlap_sources/openmx3.9.tar.gz",
+      "bytes": 166014953,
+      "sha256": "27bb56bd4d1582d33ad32108fb239b546bdd1bdffd6f5b739b4423da1ab93ae2",
+      "member_count": 1596,
+      "regular_file_count": 1574,
+      "directory_count": 22,
+      "link_count": 0,
+      "special_count": 0,
+      "uncompressed_regular_bytes": 496170279,
+      "required_members": {
+        "openmx3.9/source/openmx.c": {
+          "bytes": 23912,
+          "sha256": "ce69c1eb7b31d7771ecce3342718da1642d9c2edef15ebed704d3a3ce48d4c7b"
+        },
+        "openmx3.9/source/truncation.c": {
+          "bytes": 295599,
+          "sha256": "2b1e60ed5b4fa07716c36d9952ef2a6db746cf1547e3f20f0c7a52541349aa05"
+        },
+        "openmx3.9/source/makefile": {
+          "bytes": 41237,
+          "sha256": "a27d5d78fd6d2e595be1f1c27b058e21779e6a998c2f486a74a06e1c7d9816ab"
+        },
+        "openmx3.9/DFT_DATA19/PAO/C6.0.pao": {
+          "bytes": 693570,
+          "sha256": "1442a834dbc2b9b55e8f11a20734c7b77765fa4e05ca3e1b1f004da46bfaaef4"
+        },
+        "openmx3.9/DFT_DATA19/VPS/C_PBE19.vps": {
+          "bytes": 333898,
+          "sha256": "4b9c78eb72be25ca46366b8fd39c74ae7172d7db9e77b29782a42f71901b38a7"
+        }
+      }
+    },
+    "openmx_patch_3_9_9": {
+      "path": "/home/evan-williams/deeph-m9/downloads/overlap_sources/patch3.9.9.tar.gz",
+      "bytes": 1074993,
+      "sha256": "20cccc4e3412a814a53568f400260e90f79f0bfb7e2bed84447fe071b26edd38",
+      "member_count": 93,
+      "regular_file_count": 92,
+      "directory_count": 1,
+      "link_count": 0,
+      "special_count": 0,
+      "uncompressed_regular_bytes": 7210068,
+      "required_members": {
+        "openmx.c": {
+          "bytes": 23327,
+          "sha256": "a497df24c9974fa206e62a0a20664bf3939f7a1480b2cc5d95e3cc176dc09f79"
+        },
+        "truncation.c": {
+          "bytes": 294038,
+          "sha256": "bedb986a8301a5813ebf4a95a9bf970f9eaf4c12d0a5f0dadf0408b81842f9dd"
+        },
+        "makefile": {
+          "bytes": 43014,
+          "sha256": "bf01251254b3f0e3ee010346835bcbe4707aaa57c1f741eb1c84244e849e9d9b"
+        }
+      }
+    },
+    "hdf5_1_12_1": {
+      "path": "/home/evan-williams/deeph-m9/downloads/overlap_sources/hdf5-1.12.1.tar.gz",
+      "bytes": 13534796,
+      "sha256": "79c66ff67e666665369396e9c90b32e238e501f345afd2234186bfb8331081ca",
+      "member_count": 3602,
+      "regular_file_count": 3602,
+      "directory_count": 0,
+      "link_count": 0,
+      "special_count": 0,
+      "uncompressed_regular_bytes": 122744392,
+      "required_members": {
+        "hdf5-1.12.1/configure": {
+          "bytes": 1226992,
+          "sha256": "eb520441f052ba5f4f78ec211d9255b73a73f83b3c6d988dfe2e19e679f24f80"
+        },
+        "hdf5-1.12.1/COPYING": {
+          "bytes": 5505,
+          "sha256": "49875a6b3fd8a684f3d03d5418fcfa057efae9813194296d11f2828a24e4a6e0"
+        }
+      }
+    }
+  },
+  "overlap_only_repository": {
+    "path": "/home/evan-williams/deeph-m9/software/overlap-only-OpenMX",
+    "remote": "https://github.com/mzjb/overlap-only-OpenMX.git",
+    "commit": "c8bd8f4e01f9f19868bf2928671c21b12272a6f7",
+    "clean": true,
+    "files": {
+      "README.md": {
+        "bytes": 2076,
+        "sha256": "82036b7d44975ecd47b5854e11b8fb4fe1693635de09ffc05c4ed837d652ab9a"
+      },
+      "overlap_only_patch/openmx.c": {
+        "bytes": 34239,
+        "sha256": "96fe547d48147263a017bc116996734504d0f7862245d753a5b80c04a52cfcd5"
+      },
+      "overlap_only_patch/truncation.c": {
+        "bytes": 297463,
+        "sha256": "6abaa8c7d53a8e7fa10d32b4b59ea5686dabf48694b20ffbec2932e6aa759624"
+      },
+      "examples/MATBG.dat": {
+        "bytes": 507207,
+        "sha256": "7c8547c9dd97c52dc50519b10195e6a737428fb2b3076f14bee5dd473bd53ac9"
+      }
+    }
+  },
+  "selected_basis": {
+    "species": "C",
+    "paos": "C6.0-s2p2d1",
+    "vps": "C_PBE19",
+    "radial_cutoff_bohr": 6.0,
+    "orbital_functions_per_atom": 13,
+    "source_archive": "openmx_base"
+  }
+}

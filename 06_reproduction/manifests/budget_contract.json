@@ -1,0 +1,102 @@
+{
+  "schema_version": "m9-budget-contract-v1",
+  "decision_ids": ["D-013", "D-014", "D-017"],
+  "start_event": "first_mutating_m9_command_after_m9_01_reaudit_pass",
+  "wall_clock": {
+    "limit_seconds": 604800,
+    "start_utc": null,
+    "deadline_utc": null,
+    "precommand_check_required": true,
+    "command_timeout_is_remaining_seconds": true
+  },
+  "gpu": {
+    "device_count": 1,
+    "identity": "NVIDIA GeForce RTX 4080 Laptop GPU",
+    "accounting": "union_of_m9_cuda_process_wall_intervals",
+    "count_success_failure_oom_and_abnormal_exit": true,
+    "total_limit_seconds": 86400,
+    "exclusive_buckets": {
+      "compatibility": 7200,
+      "training": 57600,
+      "physical_validation": 21600
+    },
+    "event_fields": [
+      "bucket",
+      "start_utc",
+      "end_utc",
+      "start_monotonic_ns",
+      "end_monotonic_ns",
+      "pid",
+      "exit_code",
+      "command_sha256",
+      "config_sha256",
+      "cumulative_union_seconds"
+    ]
+  },
+  "cpu_subbudgets": {
+    "accounting": "wall_intervals_of_commands_explicitly_assigned_to_each_overlap_bucket",
+    "exclusive_buckets_seconds": {
+      "overlap_build": 7200,
+      "overlap_smoke": 1800,
+      "overlap_batch": 21600
+    },
+    "gpu_seconds_for_overlap_route": 0,
+    "limits_are_within_the_existing_overall_wall_clock": true
+  },
+  "storage": {
+    "linux_root": "/home/evan-williams/deeph-m9",
+    "host_vhdx": "E:\\Laptop\\WSL\\ext4.vhdx",
+    "limit_bytes": 107374182400,
+    "project_audit_allowlist": {
+      "sublimit_bytes": 1073741824,
+      "directory": "E:\\Projects\\Codex\\DeepH\\06_reproduction",
+      "m9_audit_prefix": "E:\\Projects\\Codex\\DeepH\\08_audits\\M9_",
+      "exact_control_files": [
+        "E:\\Projects\\Codex\\DeepH\\README.md",
+        "E:\\Projects\\Codex\\DeepH\\decisions.md",
+        "E:\\Projects\\Codex\\DeepH\\00_scope\\master_execution_plan.md",
+        "E:\\Projects\\Codex\\DeepH\\00_scope\\M8_decision_package.md",
+        "E:\\Projects\\Codex\\DeepH\\02_source_ledger\\version_registry.md",
+        "E:\\Projects\\Codex\\DeepH\\08_audits\\progress_tracker.md"
+      ],
+      "forbidden_content": [
+        "dataset",
+        "environment",
+        "checkpoint",
+        "large_runtime_output"
+      ]
+    },
+    "metrics": [
+      "linux_apparent_bytes",
+      "linux_allocated_bytes",
+      "project_audit_apparent_bytes",
+      "project_audit_allocated_bytes",
+      "combined_apparent_bytes",
+      "combined_allocated_bytes",
+      "host_vhdx_growth_from_start_bytes"
+    ],
+    "overall_limit_applies_to": [
+      "combined_apparent_bytes",
+      "combined_allocated_bytes",
+      "host_vhdx_growth_from_start_bytes"
+    ],
+    "forecast_required_before": [
+      "download",
+      "extract",
+      "hdf5_build",
+      "openmx_build",
+      "overlap_generation",
+      "graph_generation",
+      "training"
+    ]
+  },
+  "hard_stop": {
+    "on_reached_limit": true,
+    "on_forecast_exceeds_limit": true,
+    "write_event": "HARD_STOP",
+    "evidence_must_not_be_deleted_to_evade_limit": true,
+    "large_or_runtime_artifacts_outside_linux_root_forbidden": true,
+    "only_project_audit_allowlist_may_exist_outside_linux_root": true
+  },
+  "ledger_path": "/home/evan-williams/deeph-m9/manifests/budget_ledger.jsonl"
+}

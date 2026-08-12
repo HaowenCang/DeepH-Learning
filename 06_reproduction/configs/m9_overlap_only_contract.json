@@ -1,0 +1,165 @@
+{
+  "schema_version": "m9-overlap-only-contract-v1",
+  "decision_ids": ["D-013", "D-014", "D-016", "D-017"],
+  "scope": {
+    "material": "graphene",
+    "structure_ids": {
+      "start": 500,
+      "stop_inclusive": 4990,
+      "step": 10,
+      "count": 450
+    },
+    "allowed_output": [
+      "same-basis real-space overlap blocks",
+      "OpenMX coordinate and execution logs needed for provenance",
+      "derived overlap validation reports and hashes"
+    ],
+    "forbidden_output": [
+      "Hamiltonian labels",
+      "SCF density or energy labels",
+      "forces",
+      "density matrices",
+      "other DFT labels"
+    ],
+    "mpi_ranks": 1,
+    "openmp_threads": 1
+  },
+  "runtime_paths": {
+    "linux_root": "/home/evan-williams/deeph-m9",
+    "source_downloads": "/home/evan-williams/deeph-m9/downloads/overlap_sources",
+    "openmx_build_root": "/home/evan-williams/deeph-m9/software/openmx-overlap-build",
+    "overlap_repository": "/home/evan-williams/deeph-m9/software/overlap-only-OpenMX",
+    "hdf5_prefix": "/home/evan-williams/deeph-m9/env/hdf5-1.12.1",
+    "processed_data": "/home/evan-williams/deeph-m9/data/graphene/processed",
+    "run_root": "/home/evan-williams/deeph-m9/runs/overlap-only-openmx",
+    "manifest_root": "/home/evan-williams/deeph-m9/manifests"
+  },
+  "software": {
+    "openmx_base": {
+      "version": "3.9",
+      "url": "https://www.openmx-square.org/openmx3.9.tar.gz",
+      "bytes": 166014953,
+      "sha256": "27bb56bd4d1582d33ad32108fb239b546bdd1bdffd6f5b739b4423da1ab93ae2"
+    },
+    "openmx_official_patch": {
+      "version": "3.9.9",
+      "url": "https://www.openmx-square.org/bugfixed/21Oct17/patch3.9.9.tar.gz",
+      "bytes": 1074993,
+      "sha256": "20cccc4e3412a814a53568f400260e90f79f0bfb7e2bed84447fe071b26edd38"
+    },
+    "overlap_only_patch": {
+      "repository": "https://github.com/mzjb/overlap-only-OpenMX.git",
+      "commit": "c8bd8f4e01f9f19868bf2928671c21b12272a6f7",
+      "openmx_c_sha256": "96fe547d48147263a017bc116996734504d0f7862245d753a5b80c04a52cfcd5",
+      "truncation_c_sha256": "6abaa8c7d53a8e7fa10d32b4b59ea5686dabf48694b20ffbec2932e6aa759624"
+    },
+    "hdf5": {
+      "version": "1.12.1",
+      "url": "https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.12/hdf5-1.12.1/src/hdf5-1.12.1.tar.gz",
+      "bytes": 13534796,
+      "sha256": "79c66ff67e666665369396e9c90b32e238e501f345afd2234186bfb8331081ca",
+      "configure": [
+        "--enable-shared",
+        "--disable-static",
+        "--disable-fortran",
+        "--disable-cxx"
+      ],
+      "compiler": "gcc 11.4.0",
+      "cflags": "-O2 -fPIC"
+    },
+    "ubuntu_packages": {
+      "openmpi-bin": "4.1.2-2ubuntu1",
+      "libopenmpi-dev": "4.1.2-2ubuntu1",
+      "libscalapack-openmpi-dev": "2.1.0-4",
+      "libfftw3-dev": "3.3.8-2ubuntu8",
+      "libblas-dev": "3.10.0-2ubuntu1",
+      "liblapack-dev": "3.10.0-2ubuntu1",
+      "gfortran": "4:11.2.0-1ubuntu1",
+      "make": "4.3-4.1build1"
+    },
+    "openmx_makefile": {
+      "cc": "mpicc -O3 -fopenmp -Dkcomp -I${HDF5_PREFIX}/include",
+      "fc": "mpif90 -O3 -fopenmp -Dkcomp",
+      "lib": "-L${HDF5_PREFIX}/lib -Wl,-rpath,${HDF5_PREFIX}/lib -lhdf5 -lscalapack-openmpi -lfftw3 -llapack -lblas -lmpi_usempif08 -lmpi_usempi_ignore_tkr -lmpi_mpifh -lgfortran -lm -lpthread"
+    },
+    "application_order": [
+      "safely extract OpenMX 3.9 base",
+      "safely apply all official patch3.9.9 members to openmx3.9/source",
+      "compile-link smoke of official OpenMX 3.9.9 before overlap-only overwrite",
+      "overwrite only openmx.c and truncation.c from the frozen overlap-only commit",
+      "apply the frozen GNU/OpenMPI/HDF5 makefile lines",
+      "clean rebuild and link overlap-only OpenMX"
+    ]
+  },
+  "basis": {
+    "species": "C",
+    "definition": "C C6.0-s2p2d1 C_PBE19",
+    "paos": "C6.0-s2p2d1",
+    "vps": "C_PBE19",
+    "radial_cutoff_bohr": 6.0,
+    "orbital_l_values": [0, 0, 1, 1, 2],
+    "orbital_functions_per_atom": 13,
+    "pao_member": "openmx3.9/DFT_DATA19/PAO/C6.0.pao",
+    "pao_sha256": "1442a834dbc2b9b55e8f11a20734c7b77765fa4e05ca3e1b1f004da46bfaaef4",
+    "vps_member": "openmx3.9/DFT_DATA19/VPS/C_PBE19.vps",
+    "vps_sha256": "4b9c78eb72be25ca46366b8fd39c74ae7172d7db9e77b29782a42f71901b38a7"
+  },
+  "input_mapping": {
+    "atom_order": "dataset site_positions.dat columns 0..71 map to OpenMX atom indices 1..72 without permutation",
+    "lattice_rows_angstrom": "transpose of stored lat.dat",
+    "cartesian_positions_angstrom": "transpose of stored site_positions.dat",
+    "fractional_positions": "cartesian_positions_angstrom @ inverse(lattice_rows_angstrom)",
+    "coordinate_unit": "FRAC",
+    "lattice_unit": "Ang",
+    "round_trip_absolute_tolerance_angstrom": 1e-12,
+    "input_decimal_places": 16,
+    "energy_cutoff_rydberg": 300.0,
+    "k_grid": [1, 1, 1],
+    "spin_polarization": "Off",
+    "spin_orbit_coupling": "Off",
+    "md_type": "Nomd",
+    "up_electrons_per_atom": 2.0,
+    "down_electrons_per_atom": 2.0
+  },
+  "output_contract": {
+    "raw_relative_path": "output/overlaps_0.h5",
+    "parsed_filename": "overlaps.h5",
+    "key": "JSON five-integer list [R1,R2,R3,i,j], with one-based atom indices",
+    "block_shape": [13, 13],
+    "dtype": "float64",
+    "expected_keys": "exact equality with the corresponding frozen rh.npz key set",
+    "reverse_key": "[-R1,-R2,-R3,j,i]",
+    "reverse_relation": "S(R,i,j)=transpose(S(-R,j,i))",
+    "reverse_absolute_tolerance": 1e-10,
+    "parsed_coordinate_absolute_tolerance_angstrom": 1e-10,
+    "finite_values_required": true,
+    "raw_rank_files_allowed": ["overlaps_0.h5"],
+    "forbid_additional_hdf5_outputs": true
+  },
+  "execution": {
+    "smoke_structure_id": "500",
+    "smoke_command": "env OMP_NUM_THREADS=1 LD_LIBRARY_PATH=${HDF5_PREFIX}/lib mpirun --bind-to none -np 1 ${OPENMX_BINARY} openmx.dat > openmx.out 2> openmx.err",
+    "batch_order": "ascending numeric structure ID",
+    "continue_after_failure": false,
+    "require_source_and_input_hash_before_run": true,
+    "require_output_validation_before_next_structure": true,
+    "parser": "DeepH-pack v0.2.2 deeph.preprocess.openmx_parse_overlap"
+  },
+  "budget": {
+    "overall_wall_clock_and_storage_contract_unchanged": true,
+    "gpu_seconds_allocated": 0,
+    "cpu_wall_subbudget_seconds": {
+      "package_install_hdf5_and_build": 7200,
+      "single_structure_smoke": 1800,
+      "full_450_structure_batch": 21600
+    },
+    "storage_increment_sublimit_bytes": 10737418240,
+    "hard_stop_if_smoke_projection_exceeds_batch_subbudget": true,
+    "hard_stop_if_next_operation_exceeds_overall_or_overlap_sublimit": true
+  },
+  "gate": {
+    "before_install_build_or_calculation": "independent work-package audit PASS with zero remaining issues",
+    "after_smoke": "source/input/output/schema/reverse/key/coordinate checks PASS before batch",
+    "after_batch": "450/450 contracts PASS and independent M9-DATA-B01 blocking re-audit"
+  }
+}
