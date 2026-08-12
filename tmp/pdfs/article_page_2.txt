@@ -1,0 +1,88 @@
+Articles                                                                                                    NATure CompuTATionAl Science
+
+                      a                                                                              b
+                                       SCF calculation                                                           RN
+
+                                       { i}            n0
+                                                                                                                                 RC
+                                                                                     Band
+                                              H˄ DFT                               structure
+
+                                                                                    Berry
+                                                              H˄ DFT({R})
+                                                                                    phase
+
+                      {R}              Neural networks                              Physical
+                                                                                   response
+
+
+
+
+                      c                                                             d                           x′
+                                     DFT Hamiltonian matrix
+                                                                                                                      D
+
+                                              Localized
+                                                                                             y   D                        A       B
+                                                                                                                 y′
+                                                basis                                                                         Local coordinate
+                                                                                         +
+                                                                                                 x                            defined on AC bond
+                                                                                                     A      B         C
+
+
+
+
+                                                                                             +
+                                                                                    –
+                                                                                         –
+                                       Covariance under                                                               D
+                                     unitary transformation
+                                                                                                 C
+                                                                                        Global coordinate                 A       B
+                                              Localized
+                                                                                                                                  y′
+                                                basis                                                                 C
+                                                                                                                              Local coordinate
+                                                                                                                x′            defined on AD bond
+
+
+Fig. 1 | Learning the DFT Hamiltonian ĤDFT by virtue of locality. a, ĤDFT as a function of material structure (that is, atomic coordinate {R}), which can
+be obtained by self-consistent field (SCF) calculations or learned by a neural network for efficient ab initio electronic-structure calculations. b, Use of
+the nearsightedness principle of electronic matter to learn ĤDFT, whose matrix elements in the localized basis are nonzero between neighboring atoms
+(within RC) and influenced only by neighborhood (within RN). c, Schematic showing the properties of the DFT Hamiltonian matrix, which is generally dense
+and becomes sparse in the localized basis and changes covariantly under unitary transformation. d, Illustration of rotation transformation for a four-atom
+structure with px,y orbitals in varying coordinates.
+
+
+physical quantities. The DeepH method performs very well in                              and the matrix is invariant under atom permutation and translation,
+investigating twisted vdW materials in terms of accuracy, transfer­                      and covariant under rotation and gauge transformations (Fig. 1b).
+ability and efficiency, which will be advantageous for building a                        In this sense, learning the DFT Hamiltonian is much more challeng­
+twisted materials database. Our method is expected to be universal,                      ing than learning scalar physical quantities, such as total energy7–10.
+applicable to periodic or non-periodic systems, and could find use­                          Next we show that the problem of learning the DFT Hamiltonian,
+ful applications in computational materials science.                                     although appearing formidable, can be solved by virtue of the local­
+                                                                                         ity. As revealed by Kohn and colleagues, local physical properties
+Results                                                                                  do not respond to distant changes of external potential due to the
+Theoretical framework of DeepH. One of the most fundamental                              destructive interference between the many-particle eigenstates31,32.
+problems in quantum physics is to solve the Schrödinger equation                         This implies a widely applicable principle of locality or ‘nearsight­
+for interacting electrons of matter to predict material properties                       edness’ in electronic matter. Thus, there is no need to study the
+from first principles. The use of DFT1,2 has been recognized for                         entire system at once, and only information of the neighborhood is
+this purpose, and it replaces the complicated many-body problem                          relevant for learning the DFT Hamiltonian (Fig. 1b).
+with a simpler auxiliary one, ĤDFT |ψ ⟩ = E|ψ ⟩, describing non-                            A proper selection of basis sets is essential to DeepH. DFT cal­
+interacting electrons with interacting density30, where ĤDFT is the                     culations usually use plane waves or localized orbitals as basis func­
+DFT Hamiltonian operator, and E and |ψ ⟩ are the Kohn–Sham                               tions. The latter is compatible with the locality and non-periodicity
+eigenvalue and eigenstate, respectively. Typically, the ab initio                        nature of the problem and thus will be employed. ĤDFT is then
+DFT Hamiltonian ĤDFT is obtained via self-consistent field calcu­                       expressed as a sparse matrix (Fig. 1c) benefiting from the local or
+lations, followed by calculations of material properties (Fig. 1a).                      semilocal property of the Kohn–Sham potential. The matrix element
+According to the Hohenberg–Kohn theorem1, there is a one-to-                             Hiα,jβ (α and β refer to localized orbitals centered at atoms i and j)
+one correspondence between the external field determined by the                          vanishes when the distance between atoms i and j is larger than a
+material structure {R} and ĤDFT, implying a mapping function:                           cutoff radius RC. RC is determined by the spread of localized orbitals,
+{R} �→ ĤDFT ({R}). The generic form of ĤDFT ({R}), however, is                         which is on the order of ångstroms, much smaller than the near­
+too complicated to be expressed analytically, but can be represented                     sightedness length RN (Fig. 1b). We suggest using non-orthogonal
+by the DeepH method. For generally non-periodic crystalline mate­                        atomic-like orbitals. These are typically more localized than orthog­
+rials containing an infinite number of atoms, ĤDFT ({R}) has an                         onal ones as a result of circumventing the conflicting requirements
+infinite number of independent variables in {R}. Therefore, the                          of localization and orthogonalization33. Moreover, their gauge is sys­
+DFT Hamiltonian matrix may have an infinitely large dimension                            tem-independent, and the rotation transformation is well described
+
+368                                                                         Nature Computational Science | VOL 2 | June 2022 | 367–377 | www.nature.com/natcomputsci
+

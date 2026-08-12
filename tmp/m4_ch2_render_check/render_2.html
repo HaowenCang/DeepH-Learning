@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>examples</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<h1 id="第-2-章例题二能级系统中的一致与不一致基变换">第 2
+章例题：二能级系统中的一致与不一致基变换</h1>
+<h2 id="原始表示">1. 原始表示</h2>
+<p>取正交基中的 Hermitian 矩阵和归一化态</p>
+<p><span class="math display">\[
+H=\begin{pmatrix}1&amp;2\\2&amp;-1\end{pmatrix},
+\qquad
+c=\frac1{\sqrt2}\begin{pmatrix}1\\i\end{pmatrix},
+\qquad S=I_2.
+\]</span></p>
+<p>特征多项式为 <span
+class="math inline">\(\det(H-EI)=E^2-5\)</span>，故本征值为 <span
+class="math inline">\(E_\pm=\pm\sqrt5\)</span>。态的期望值为</p>
+<p><span class="math display">\[
+c^\dagger Hc
+=\frac12(1,-i)
+\begin{pmatrix}1+2i\\2-i\end{pmatrix}=0.
+\]</span></p>
+<h2 id="单轨道相位翻转">2. 单轨道相位翻转</h2>
+<p>令</p>
+<p><span class="math display">\[
+A_\mathrm p=\begin{pmatrix}1&amp;0\\0&amp;-1\end{pmatrix}.
+\]</span></p>
+<p>因为 <span class="math inline">\(A_\mathrm p\)</span> 幺正，</p>
+<p><span class="math display">\[
+H_\mathrm p=A_\mathrm p^\dagger H A_\mathrm p
+=\begin{pmatrix}1&amp;-2\\-2&amp;-1\end{pmatrix},
+\quad
+c_\mathrm p=A_\mathrm p^{-1}c
+=\frac1{\sqrt2}\begin{pmatrix}1\\-i\end{pmatrix},
+\quad S_\mathrm p=I_2.
+\]</span></p>
+<p>非对角元改变符号，但特征多项式仍为 <span
+class="math inline">\(E^2-5\)</span>，且 <span
+class="math inline">\(c_\mathrm p^\dagger H_\mathrm p c_\mathrm
+p=0\)</span>。这说明矩阵元素变化不等于物理问题变化。</p>
+<h2 id="轨道重排">3. 轨道重排</h2>
+<p>令</p>
+<p><span class="math display">\[
+A_\mathrm r=\begin{pmatrix}0&amp;1\\1&amp;0\end{pmatrix}.
+\]</span></p>
+<p>则</p>
+<p><span class="math display">\[
+H_\mathrm r=A_\mathrm r^\dagger H A_\mathrm r
+=\begin{pmatrix}-1&amp;2\\2&amp;1\end{pmatrix},
+\qquad
+c_\mathrm r=A_\mathrm r^{-1}c
+=\frac1{\sqrt2}\begin{pmatrix}i\\1\end{pmatrix}.
+\]</span></p>
+<p>谱和期望值仍分别为 <span
+class="math inline">\(\{-\sqrt5,+\sqrt5\}\)</span> 与
+0。若只重排矩阵的行而不重排列，所得矩阵通常不再
+Hermitian；若只重排矩阵而不重排系数，期望值对应另一个态。</p>
+<h2 id="非幺正基变换">4. 非幺正基变换</h2>
+<p>取</p>
+<p><span class="math display">\[
+A=\begin{pmatrix}1&amp;\tfrac12\\0&amp;1\end{pmatrix},
+\qquad
+A^{-1}=\begin{pmatrix}1&amp;-\tfrac12\\0&amp;1\end{pmatrix}.
+\]</span></p>
+<p>新基不是正交基，因为</p>
+<p><span class="math display">\[
+S&#39;=A^\dagger A
+=\begin{pmatrix}1&amp;\tfrac12\\[2pt]\tfrac12&amp;\tfrac54\end{pmatrix}\ne
+I_2.
+\]</span></p>
+<p>同步变换给出</p>
+<p><span class="math display">\[
+H&#39;=A^\dagger H A
+=\begin{pmatrix}1&amp;\tfrac52\\[2pt]\tfrac52&amp;\tfrac54\end{pmatrix},
+\qquad
+c&#39;=A^{-1}c
+=\frac1{\sqrt2}\begin{pmatrix}1-\tfrac i2\\ i\end{pmatrix}.
+\]</span></p>
+<p>直接计算可验证</p>
+<p><span class="math display">\[
+c&#39;^\dagger S&#39;c&#39;=1,
+\qquad
+c&#39;^\dagger H&#39;c&#39;=0.
+\]</span></p>
+<p>广义特征方程满足</p>
+<p><span class="math display">\[
+\det(H&#39;-ES&#39;)=|\det A|^2\det(H-EI)=E^2-5,
+\]</span></p>
+<p>所以广义本征值仍为 <span
+class="math inline">\(\pm\sqrt5\)</span>。</p>
+<h2 id="确定性失败样例">5. 确定性失败样例</h2>
+<p>若错误地忽略 <span class="math inline">\(S&#39;\)</span>，直接求
+<span class="math inline">\(H&#39;x=Ex\)</span>，则</p>
+<p><span class="math display">\[
+\det(H&#39;-EI)=E^2-\frac94E-5,
+\]</span></p>
+<p>普通本征值为</p>
+<p><span class="math display">\[
+E_{\mathrm{wrong},\pm}
+=\frac{9\pm\sqrt{401}}8
+\approx 3.6281,-1.3781,
+\]</span></p>
+<p>明显不同于 <span
+class="math inline">\(\pm\sqrt5\approx\pm2.2361\)</span>。失败原因不是非幺正基变换改变了物理谱，而是把非正交基中的矩阵
+<span class="math inline">\(H&#39;\)</span> 错当成正交基矩阵，遗漏了
+<span class="math inline">\(S&#39;\)</span>。</p>
+<h2 id="验收结论">6. 验收结论</h2>
+<p>本例同时验证：</p>
+<ul>
+<li>相位翻转和重排会改变矩阵元素，但一致变换保持谱与期望值；</li>
+<li>一般可逆基变换保持矩阵对 <span class="math inline">\((H,S)\)</span>
+的广义谱；</li>
+<li>非幺正变换后只求 <span class="math inline">\(H&#39;\)</span>
+的普通谱是可确定复现的错误；</li>
+<li>基变换必须同步作用于基、系数、Hamiltonian 和 overlap。</li>
+</ul>
+</body>
+</html>

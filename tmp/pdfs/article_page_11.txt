@@ -1,0 +1,82 @@
+NATure CompuTATionAl Science                                                                                                                            Articles
+26. Hegde, G. & Bowen, R. C. Machine-learned approximations to density                  52. Kresse, G. & Furthmüller, J. Efficient iterative schemes for ab initio total-energy
+    functional theory Hamiltonians. Sci. Rep. 7, 42669 (2017).                              calculations using a plane-wave basis set. Phys. Rev. B 54, 11169–11186 (1996).
+27. Thomas, N. et al. Tensor field networks: rotation- and translation-equivariant      53. Blöchl, P. E. Projector augmented-wave method. Phys. Rev. B 50,
+    neural networks for 3D point clouds. Preprint at https://arxiv.org/abs/                 17953–17979 (1994).
+    arXiv:1802.08219 (2018).                                                            54. Kresse, G. & Joubert, D. From ultrasoft pseudopotentials to the projector
+28. Anderson, B., Hy, T. S. & Kondor, R. Cormorant: covariant molecular neural              augmented-wave method. Phys. Rev. B 59, 1758–1775 (1999).
+    networks. In Proc. Advances in Neural Information Processing Systems Vol. 32        55. Perdew, J. P., Burke, K. & Ernzerhof, M. Generalized gradient approximation
+    (eds. Wallach, H. et al.) 14537–14546 (Curran Associates, 2019); https://               made simple. Phys. Rev. Lett. 77, 3865–3868 (1996).
+    proceedings.neurips.cc/paper/2019/file/03573b32b2746e6e8ca98b9123f224               56. Ozaki, T. Variationally optimized atomic orbitals for large-scale electronic
+    9b-Paper.pdf                                                                            structures. Phys. Rev. B 67, 155108 (2003).
+29. Fuchs, F. B., Worrall, D. E., Fischer, V. & Welling, M. SE(3)-transformers: 3D      57. Ozaki, T. & Kino, H. Numerical atomic basis orbitals from H to Kr. Phys. Rev.
+    roto-translation equivariant attention networks. In Proc. Advances in Neural            B 69, 195113 (2004).
+    Information Processing Systems Vol. 33 (eds. Larochelle, H., Ranzato M.,            58. Morrison, I., Bylander, D. M. & Kleinman, L. Nonlocal Hermitian norm-
+    Hadsell, R., Balcan, M. F. & Lin, H.) 1970–1981 (Curran Associates, 2020);              conserving Vanderbilt pseudopotential. Phys. Rev. B 47, 6728–6731 (1993).
+    https://proceedings.neurips.cc/paper/2020/file/15231a7ce4ba789d13b722cc             59. Sipe, J. E. & Shkrebtii, A. I. Second-order optical response in semiconductors.
+    5c955834-Paper.pdf                                                                      Phys. Rev. B 61, 5337–5352 (2000).
+30. Martin, R. M. Electronic Structure: Basic Theory and Practical Methods              60. Fey, M. & Lenssen, J. E. Fast graph representation learning with PyTorch
+    (Cambridge Univ. Press, 2004); https://doi.org/10.1017/CBO9780511805769                 Geometric. In Proc. ICLR Workshop on Representation Learning on Graphs
+31. Kohn, W. Density functional and density matrix method scaling linearly with             and Manifolds (ICLR, 2019); https://arxiv.org/abs/1903.02428
+    the number of atoms. Phys. Rev. Lett. 76, 3168–3171 (1996).                         61. Li, H. Dataset for deep-learning density functional theory Hamiltonian for
+32. Prodan, E. & Kohn, W. Nearsightedness of electronic matter. Proc. Natl. Acad.           efficient ab initio electronic-structure calculation (Zenodo, 2022); https://doi.
+    Sci. USA 102, 11635 (2005).                                                             org/10.5281/zenodo.6555484
+33. Wang, C. et al. First-principles calculation of optical responses based on          62. Li, H. Code for deep-learning density functional theory Hamiltonian for
+    nonorthogonal localized orbitals. New J. Phys. 21, 093001 (2019).                       efficient ab initio electronic-structure calculation (Zenodo, 2022); https://doi.
+34. Marzari, N., Mostofi, A. A., Yates, J. R., Souza, I. & Vanderbilt, D. Maximally         org/10.5281/zenodo.6555482
+    localized wannier functions: theory and applications. Rev. Mod. Phys. 84,
+    1419–1475 (2012).                                                                   Acknowledgements
+35. Gilmer, J., Schoenholz, S. S., Riley, P. F., Vinyals, O. & Dahl, G. E. Neural       This work was supported by the Basic Science Center Project of NSFC (grant no. 51788104),
+    message passing for quantum chemistry. In Proc. 34th International                  the National Science Fund for Distinguished Young Scholars (grant no. 12025405), the
+    Conference on Machine Learning (ICML) PMLR 70 (eds. Precup, D. &                    National Natural Science Foundation of China (grant no. 11874035), the Ministry of Science
+    Teh, Y. W.) 1263–1272 (2017); http://proceedings.mlr.press/v70/                     and Technology of China (grant nos. 2018YFA0307100 and 2018YFA0305603), the Beijing
+    gilmer17a.html                                                                      Advanced Innovation Center for Future Chip (ICFC) and the Beijing Advanced Innovation
+36. Schütt, K. T., Arbabzadah, F., Chmiela, S., Müller, K.-R. & Tkatchenko, A.          Center for Materials Genome Engineering. M.Y. was supported by the Shuimu Tsinghua
+    Quantum-chemical insights from deep tensor neural networks. Nat.                    Scholar Program and Postdoctoral International Exchange Program. R.X. was funded by the
+    Commun. 8, 13890 (2017).                                                            China Postdoctoral Science Foundation (grant no. 2021TQ0187).
+37. Xie, T. & Grossman, J. C. Crystal graph convolutional neural networks for an
+    accurate and interpretable prediction of material properties. Phys. Rev. Lett.
+    120, 145301 (2018).
+                                                                                        Author contributions
+                                                                                        Y.X. and W.D. proposed the project and supervised H.L., Z.W. and N.Z. in carrying out
+38. Wang, Z. et al. Symmetry-adapted graph neural networks for constructing
+                                                                                        the research, with the help of M.Y., R.X. and X.G. All authors discussed the results. Y.X.
+    molecular dynamics force fields. Sci. China Phys. Mech. Astron. 64,
+                                                                                        and H.L. prepared the manuscript with input from the other co-authors.
+    117211 (2021).
+39. Ba, J. L., Kiros, J. R. & Hinton, G. E. Layer normalization. Preprint at https://
+    arxiv.org/abs/arXiv:1607.06450 (2016).                                              Competing interests
+40. Morimoto, T. & Nagaosa, N. Topological nature of nonlinear optical effects in       The authors declare no competing interests.
+    solids. Sci. Adv. 2, e1501524 (2016).
+41. Wang, C. et al. First-principles calculation of nonlinear optical responses by      Additional information
+    Wannier interpolation. Phys. Rev. B 96, 115147 (2017).                              Supplementary information The online version contains supplementary material
+42. Bistritzer, R. & MacDonald, A. H. Moiré bands in twisted double-layer               available at https://doi.org/10.1038/s43588-022-00265-6.
+    graphene. Proc. Natl. Acad. Sci. USA 108, 12233 (2011).
+43. Cao, Y. et al. Correlated insulator behaviour at half-filling in magic-angle        Correspondence and requests for materials should be addressed to
+    graphene superlattices. Nature 556, 80–84 (2018).                                   Wenhui Duan or Yong Xu.
+44. Cao, Y. et al. Unconventional superconductivity in magic-angle graphene             Peer review information Nature Computational Science thanks the anonymous reviewers
+    superlattices. Nature 556, 43–50 (2018).                                            for their contribution to the peer review of this work. Primary Handling Editor: Kaitlin
+45. Yankowitz, M. et al. Tuning superconductivity in twisted bilayer graphene.          McCardle, in collaboration with the Nature Computational Science team. Peer reviewer
+    Science 363, 1059–1064 (2019).                                                      reports are available.
+46. Xie, Y. et al. Fractional Chern insulators in magic-angle twisted bilayer           Reprints and permissions information is available at www.nature.com/reprints.
+    graphene. Nature 600, 439–443 (2021).
+47. Carr, S., Fang, S. & Kaxiras, E. Electronic-structure methods for twisted           Publisher’s note Springer Nature remains neutral with regard to jurisdictional claims in
+    moiré layers. Nat. Rev. Mater. 5, 748–763 (2020).                                   published maps and institutional affiliations.
+48. Jeong, W., Yoo, D., Lee, K., Jung, J. & Han, S. Efficient atomic-resolution                            Open Access This article is licensed under a Creative Commons
+    uncertainty estimation for neural network potentials using a replica ensemble.                         Attribution 4.0 International License, which permits use, sharing, adap­
+    J. Phys. Chem. Lett. 11, 6090–6096 (2020).                                                             tation, distribution and reproduction in any medium or format, as long
+49. Lucignano, P., Alfè, D., Cataudella, V., Ninno, D. & Cantele, G. Crucial            as you give appropriate credit to the original author(s) and the source, provide a link to
+    role of atomic corrugation on the flat bands and energy gaps of twisted             the Creative Commons licence, and indicate if changes were made. The images or other
+    bilayer graphene at the magic angle θ ~ 1.08°. Phys. Rev. B 99,                     third party material in this article are included in the article’s Creative Commons licence,
+    195419 (2019).                                                                      unless indicated otherwise in a credit line to the material. If material is not included in
+50. David, A., Rakyta, P., Kormányos, A. & Burkard, G. Induced spin-orbit               the article’s Creative Commons licence and your intended use is not permitted by statu­
+    coupling in twisted graphene-transition metal dichalcogenide heterobilayers:        tory regulation or exceeds the permitted use, you will need to obtain permission directly
+    twistronics meets spintronics. Phys. Rev. B 100, 085412 (2019).                     from the copyright holder. To view a copy of this licence, visit http://creativecommons.
+51. Gou, J. et al. The effect of moiré superstructures on topological edge states in    org/licenses/by/4.0/.
+    twisted bismuthene homojunctions. Sci. Adv. 6, eaba2773 (2020).                     © The Author(s) 2022, corrected publication 2024
+
+
+
+
+Nature Computational Science | VOL 2 | June 2022 | 367–377 | www.nature.com/natcomputsci                                                                                        377
+

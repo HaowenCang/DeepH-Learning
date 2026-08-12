@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>02_basis_representation</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<h1
+id="d-b01有限维基表示与一致变换推导">D-B01：有限维基表示与一致变换推导</h1>
+<h2 id="条件与记号">1. 条件与记号</h2>
+<p>设 <span class="math inline">\(\mathcal V_M\)</span> 是复内积空间的
+<span class="math inline">\(M\)</span> 维子空间，<span
+class="math inline">\(\boldsymbol\Phi=(|\phi_1\rangle,\ldots,|\phi_M\rangle)\)</span>
+是其线性无关有序基。令 <span class="math inline">\(A\in\mathbb
+C^{M\times M}\)</span> 可逆，并定义新基</p>
+<p><span class="math display">\[
+\boldsymbol\Phi&#39;=\boldsymbol\Phi A.
+\]</span></p>
+<p>本推导只比较同一 <span class="math inline">\(\mathcal V_M\)</span>
+中的两个基，不覆盖删除/新增基函数造成的子空间变化。</p>
+<h2 id="系数的逆变换">2. 系数的逆变换</h2>
+<p>同一态同时写为</p>
+<p><span class="math display">\[
+|\psi\rangle=\boldsymbol\Phi c=\boldsymbol\Phi&#39;c&#39;
+=\boldsymbol\Phi A c&#39;.
+\]</span></p>
+<p>因 <span class="math inline">\(\boldsymbol\Phi\)</span>
+的列线性无关，<span class="math inline">\(c=Ac&#39;\)</span>，故</p>
+<p><span class="math display">\[
+c&#39;=A^{-1}c.
+\]</span></p>
+<h2 id="矩阵元的合同变换">3. 矩阵元的合同变换</h2>
+<p>对任意线性算符 <span class="math inline">\(\hat
+H\)</span>，新基矩阵元为</p>
+<p><span class="math display">\[
+\begin{aligned}
+H&#39;_{\alpha\beta}
+&amp;=\langle\phi&#39;_\alpha|\hat H|\phi&#39;_\beta\rangle\\
+&amp;=\sum_{\mu\nu}A_{\mu\alpha}^*
+\langle\phi_\mu|\hat H|\phi_\nu\rangle
+A_{\nu\beta}.
+\end{aligned}
+\]</span></p>
+<p>因此</p>
+<p><span class="math display">\[
+H&#39;=A^\dagger H A.
+\]</span></p>
+<p>令 <span class="math inline">\(\hat H\)</span> 为恒等算符，同理得到
+Gram 矩阵</p>
+<p><span class="math display">\[
+S&#39;=A^\dagger S A.
+\]</span></p>
+<p>这属于合同变换，不应与对线性映射坐标常见的相似变换 <span
+class="math inline">\(A^{-1}HA\)</span> 静默混用；此处 <span
+class="math inline">\(H\)</span> 的定义是带有 bra 与 ket 的矩阵元。</p>
+<h2 id="范数与期望值不变">4. 范数与期望值不变</h2>
+<p>利用 <span class="math inline">\(c&#39;=A^{-1}c\)</span>，</p>
+<p><span class="math display">\[
+\begin{aligned}
+c&#39;^\dagger S&#39;c&#39;
+&amp;=c^\dagger(A^{-1})^\dagger A^\dagger SAA^{-1}c\\
+&amp;=c^\dagger Sc,
+\end{aligned}
+\]</span></p>
+<p>并同理有 <span class="math inline">\(c&#39;^\dagger
+H&#39;c&#39;=c^\dagger Hc\)</span>。所以归一化期望值</p>
+<p><span class="math display">\[
+\frac{c^\dagger Hc}{c^\dagger Sc}
+\]</span></p>
+<p>在一致可逆基变换下保持不变。</p>
+<h2 id="广义本征方程不变">5. 广义本征方程不变</h2>
+<p>若</p>
+<p><span class="math display">\[
+Hc=ESc,
+\]</span></p>
+<p>则</p>
+<p><span class="math display">\[
+H&#39;c&#39;=A^\dagger Hc=EA^\dagger Sc=ES&#39;c&#39;.
+\]</span></p>
+<p>特征行列式满足</p>
+<p><span class="math display">\[
+\det(H&#39;-ES&#39;)
+=\det(A^\dagger)\det(H-ES)\det(A)
+=|\det A|^2\det(H-ES).
+\]</span></p>
+<p>由于 <span class="math inline">\(A\)</span>
+可逆，前因子非零，故广义特征值集合不变。若 <span
+class="math inline">\(A\)</span> 幺正且旧基正交，则 <span
+class="math inline">\(S&#39;=I\)</span>，普通谱也直接保持；若 <span
+class="math inline">\(A\)</span> 非幺正，则必须保留 <span
+class="math inline">\(S&#39;\)</span>。</p>
+<h2 id="失败边界">6. 失败边界</h2>
+<ul>
+<li><span class="math inline">\(A\)</span>
+奇异：新列线性相关或发生降维，<span
+class="math inline">\(A^{-1}\)</span>
+不存在，不再是同一子空间的基变换。</li>
+<li>只变换 <span class="math inline">\(H\)</span>：若 <span
+class="math inline">\(S,c\)</span>
+未同步改变，所得问题不是原对象的同一表示。</li>
+<li>子空间改变：即使新旧基分别线性无关，也不能用同一个方阵 <span
+class="math inline">\(A\)</span> 双向连接，谱差可包含基截断误差。</li>
+<li>无界算符：连续空间中还应检查基函数是否属于算符和伴随关系的适用定义域；有限矩阵代数不自动消除该条件。</li>
+</ul>
+<p>解析复算见<a
+href="../../03_textbook/chapters/02_quantum_states_operators_matrices/examples.md">第
+2 章例题</a>，对应练习与答案见
+<code>06_exercises/02-stageB/02_basis/</code>。</p>
+</body>
+</html>

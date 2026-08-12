@@ -1,0 +1,146 @@
+Articles                                                                                                                                                                        NATure CompuTATionAl Science
+
+                     a
+                                                                                                                                                                                  D              Local coordinate
+                                                                                                                                                                                                defined on AB bond
+                                                                                                                                                                                   AB
+                                                                                                                                                                                  eAD                     AB                         y′ ·
+                                                                                                                                                                                                         eAB                                          x′
+                                                                                                                                                                                                A                           B                 z′
+                                                                                                                                                                                    AB
+                                                                                                       RC            ʋB                                                           e AC
+                                                                                                                            B                                                                                                   H′Aα,Bβ
+                                                                                                                                                                                                 AB
+                                                                                                                                                                                                eAA
+                                                                                                                                eAB                                               C
+
+                                                                                                                                              eAA                                                Local coordinate
+                                                                                                                     ʋA                                                           B
+                                                                                                                            A                                                                   defined on AC bond
+                                                                                                                                           eAC                                     AC
+                                                                                                                                                                                  eAB
+                                                                                                                      eAD                                                                                 AC
+                                                                                                                                                                                                         eAC                         y′ ·
+                                                                                                                                                                                                                                                 x′
+                                                                                                            ʋD                        ʋC C                                                      A                           C
+                                                                                                                 D                                                                                                                             z′
+                                                                                                                                                                                   AC
+                                                                                                                                                                                  eAD
+                                                                                                                                                                                                 AC                                 H′Aα,Cβ
+                                                                                                                                                                                                eAA
+                                                                                                                                                                                  D
+
+
+
+                                                                                                                                                                                              Local coordinate
+                                                                                                                                                                                           defined on other bonds
+
+                     b                                              {∣ri j∣}                    {r˄i j }
+                                                                                                    pq
+                                                                                                                                              MP layer:                                          LCMP layer:
+                                           {Zi }
+
+                                                                                                                                                                                       (L–1)           (L–1)            (L–1)
+                                                                                                                            ʋi
+                                                                                                                                 (l –1)             (l –1)
+                                                                                                                                                   ʋk
+                                                                                                                                                                       (l –1)
+                                                                                                                                                                      eik             ʋi            ʋk                eik
+                                   Elemental                    Gaussian
+                                   embedding                     basis                                                                                       k ∈Ni                                            k ∈Ni
+
+                                                                                                                                                                                                         ||
+                                   { }
+                                   ʋi
+                                     (0)
+                                                            { }
+                                                              (0)
+                                                            eij
+                                                                                                                                                        ||
+
+
+
+
+                                                                                                                                                                                                                                    YJm (θik ,ϕik )
+                                                                                                                                                       Ф(l)
+                                                                                                                                                        ʋ                                              Ф(L)
+                                                                                                                                                                                                        ʋ
+
+
+
+
+                                                                                                                                                                                                                                           pq
+                                                                                   Spherical
+                                        MP
+                                                                                   harmonic
+
+
+
+
+                                                                                                                                                                                                                                           pq
+                                       layer                                                                                                            Σk                                               Σk          Vertex
+                                                                                                                                                                                                                     update
+
+                                        MP                                                                                                    LayerNorm
+                    L – 1 layers
+
+
+
+
+                                                                                                                                                                                               pq(L)            pq(L)
+                                       layer                                                                                                                                               ʋj                 ʋi
+                                                                                                                                                                Vertex
+                                                                               {YJm (θijpq, ϕpqij )}
+
+
+
+
+                                                                                                                                                                                                                            (L–1)
+                                                                                                                                                        +                                                               eij
+                                                                                                                                                                update
+                                            +
+                                                                                                                                (l)              (l)              (l –1)
+                                                                                                                            ʋi                ʋj                eij                                      ||
+                                        MP
+                                       layer                                                                                                            ||                                                   Edge
+                                                                                                                                                                                                       Фe(L) update
+
+
+                                           LCMP layer                                                                                                  Фe(l) Edge                                               pq(L)
+                                                                                                                                                                                                              eij
+                                                                                                                                                             update
+
+                                                                                                                                       (l )              (l )                                   H′iα,jβ = e ij(L)
+                                                                                                                                      ʋi               eij                                                      ij
+                                                {H′iα,jβ}
+
+
+
+Fig. 2 | Crystal graph and MPNN including L layers employed by DeepH. a, Crystal graph with vertices vi and edges eij used for the MPNN. For simplicity,
+only edges connected to the nearest neighbors are shown. RC denotes the cutoff radius. In the LCMP layer, different crystal graphs with new edges, epq
+                                                                                                                                                    ij , are
+applied for different local coordinates defined on varying atom pairs pq. b, Architecture and workflow of the deep neural network, including L − 1 MP layers
+with atomic numbers {Z} and interatomic distances {∣rij∣} as initial inputs and one LCMP layer using additional orientation information {r̂pq
+                                                                                                                                           ik
+                                                                                                                                              } relative to
+different local coordinates.
+
+300 K, giving 14,400,000 nonzero Hamiltonian matrix blocks. A total                                                                            sampled by ab initio MD from 100 K to 400 K, the generalization
+of 270 configurations were used for training, which is large enough                                                                            MAE of H′iα, jβ was as small as 1.9 meV on average, demonstrating
+to ensure convergence, as demonstrated by the calculated learning                                                                              the high accuracy of DeepH.
+curve as a function of training set size (Supplementary Fig. 4), 90                                                                               Figure 3c,d shows the results for the DOS and shift current
+configurations were used for hyperparameter optimization, and the                                                                              conductivity, respectively. For the 2,000 unseen configurations of
+remainder for the test. The mean absolute error (MAE) of H′iα, jβ for                                                                          graphene, the MAE between the predicted and calculated DOS for
+the test set is shown in Fig. 3a. The MAE value averaged over all                                                                              500 points between −6 eV and +6 eV around the Fermi level is on
+13 × 13 orbital combinations was 2.1 meV, and the individual values                                                                            the order of 0.1 × 10−3 eV−1 Å−2, much smaller than the absolute
+were distributed between 0.4 meV and 8.5 meV. This MAE is quite                                                                                values (usually >10 × 10−3 eV−1 Å−2). The spectra for the DOS and
+small considering that the Hamiltonian matrix element is typically                                                                             shift conductivity were compared for DeepH and DFT and show
+on the order of electronvolts. For example, H′iα, jβ for the 1s orbital                                                                        satisfactory agreement.
+and the nearest neighbor obtained from DFT calculations has a                                                                                     DeepH uses the embedding of atomic numbers as initial vertex
+mean value of −10.1 eV and a standard deviation (s.d.) of 315 meV                                                                              features and can naturally work for systems containing multiple
+(Fig. 3b), whereas the corresponding MAE of DeepH is 6.6 meV,                                                                                  atomic types. For demonstration, we performed calculations on
+corresponding to a high coefficient of determination, r2 = 0.9994.                                                                             monolayer MoS2, used 300 random 5 × 5 MoS2 supercell structures
+For another 2,000 unseen configurations of a graphene supercell                                                                                for training, and achieved high accuracy (Fig. 4b–d). Specifically,
+
+370                                                                                                                  Nature Computational Science | VOL 2 | June 2022 | 367–377 | www.nature.com/natcomputsci
+

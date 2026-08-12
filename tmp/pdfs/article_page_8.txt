@@ -1,0 +1,99 @@
+ Articles                                                                                                                                     NATure CompuTATionAl Science
+
+a                                                                                                                                                                     d
+
+                                                                                                                                                                                              TBB (DFT)         TBG (DFT)
+                                                                                                     Hamiltonian
+                                                                                  DFT
+                                                                                                       matrix
+                                                                                                                                                                                 103
+                           Non-twisted structures
+                                                                                                                                                                                                                       Magic
+
+
+
+
+                                                                                                                                                                      Time (s)
+                                                                                                                                                                                                                       angle
+                 θ                                               Train                                                                                                           102
+
+                                                                                                                                                                                                   TBB (DeepH)
+
+                                                                                                                                                                                      1
+                                                                                                           Hamiltonian                                                           10                               TBG (DeepH)
+                                                                                                              matrix
+                                                                                                                                                   Properties
+                                                                                                            for twisted
+                                                                                                            structures                                                                               102         103           104
+                                                                            DeepH
+                                                                                                                                                                                                      Number of atoms
+
+
+
+b                                        Twisted bilayer graphene (TBG)                                        c                                       Twisted bilayer bismuthene (TBB)
+
+
+
+
+                         TBG: θ ≈ 3.48°, Natom = 1,084                   TBG: θ ≈ 1.08°, Natom = 11,164                                 TBB: θ ≈ 9.43°, Natom = 148                               TBB: θ ≈ 7.34°, Natom = 244
+                                                               0.3
+
+               1.0                                                                                                            0.2                                                 0.2
+                                                               0.2
+                                                                                                                              0.1                                                 0.1
+               0.5
+Energy (eV)
+
+
+
+
+                                                                                                               Energy (eV)
+
+
+
+
+                                                               0.1
+                                                                                                                               0                                                          0
+                0
+                                                                0
+                                                                                                                             –0.1                                                –0.1
+              –0.5
+                                                              –0.1
+                                                                                                                             –0.2                                                –0.2
+              –1.0
+                                                              –0.2
+                     K              Г           M        K'          K              Г           M         K'                        K             Г             M          K'                 K             Г             M          K'
+                                                    DFT                  DeepH                                                                                        DFT                         DeepH
+
+
+   Fig. 6 | Application of the DeepH method to study moiré-twisted materials. a, Workflow for studying twisted materials using DeepH, which uses
+   the DFT results for small non-twisted structures as training data and makes predictions on twisted structures with arbitrary twist angle θ. b,c, Band
+   structures computed by DFT and DeepH for TBGs (b: θ ≈ 3.48°, 1.08°) and TBBs (c: θ ≈ 9.43°, 7.34°). In c, the DFT bands for the magic angle θ ≈ 1.08° are
+   adapted from ref. 49. d, Computation time to construct the DFT Hamiltonian matrices of TBGs and TBBs with varying system size by DFT self-consistent
+   calculations versus by DeepH. For comparison, the calculations were all done by one compute node equipped with two AMD EPYC 7542 central
+   processing units (CPUs), although DeepH works much more efficiently on graphics processor unit (GPU) nodes.
+
+
+   quantities can be simultaneously derived from DeepH. Second, and                                                2D materials without or with multiple elements, curved geometry
+   more importantly, the complex structure–property relation can be                                                or moiré twist. DeepH can also be applied to study material systems
+   accurately described by DeepH, as we have demonstrated here, by                                                 of other space dimensions. For example, we have carried out experi­
+   benefiting from the nearsighted nature of the DFT Hamiltonian.                                                  ments on 3D bulk materials (including silicon and allotropes of
+   In contrast, the nearsightedness principle is not applicable to some                                            carbon) as well as quasi-0D molecules (Supplementary Section 6).
+   physical quantities, such as band structure and wavefunction.                                                   With the help of DeepH, the accuracy–efficiency dilemma of DFT
+       Recently, Hegde and Bowen attempted to study the DFT                                                        can be solved and efficient ab initio electronic-structure calcula­
+   Hamiltonian via statistical learning (not deep learning)26, which                                               tions become feasible for large-scale material systems.
+   works for small unit cells of simple metal copper. However, this                                                   One may straightforwardly check the generalization ability of
+   method can hardly be applied to study more complex material sys­                                                DeepH by performing principal component analysis (PCA) for the
+   tems due to the limited expressive power of statistical learning and                                            output atom features of the final MP layer or the output bond fea­
+   the lack of an appropriate treatment of rotation covariance. A quan­                                            tures of the final LCMP layer. We performed PCA on monolayer
+   titative comparison between this method and DeepH is presented in                                               sheets versus nanotubes and non-twisted versus twisted bilayers, as
+   Supplementary Section 6. A few primary deep-learning works have                                                 presented in Supplementary Figs. 17–20. The corresponding results
+   been applied to small molecules18,19 and are applicable to systems                                              are discussed in Supplementary Section 5. It was established from
+   with a fixed number of atoms. Distinct from existing deep-learning                                              the PCA results that DeepH can make accurate predictions on new
+   DFT methods, the DeepH method shows excellent performance                                                       structures with principal components substantially different from
+   on studying periodic or non-periodic crystalline materials in                                                   the original training set, showing satisfactory generalization ability.
+   terms of accuracy, efficiency and transferability, as demonstrated                                                 It is worthwhile comparing our method with covariant neural
+   by case studies on various quasi-one-dimensional (quasi-1D) and                                                 network methods (such as tensor-field networks27, Cormorant28,
+
+   374                                                                                          Nature Computational Science | VOL 2 | June 2022 | 367–377 | www.nature.com/natcomputsci
+

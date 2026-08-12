@@ -1,0 +1,78 @@
+NATure CompuTATionAl Science                                                                                                            Articles
+                      a
+
+
+                                                                        C         Mo                 S
+
+
+
+
+                                                                            Generalization
+
+
+
+
+                      b              6                                          c
+                                                                                               1.4
+
+
+                                    4
+                                                                                               1.1
+
+
+                                     2
+                                                                                               0.8
+                      Energy (eV)
+
+
+
+
+                                                                                Energy (eV)
+
+
+
+
+                                                                DFT                                                       DFT
+                                     0
+                                                                DeepH                                                     DeepH
+
+                                                                                              –0.8
+
+                                    –2
+
+
+                                                                                              –1.1
+                                    –4
+
+
+                                                                                              –1.4
+                                    –6
+                                         Г                               Z                           Г                              Z
+
+
+Fig. 5 | Generalization ability of DeepH, from flat sheets to curved nanotubes. a, The use of DeepH, trained by DFT results for flat sheets, to study curved
+nanotubes: graphene (left) and MoS2 (right). b,c, Band structures for a zigzag (25, 0) carbon nanotube (b) and a zigzag (50, 0) MoS2 nanotube (c),
+computed by DFT and DeepH. The Fermi level is aligned at the middle of the bandgap.
+
+
+TBGs is achieved for TBBs on predicting the DFT Hamiltonian                         Wide applicability of DeepH. Many types of deep-learning DFT
+(Supplementary Fig. 13) as well as on calculating material proper­                  method have been developed so far7–10,12–24. They can be classified
+ties (Fig. 6c and Supplementary Fig. 14).                                           into two groups that aim to improve either the accuracy or effi­
+    It is worth noting that the computational time can be reduced                   ciency of DFT via deep-learning techniques. Representative works
+considerably by replacing DFT self-consistent field iterations with                 of the first group have achieved substantial breakthroughs recently
+DeepH, making ab initio electronic-structure calculations much                      in developing advanced exchange and correlation functionals via
+more efficient and applicable to much larger material systems                       deep neural networks20–22. The second group of works try to repro­
+(Fig. 6d), such as magic-angle TBG. On the other hand, compared                     duce DFT results via deep learning, in a similar manner to DeepH.
+to empirical tight-binding and continuum models, DeepH has                          Among these, great successes have been achieved regarding deep-
+slightly lower efficiency, but it has much better accuracy and trans­               learning potential7–10, facilitating highly efficient ab initio atomic-
+ferability. Moreover, superior to empirical methods, DeepH can                      structure calculations. However, the corresponding developments
+easily and appropriately treat SOC, which is advantageous for                       of ab initio electronic-structure methods are at a preliminary
+exploring spin-related or topological quantum phenomena. For                        stage. Most current works select a one-step strategy and directly
+comparison, the performance of different theoretical methods is                     learn individual physical quantities, such as bandgap, band disper­
+summarized in Supplementary Table 5. DeepH can outperform the                       sion, electron density and wavefunction12–17. The two-step strategy
+currently used approaches in studying twisted materials, and the                    employed by DeepH, which first learns the DFT Hamiltonian and
+method is promising for studying twist-angle-dependent physical                     then predicts the desired physical properties, is advantageous in two
+properties and for building twisted materials databases.                            regards. First, all the above-mentioned electron-related physical
+
+Nature Computational Science | VOL 2 | June 2022 | 367–377 | www.nature.com/natcomputsci                                                                 373
+

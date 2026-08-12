@@ -1,0 +1,94 @@
+Articles                                                                                                                               NATure CompuTATionAl Science
+
+                     a                                                                  c
+                                                                                                                             1.3
+
+
+                                                                                                                             1.0
+                                                    Mo     S
+
+                                                                                                                             0.7
+
+
+
+
+                                                                                        Energy (eV)
+                                                                                                                                       DFT
+                                                                                                                                       DeepH
+                                                                                                                         –0.7
+
+
+                           x                                                                                             –1.0
+                                 y
+                                                                                                                         –1.3
+
+
+                                                                                                                                   Г           K        M                    Г
+
+                     b                       Mo                  S                      d
+                                                                                                                              80                            DFT Re( χxx)
+                                 1
+                                                                                                                                                            DFT Im( χxx)
+                                 5                                                                                                                          DeepH Re(χxx)
+                                                                                                                              60
+
+
+
+
+                                                                                               Electric susceptibility (Å)
+                                                                                                                                                            DeepH Im( χxx)
+                                 9                                          (meV)
+                                                                                    4                                         40
+                                13
+                    Orbital β
+
+
+
+
+                                17                                                  2
+                                                                                                                              20
+                                21
+
+                                25                                                                                             0
+
+                                29
+                                                                                                                             –20
+                                     1   5   9    13 17 21      25   29                                                            0    2       4            6         8
+                                                    Orbital α                                                                                  ω (eV)
+
+
+Fig. 4 | Performance of DeepH on studying monolayer MoS2. a, Atomic structure of MoS2. b, MAE of H′iα, jβ for different orbitals. c,d, Band structures (c)
+and real and imaginary parts (d) of electric susceptibility χxx computed by DFT and DeepH for a 5 × 5 MoS2 supercell. A representative structure with the
+median generalization MAE of the DFT Hamiltonian matrix (the atomic structure is presented in Supplementary Data 2) is considered in c and d. Γ, K and
+M represent different high-symmetry k-points of the Brillouin zone (the same applies for Figs. 5b,c and 6b,c).
+
+
+remains a great challenge, both experimentally and theoretically.                       supercells of up to ~1,000 atoms (Supplementary Fig. 9). Because
+Theoretically, empirical tight-binding and continuum models                             of the high accuracy in predicting the DFT Hamiltonian, the cal­
+work well for simple model systems of TBG42, but are usually not                        culated band structures from DeepH match the DFT results well
+accurate enough to study other materials. Indeed, ab initio calcula­                    (Fig. 6b and Supplementary Fig. 10), and similar agreements are
+tions need to accurately describe the electronic structure, but are                     thus expected for other material properties. By using traditional
+only applicable to small moiré supercells. In short, the theoretical                    DFT methods it is difficult to study TBG with magic angle θ ≈ 1.08°
+study of twisted vdW materials is limited by the accuracy–efficiency                    and including 11,164 atoms per supercell, but this can be achieved
+dilemma47. DeepH is designed to solve the dilemma, and works well                       quite easily with DeepH. For this large-sized structure, the uncer­
+for studying twisted materials, as we will show.                                        tainty of an ensemble of neural networks can serve as a reliability
+    The workflow for using DeepH to study twisted materials is dis­                     indicator of accuracy48. The corresponding results indicate that
+played in Fig. 6a. First, the training data are obtained by DFT calcu­                  the high prediction accuracy is preserved for magic-angle TBG
+lations of non-twisted structures, which usually contain hundreds                       (Supplementary Fig. 11). Indeed, the band structure calculated by
+of randomly perturbed samples of a relatively small supercell. The                      DeepH satisfactorily matches the DFT benchmark result49 that was
+process of generating datasets is largely simplified because there is                   obtained by using the plane-wave basis at enormous computational
+no need to consider varying twist angles for training. Second, the                      cost (Fig. 6b, right). Importantly the existence of flat bands near
+neural network of DeepH is trained using the DFT data. Finally,                         the Fermi level, a characteristic feature of the magic angle, is well
+the trained DeepH is applied to predict the DFT Hamiltonian and                         reproduced by DeepH.
+calculate the material properties for new twisted structures with an                       Our method works well not only for TBGs, but also for other
+arbitrary twist angle θ.                                                                twisted vdW materials. Special attention has been paid to materi­
+    As a proof of principle, we first considered TBGs that have                         als with strong SOC, such as twisted bilayer bismuthenes (TBBs),
+already been intensively studied42–46. The neural network of DeepH,                     where the interplay between the strong SOC and moiré twist induces
+once trained by DFT data for zero twist angle, is able to give highly                   exotic physical properties50,51. In contrast to the Hamiltonian matrix
+accurate predictions on material properties for varying twist angles.                   calculated without SOC, the DFT Hamiltonian matrix with SOC
+The good transferability of DeepH was demonstrated by comparing                         has complex values and needs to take the spin degree of freedom
+its results with those calculated with DFT. The averaged MAE of                         into account for rotation transformation. Despite the additional
+H′iα, jβ is as low as sub-millielectronvolt when testing moiré-twisted                  complexity, a high prediction accuracy comparable to that of
+
+372                                                                       Nature Computational Science | VOL 2 | June 2022 | 367–377 | www.nature.com/natcomputsci
+

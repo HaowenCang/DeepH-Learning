@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>03_generalized_eigen</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+<h1
+id="d-b02d-b03非正交基广义本征与正交化约化">D-B02/D-B03：非正交基、广义本征与正交化约化</h1>
+<h2 id="条件与对象">1. 条件与对象</h2>
+<p>设
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝚽</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><msub><mi>ϕ</mi><mn>1</mn></msub><mo stretchy="false" form="postfix">⟩</mo><mo>,</mo><mi>…</mi><mo>,</mo><mo stretchy="false" form="prefix">|</mo><msub><mi>ϕ</mi><mi>M</mi></msub><mo stretchy="false" form="postfix">⟩</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\boldsymbol\Phi=(|\phi_1\rangle,\ldots,|\phi_M\rangle)</annotation></semantics></math>
+是同一
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>
+维子空间的一组线性无关基，定义</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mrow><mi>μ</mi><mi>ν</mi></mrow></msub><mo>=</mo><mo stretchy="false" form="prefix">⟨</mo><msub><mi>ϕ</mi><mi>μ</mi></msub><mo stretchy="false" form="prefix">|</mo><mover><mi>H</mi><mo accent="true">̂</mo></mover><mo stretchy="false" form="prefix">|</mo><msub><mi>ϕ</mi><mi>ν</mi></msub><mo stretchy="false" form="postfix">⟩</mo><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>S</mi><mrow><mi>μ</mi><mi>ν</mi></mrow></msub><mo>=</mo><mo stretchy="false" form="prefix">⟨</mo><msub><mi>ϕ</mi><mi>μ</mi></msub><mo stretchy="false" form="prefix">|</mo><msub><mi>ϕ</mi><mi>ν</mi></msub><mo stretchy="false" form="postfix">⟩</mo><mo>,</mo><mspace width="2.0em"></mspace><mi>H</mi><mo>,</mo><mi>S</mi><mo>∈</mo><msup><mi>ℂ</mi><mrow><mi>M</mi><mo>×</mo><mi>M</mi></mrow></msup><mi>.</mi></mrow><annotation encoding="application/x-tex">
+H_{\mu\nu}=\langle\phi_\mu|\hat H|\phi_\nu\rangle,
+\qquad
+S_{\mu\nu}=\langle\phi_\mu|\phi_\nu\rangle,
+\qquad H,S\in\mathbb C^{M\times M}.
+</annotation></semantics></math></p>
+<p>本章主问题限定为</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mo>=</mo><msup><mi>H</mi><mo>†</mo></msup><mo>,</mo><mspace width="2.0em"></mspace><mi>S</mi><mo>=</mo><msup><mi>S</mi><mo>†</mo></msup><mo>≻</mo><mn>0</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+H=H^\dagger,\qquad S=S^\dagger\succ0.
+</annotation></semantics></math></p>
+<p>若
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>H</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat H</annotation></semantics></math>
+的伴随关系在所选基函数上成立，则第一项由矩阵元定义得到；第二项由 Gram
+矩阵定义与基的线性无关性得到。半正定但奇异、非 Hermitian
+或不定矩阵束属于另外的问题类别，不能静默套用以下结论。</p>
+<h2 id="gram-矩阵正定性">2. Gram 矩阵正定性</h2>
+<p>对任意
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>∈</mo><msup><mi>ℂ</mi><mrow><mi>M</mi><mo>×</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">x\in\mathbb C^{M\times1}</annotation></semantics></math>，</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><msup><mi>x</mi><mo>†</mo></msup><mi>S</mi><mi>x</mi></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><munder><mo>∑</mo><mrow><mi>μ</mi><mi>ν</mi></mrow></munder><msubsup><mi>x</mi><mi>μ</mi><mo>*</mo></msubsup><mo stretchy="false" form="prefix">⟨</mo><msub><mi>ϕ</mi><mi>μ</mi></msub><mo stretchy="false" form="prefix">|</mo><msub><mi>ϕ</mi><mi>ν</mi></msub><mo stretchy="false" form="postfix">⟩</mo><msub><mi>x</mi><mi>ν</mi></msub></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mrow><mo stretchy="true" form="prefix">⟨</mo><munder><mo>∑</mo><mi>μ</mi></munder><msub><mi>x</mi><mi>μ</mi></msub><msub><mi>ϕ</mi><mi>μ</mi></msub><mo stretchy="true" form="infix">|</mo><munder><mo>∑</mo><mi>ν</mi></munder><msub><mi>x</mi><mi>ν</mi></msub><msub><mi>ϕ</mi><mi>ν</mi></msub><mo stretchy="true" form="postfix">⟩</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">∥</mo><munder><mo>∑</mo><mi>ν</mi></munder><msub><mi>x</mi><mi>ν</mi></msub><mo stretchy="false" form="prefix">|</mo><msub><mi>ϕ</mi><mi>ν</mi></msub><mo stretchy="false" form="postfix">⟩</mo><mo stretchy="true" form="postfix">∥</mo></mrow><mn>2</mn></msup><mo>≥</mo><mn>0</mn><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{aligned}
+x^\dagger Sx
+&amp;=\sum_{\mu\nu}x_\mu^*
+\langle\phi_\mu|\phi_\nu\rangle x_\nu\\
+&amp;=\left\langle\sum_\mu x_\mu\phi_\mu
+\middle|
+\sum_\nu x_\nu\phi_\nu\right\rangle\\
+&amp;=\left\|\sum_\nu x_\nu|\phi_\nu\rangle\right\|^2\ge0.
+\end{aligned}
+</annotation></semantics></math></p>
+<p>若基线性无关，则
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>≠</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">x\ne0</annotation></semantics></math>
+时线性组合不为零，故
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mo>†</mo></msup><mi>S</mi><mi>x</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">x^\dagger Sx&gt;0</annotation></semantics></math>，即
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo>≻</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">S\succ0</annotation></semantics></math>。反之，若基线性相关，存在
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>≠</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">x\ne0</annotation></semantics></math>
+使线性组合为零，于是
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mo>†</mo></msup><mi>S</mi><mi>x</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">x^\dagger Sx=0</annotation></semantics></math>，<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+不正定。因此：</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><msub><mi>ϕ</mi><mi>μ</mi></msub><msubsup><mo stretchy="false" form="postfix">}</mo><mrow><mi>μ</mi><mo>=</mo><mn>1</mn></mrow><mi>M</mi></msubsup><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> 线性无关</mtext></mrow><mspace width="1.0em"></mspace><mo>⇔</mo><mspace width="1.0em"></mspace><mi>S</mi><mo>≻</mo><mn>0</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\{\phi_\mu\}_{\mu=1}^{M}\text{ 线性无关}
+\quad\Longleftrightarrow\quad
+S\succ0.
+</annotation></semantics></math></p>
+<h2 id="从算符方程投影得到-hcesc">3. 从算符方程投影得到
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mi>c</mi><mo>=</mo><mi>E</mi><mi>S</mi><mi>c</mi></mrow><annotation encoding="application/x-tex">Hc=ESc</annotation></semantics></math></h2>
+<p>将子空间中的态写为</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>ψ</mi><mo stretchy="false" form="postfix">⟩</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>ν</mi><mo>=</mo><mn>1</mn></mrow><mi>M</mi></munderover><msub><mi>c</mi><mi>ν</mi></msub><mo stretchy="false" form="prefix">|</mo><msub><mi>ϕ</mi><mi>ν</mi></msub><mo stretchy="false" form="postfix">⟩</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+|\psi\rangle=\sum_{\nu=1}^{M}c_\nu|\phi_\nu\rangle.
+</annotation></semantics></math></p>
+<p>若该态满足投影范围内的本征方程
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>H</mi><mo accent="true">̂</mo></mover><mo stretchy="false" form="prefix">|</mo><mi>ψ</mi><mo stretchy="false" form="postfix">⟩</mo><mo>=</mo><mi>E</mi><mo stretchy="false" form="prefix">|</mo><mi>ψ</mi><mo stretchy="false" form="postfix">⟩</mo></mrow><annotation encoding="application/x-tex">\hat H|\psi\rangle=E|\psi\rangle</annotation></semantics></math>，左乘
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⟨</mo><msub><mi>ϕ</mi><mi>μ</mi></msub><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">\langle\phi_\mu|</annotation></semantics></math>：</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><mo>∑</mo><mi>ν</mi></munder><mo stretchy="false" form="prefix">⟨</mo><msub><mi>ϕ</mi><mi>μ</mi></msub><mo stretchy="false" form="prefix">|</mo><mover><mi>H</mi><mo accent="true">̂</mo></mover><mo stretchy="false" form="prefix">|</mo><msub><mi>ϕ</mi><mi>ν</mi></msub><mo stretchy="false" form="postfix">⟩</mo><msub><mi>c</mi><mi>ν</mi></msub><mo>=</mo><mi>E</mi><munder><mo>∑</mo><mi>ν</mi></munder><mo stretchy="false" form="prefix">⟨</mo><msub><mi>ϕ</mi><mi>μ</mi></msub><mo stretchy="false" form="prefix">|</mo><msub><mi>ϕ</mi><mi>ν</mi></msub><mo stretchy="false" form="postfix">⟩</mo><msub><mi>c</mi><mi>ν</mi></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\sum_\nu
+\langle\phi_\mu|\hat H|\phi_\nu\rangle c_\nu
+=
+E\sum_\nu
+\langle\phi_\mu|\phi_\nu\rangle c_\nu.
+</annotation></semantics></math></p>
+<p>逐个
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math>
+收集即得</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mi>c</mi><mo>=</mo><mi>E</mi><mi>S</mi><mi>c</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+Hc=ESc.
+</annotation></semantics></math></p>
+<p>正交基只是
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo>=</mo><mi>I</mi></mrow><annotation encoding="application/x-tex">S=I</annotation></semantics></math>
+的特例。把非正交基中的
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+删除，相当于错误地把系数空间的欧氏内积当成物理态内积。</p>
+<h2 id="从-rayleigh-商驻值得到广义本征方程">4. 从 Rayleigh
+商驻值得到广义本征方程</h2>
+<p>非零系数向量的 Rayleigh 商定义为</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ℛ</mi><mo stretchy="false" form="prefix">(</mo><mi>c</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mrow><msup><mi>c</mi><mo>†</mo></msup><mi>H</mi><mi>c</mi></mrow><mrow><msup><mi>c</mi><mo>†</mo></msup><mi>S</mi><mi>c</mi></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\mathcal R(c)=\frac{c^\dagger Hc}{c^\dagger Sc}.
+</annotation></semantics></math></p>
+<p>因为
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo>≻</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">S\succ0</annotation></semantics></math>，分母对
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mo>≠</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">c\ne0</annotation></semantics></math>
+严格为正。等价地，在约束
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>c</mi><mo>†</mo></msup><mi>S</mi><mi>c</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">c^\dagger Sc=1</annotation></semantics></math>
+下令</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ℒ</mi><mo stretchy="false" form="prefix">(</mo><mi>c</mi><mo>,</mo><msup><mi>c</mi><mo>*</mo></msup><mo>,</mo><mi>E</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msup><mi>c</mi><mo>†</mo></msup><mi>H</mi><mi>c</mi><mo>−</mo><mi>E</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>c</mi><mo>†</mo></msup><mi>S</mi><mi>c</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\mathcal L(c,c^*,E)
+=c^\dagger Hc-E(c^\dagger Sc-1).
+</annotation></semantics></math></p>
+<p>对复变量采用
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
+与
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>c</mi><mo>*</mo></msup><annotation encoding="application/x-tex">c^*</annotation></semantics></math>
+独立变化的标准有限维变分记法，对
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>c</mi><mo>*</mo></msup><annotation encoding="application/x-tex">c^*</annotation></semantics></math>
+的任意变化
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><msup><mi>c</mi><mo>†</mo></msup></mrow><annotation encoding="application/x-tex">\delta c^\dagger</annotation></semantics></math>
+有</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>δ</mi><msup><mi>c</mi><mo>*</mo></msup></msub><mi>ℒ</mi><mo>=</mo><mi>δ</mi><msup><mi>c</mi><mo>†</mo></msup><mo stretchy="false" form="prefix">(</mo><mi>H</mi><mi>c</mi><mo>−</mo><mi>E</mi><mi>S</mi><mi>c</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\delta_{c^*}\mathcal L
+=\delta c^\dagger(Hc-ESc).
+</annotation></semantics></math></p>
+<p>驻值要求该式对任意
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><msup><mi>c</mi><mo>†</mo></msup></mrow><annotation encoding="application/x-tex">\delta c^\dagger</annotation></semantics></math>
+为零，因此</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mi>c</mi><mo>=</mo><mi>E</mi><mi>S</mi><mi>c</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+Hc=ESc.
+</annotation></semantics></math></p>
+<p>这条推导还说明
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>-归一化是变分约束，而不是事后任意选择的欧氏归一化。</p>
+<h2 id="实谱与-s-正交性">5. 实谱与
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>-正交性</h2>
+<p>若
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><msub><mi>c</mi><mi>n</mi></msub><mo>=</mo><msub><mi>E</mi><mi>n</mi></msub><mi>S</mi><msub><mi>c</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">Hc_n=E_nSc_n</annotation></semantics></math>，左乘
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>c</mi><mi>n</mi><mo>†</mo></msubsup><annotation encoding="application/x-tex">c_n^\dagger</annotation></semantics></math>
+得</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>E</mi><mi>n</mi></msub><mo>=</mo><mfrac><mrow><msubsup><mi>c</mi><mi>n</mi><mo>†</mo></msubsup><mi>H</mi><msub><mi>c</mi><mi>n</mi></msub></mrow><mrow><msubsup><mi>c</mi><mi>n</mi><mo>†</mo></msubsup><mi>S</mi><msub><mi>c</mi><mi>n</mi></msub></mrow></mfrac><mo>∈</mo><mi>ℝ</mi><mo>,</mo></mrow><annotation encoding="application/x-tex">
+E_n=\frac{c_n^\dagger Hc_n}{c_n^\dagger Sc_n}\in\mathbb R,
+</annotation></semantics></math></p>
+<p>因为分子、分母均为实数且分母为正。</p>
+<p>对两个本征对，</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><msub><mi>c</mi><mi>n</mi></msub><mo>=</mo><msub><mi>E</mi><mi>n</mi></msub><mi>S</mi><msub><mi>c</mi><mi>n</mi></msub><mo>,</mo><mspace width="2.0em"></mspace><mi>H</mi><msub><mi>c</mi><mi>m</mi></msub><mo>=</mo><msub><mi>E</mi><mi>m</mi></msub><mi>S</mi><msub><mi>c</mi><mi>m</mi></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+Hc_n=E_nSc_n,\qquad Hc_m=E_mSc_m.
+</annotation></semantics></math></p>
+<p>左乘
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>c</mi><mi>m</mi><mo>†</mo></msubsup><annotation encoding="application/x-tex">c_m^\dagger</annotation></semantics></math>
+到第一式得</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>c</mi><mi>m</mi><mo>†</mo></msubsup><mi>H</mi><msub><mi>c</mi><mi>n</mi></msub><mo>=</mo><msub><mi>E</mi><mi>n</mi></msub><msubsup><mi>c</mi><mi>m</mi><mo>†</mo></msubsup><mi>S</mi><msub><mi>c</mi><mi>n</mi></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+c_m^\dagger Hc_n=E_n c_m^\dagger Sc_n.
+</annotation></semantics></math></p>
+<p>利用 Hermiticity 对第二式取共轭并右配
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mi>n</mi></msub><annotation encoding="application/x-tex">c_n</annotation></semantics></math>，也有</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>c</mi><mi>m</mi><mo>†</mo></msubsup><mi>H</mi><msub><mi>c</mi><mi>n</mi></msub><mo>=</mo><msub><mi>E</mi><mi>m</mi></msub><msubsup><mi>c</mi><mi>m</mi><mo>†</mo></msubsup><mi>S</mi><msub><mi>c</mi><mi>n</mi></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+c_m^\dagger Hc_n=E_m c_m^\dagger Sc_n.
+</annotation></semantics></math></p>
+<p>故</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>E</mi><mi>n</mi></msub><mo>−</mo><msub><mi>E</mi><mi>m</mi></msub><mo stretchy="false" form="postfix">)</mo><msubsup><mi>c</mi><mi>m</mi><mo>†</mo></msubsup><mi>S</mi><msub><mi>c</mi><mi>n</mi></msub><mo>=</mo><mn>0</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+(E_n-E_m)c_m^\dagger Sc_n=0.
+</annotation></semantics></math></p>
+<p>当
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>E</mi><mi>n</mi></msub><mo>≠</mo><msub><mi>E</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">E_n\ne E_m</annotation></semantics></math>
+时，<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>c</mi><mi>m</mi><mo>†</mo></msubsup><mi>S</mi><msub><mi>c</mi><mi>n</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">c_m^\dagger Sc_n=0</annotation></semantics></math>。各本征矢可缩放为</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>C</mi><mo>†</mo></msup><mi>S</mi><mi>C</mi><mo>=</mo><mi>I</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+C^\dagger SC=I.
+</annotation></semantics></math></p>
+<p>简并时，单个本征矢不唯一，但可在简并子空间内进行
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>-正交化；应比较子空间而非未经规范固定的逐列向量。</p>
+<h2 id="cholesky-约化">6. Cholesky 约化</h2>
+<p>由于
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo>≻</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">S\succ0</annotation></semantics></math>，存在唯一的正对角下三角矩阵
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
+使</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo>=</mo><mi>L</mi><msup><mi>L</mi><mo>†</mo></msup><mi>.</mi></mrow><annotation encoding="application/x-tex">
+S=LL^\dagger.
+</annotation></semantics></math></p>
+<p>令</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><msup><mi>L</mi><mo>†</mo></msup><mi>c</mi><mo>,</mo><mspace width="2.0em"></mspace><mi>c</mi><mo>=</mo><msup><mi>L</mi><mrow><mi>−</mi><mo>†</mo></mrow></msup><mi>y</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+y=L^\dagger c,\qquad c=L^{-\dagger}y.
+</annotation></semantics></math></p>
+<p>代入
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mi>c</mi><mo>=</mo><mi>E</mi><mi>S</mi><mi>c</mi></mrow><annotation encoding="application/x-tex">Hc=ESc</annotation></semantics></math>
+并左乘
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>L</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><annotation encoding="application/x-tex">L^{-1}</annotation></semantics></math>：</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><munder><mrow><msup><mi>L</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mi>H</mi><msup><mi>L</mi><mrow><mi>−</mi><mo>†</mo></mrow></msup></mrow><mo accent="true">⏟</mo></munder><msub><mover><mi>H</mi><mo accent="true">̃</mo></mover><mi mathvariant="normal">C</mi></msub></munder><mi>y</mi><mo>=</mo><mi>E</mi><mi>y</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\underbrace{L^{-1}HL^{-\dagger}}_{\widetilde H_{\mathrm C}}y
+=Ey.
+</annotation></semantics></math></p>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mover><mi>H</mi><mo accent="true">̃</mo></mover><mi mathvariant="normal">C</mi></msub><annotation encoding="application/x-tex">\widetilde H_{\mathrm C}</annotation></semantics></math>
+是 Hermitian：</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mover><mi>H</mi><mo accent="true">̃</mo></mover><mi mathvariant="normal">C</mi><mo>†</mo></msubsup><mo>=</mo><msup><mi>L</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mi>H</mi><mo>†</mo></msup><msup><mi>L</mi><mrow><mi>−</mi><mo>†</mo></mrow></msup><mo>=</mo><msub><mover><mi>H</mi><mo accent="true">̃</mo></mover><mi mathvariant="normal">C</mi></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\widetilde H_{\mathrm C}^\dagger
+=L^{-1}H^\dagger L^{-\dagger}
+=\widetilde H_{\mathrm C}.
+</annotation></semantics></math></p>
+<p>若
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>y</mi><mi>m</mi><mo>†</mo></msubsup><msub><mi>y</mi><mi>n</mi></msub><mo>=</mo><msub><mi>δ</mi><mrow><mi>m</mi><mi>n</mi></mrow></msub></mrow><annotation encoding="application/x-tex">y_m^\dagger y_n=\delta_{mn}</annotation></semantics></math>，则</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>c</mi><mi>m</mi><mo>†</mo></msubsup><mi>S</mi><msub><mi>c</mi><mi>n</mi></msub><mo>=</mo><msubsup><mi>y</mi><mi>m</mi><mo>†</mo></msubsup><msup><mi>L</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mi>L</mi><msup><mi>L</mi><mo>†</mo></msup><msup><mi>L</mi><mrow><mi>−</mi><mo>†</mo></mrow></msup><msub><mi>y</mi><mi>n</mi></msub><mo>=</mo><msub><mi>δ</mi><mrow><mi>m</mi><mi>n</mi></mrow></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+c_m^\dagger Sc_n
+=y_m^\dagger L^{-1}LL^\dagger L^{-\dagger}y_n
+=\delta_{mn}.
+</annotation></semantics></math></p>
+<p>实际实现应通过三角求解应用
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>L</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><annotation encoding="application/x-tex">L^{-1}</annotation></semantics></math>
+或
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>L</mi><mrow><mi>−</mi><mo>†</mo></mrow></msup><annotation encoding="application/x-tex">L^{-\dagger}</annotation></semantics></math>，而不显式形成矩阵逆。</p>
+<h2 id="对称正交化">7. 对称正交化</h2>
+<p>对
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+作谱分解</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo>=</mo><mi>U</mi><mi>diag</mi><mo>&#8289;</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>s</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>s</mi><mi>M</mi></msub><mo stretchy="false" form="postfix">)</mo><msup><mi>U</mi><mo>†</mo></msup><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>s</mi><mi>i</mi></msub><mo>&gt;</mo><mn>0</mn><mo>,</mo></mrow><annotation encoding="application/x-tex">
+S=U\operatorname{diag}(s_1,\ldots,s_M)U^\dagger,
+\qquad s_i&gt;0,
+</annotation></semantics></math></p>
+<p>定义唯一 Hermitian 正定平方根及其逆</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>S</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msup><mo>=</mo><mi>U</mi><mi>diag</mi><mo>&#8289;</mo><mo stretchy="false" form="prefix">(</mo><msqrt><msub><mi>s</mi><mi>i</mi></msub></msqrt><mo stretchy="false" form="postfix">)</mo><msup><mi>U</mi><mo>†</mo></msup><mo>,</mo><mspace width="2.0em"></mspace><msup><mi>S</mi><mrow><mi>−</mi><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msup><mo>=</mo><mi>U</mi><mi>diag</mi><mo>&#8289;</mo><mo stretchy="false" form="prefix">(</mo><msubsup><mi>s</mi><mi>i</mi><mrow><mi>−</mi><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msubsup><mo stretchy="false" form="postfix">)</mo><msup><mi>U</mi><mo>†</mo></msup><mi>.</mi></mrow><annotation encoding="application/x-tex">
+S^{1/2}=U\operatorname{diag}(\sqrt{s_i})U^\dagger,
+\qquad
+S^{-1/2}=U\operatorname{diag}(s_i^{-1/2})U^\dagger.
+</annotation></semantics></math></p>
+<p>令
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><msup><mi>S</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msup><mi>c</mi></mrow><annotation encoding="application/x-tex">y=S^{1/2}c</annotation></semantics></math>，则
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mo>=</mo><msup><mi>S</mi><mrow><mi>−</mi><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msup><mi>y</mi></mrow><annotation encoding="application/x-tex">c=S^{-1/2}y</annotation></semantics></math>。原问题化为</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><munder><mrow><msup><mi>S</mi><mrow><mi>−</mi><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msup><mi>H</mi><msup><mi>S</mi><mrow><mi>−</mi><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msup></mrow><mo accent="true">⏟</mo></munder><msub><mover><mi>H</mi><mo accent="true">̃</mo></mover><mi mathvariant="normal">S</mi></msub></munder><mi>y</mi><mo>=</mo><mi>E</mi><mi>y</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\underbrace{S^{-1/2}HS^{-1/2}}_{\widetilde H_{\mathrm S}}y
+=Ey.
+</annotation></semantics></math></p>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mover><mi>H</mi><mo accent="true">̃</mo></mover><mi mathvariant="normal">S</mi></msub><annotation encoding="application/x-tex">\widetilde H_{\mathrm S}</annotation></semantics></math>
+同样 Hermitian，且</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>c</mi><mo>†</mo></msup><mi>S</mi><mi>c</mi><mo>=</mo><msup><mi>y</mi><mo>†</mo></msup><mi>y</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+c^\dagger Sc=y^\dagger y.
+</annotation></semantics></math></p>
+<p>Cholesky
+与对称正交化给出不同的正交基坐标，但都保持广义谱。前者通常适合稳定数值求解；后者在分析规范对称性和小特征值方向时更直观。不能仅因公式简洁便默认在数值代码中显式形成
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>S</mi><mrow><mi>−</mi><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msup><annotation encoding="application/x-tex">S^{-1/2}</annotation></semantics></math>。</p>
+<h2 id="病态性与近线性相关">8. 病态性与近线性相关</h2>
+<p>设
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+的特征值满足</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>&lt;</mo><msub><mi>λ</mi><mi>min</mi><mo>&#8289;</mo></msub><mo stretchy="false" form="prefix">(</mo><mi>S</mi><mo stretchy="false" form="postfix">)</mo><mo>≤</mo><msub><mi>λ</mi><mi>max</mi><mo>&#8289;</mo></msub><mo stretchy="false" form="prefix">(</mo><mi>S</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>κ</mi><mn>2</mn></msub><mo stretchy="false" form="prefix">(</mo><mi>S</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mrow><msub><mi>λ</mi><mi>max</mi><mo>&#8289;</mo></msub><mo stretchy="false" form="prefix">(</mo><mi>S</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>λ</mi><mi>min</mi><mo>&#8289;</mo></msub><mo stretchy="false" form="prefix">(</mo><mi>S</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+0&lt;\lambda_{\min}(S)\le\lambda_{\max}(S),
+\qquad
+\kappa_2(S)=\frac{\lambda_{\max}(S)}{\lambda_{\min}(S)}.
+</annotation></semantics></math></p>
+<p>对任意
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>，</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>λ</mi><mi>min</mi><mo>&#8289;</mo></msub><mo stretchy="false" form="prefix">(</mo><mi>S</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">∥</mo><mi>c</mi><msubsup><mo stretchy="false" form="postfix">∥</mo><mn>2</mn><mn>2</mn></msubsup><mo>≤</mo><msup><mi>c</mi><mo>†</mo></msup><mi>S</mi><mi>c</mi><mo>≤</mo><msub><mi>λ</mi><mi>max</mi><mo>&#8289;</mo></msub><mo stretchy="false" form="prefix">(</mo><mi>S</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">∥</mo><mi>c</mi><msubsup><mo stretchy="false" form="postfix">∥</mo><mn>2</mn><mn>2</mn></msubsup><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\lambda_{\min}(S)\|c\|_2^2
+\le c^\dagger Sc
+\le\lambda_{\max}(S)\|c\|_2^2.
+</annotation></semantics></math></p>
+<p>当
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>λ</mi><mi>min</mi><mo>&#8289;</mo></msub><annotation encoding="application/x-tex">\lambda_{\min}</annotation></semantics></math>
+很小时，某些欧氏范数不小的系数组合代表物理范数很小的近抵消态；<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>S</mi><mrow><mi>−</mi><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msup><annotation encoding="application/x-tex">S^{-1/2}</annotation></semantics></math>
+和 Cholesky
+求解会放大这些方向上的舍入与数据误差。由此只能推出数值敏感性增加，不能仅凭较大条件数断言某个具体能带误差必然以固定速率增长。</p>
+<p>若要删除小特征值方向，必须同时登记阈值、被删除子空间及其对谱和物理量的影响。这一操作改变有效子空间，不再是无损的可逆基变换。</p>
+<h2 id="失败边界与验证入口">9. 失败边界与验证入口</h2>
+<ul>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+非正定：标准 Hermitian-definite 广义本征求解器应拒绝输入。</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+奇异：基线性相关，Cholesky 分解失败，系数坐标不唯一。</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mo>≠</mo><msup><mi>H</mi><mo>†</mo></msup></mrow><annotation encoding="application/x-tex">H\ne H^\dagger</annotation></semantics></math>：实谱和
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>-正交结论一般不再成立。</li>
+<li>近简并：逐本征矢比较可能不稳定，应改用子空间夹角或投影量。</li>
+<li>显式求逆：可能放大舍入误差，不能作为默认稳定实现。</li>
+</ul>
+<p>固定的数值残差、<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>-正交、条件数扫描和失败断言见
+M4 工作包 T-B01、T-B02、T-B04；相应自动实现属于 M4-07。</p>
+</body>
+</html>

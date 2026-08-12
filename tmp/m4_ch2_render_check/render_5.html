@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>readme</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<h1 id="第-2-章练习参考解答">第 2 章练习参考解答</h1>
+<h2 id="q2-01">Q2-01</h2>
+<p><span class="math inline">\(\hat H\)</span>
+是作用于态空间的算符；<span
+class="math inline">\(\boldsymbol\Phi\)</span> 是有序基列；<span
+class="math inline">\(c\)</span> 是同一态在该基中的坐标；<span
+class="math inline">\(H\)</span> 是 <span class="math inline">\(\hat
+H\)</span> 的矩阵表示；<span class="math inline">\(S\)</span> 是基的
+Gram 矩阵；<span class="math inline">\(E_n\)</span> 是矩阵对 <span
+class="math inline">\((H,S)\)</span> 在适用条件下的广义本征值。</p>
+<p>在 <span class="math inline">\(\Phi&#39;=\Phi A\)</span>
+的一致可逆变换下，基、系数、<span class="math inline">\(H\)</span> 和
+<span class="math inline">\(S\)</span>
+均改变表示，但抽象态、抽象算符、归一化期望值和广义谱不变。若同时改变所张成的子空间，则不再只是表示变化。</p>
+<p>常见错误是把 <span class="math inline">\(H\)</span> 与 <span
+class="math inline">\(\hat H\)</span>
+当作同一对象，或者只说“本征值不变”而未限定 <span
+class="math inline">\(H,S,c\)</span> 必须同步变换。</p>
+<h2 id="q2-02">Q2-02</h2>
+<p>直接计算得</p>
+<p><span class="math display">\[
+c_1^\dagger Xc_1=1,
+\qquad
+c_2^\dagger Xc_2=0.
+\]</span></p>
+<p>两态的分量相对相位不同，因此是不同物理态。另一方面，对整体相位，</p>
+<p><span class="math display">\[
+(e^{i\theta}c)^\dagger A(e^{i\theta}c)
+=e^{-i\theta}e^{i\theta}c^\dagger Ac=c^\dagger Ac.
+\]</span></p>
+<p>所以“整体相位无效”与“相对相位可观测”并不矛盾。把每个分量独立改相位而不同步变换算符，不是整体相位变换。</p>
+<h2 id="q2-03">Q2-03</h2>
+<p>矩阵满足</p>
+<p><span class="math display">\[
+A^\dagger
+=\begin{pmatrix}1&amp;i\\-i&amp;2\end{pmatrix}=A,
+\]</span></p>
+<p>故为 Hermitian。Hermiticity 要求 <span
+class="math inline">\(A_{\mu\nu}=A_{\nu\mu}^*\)</span>，不要求所有元素为实数。对任意
+<span class="math inline">\(c\)</span>，</p>
+<p><span class="math display">\[
+(c^\dagger Ac)^*=c^\dagger A^\dagger c=c^\dagger Ac,
+\]</span></p>
+<p>因此该标量为实数。归一化只决定它能否直接解释为期望值，不是上述实数性的必要条件。</p>
+<h2 id="q2-04">Q2-04</h2>
+<p>由</p>
+<p><span class="math display">\[
+\Phi c=\Phi&#39;c&#39;=\Phi A c&#39;
+\]</span></p>
+<p>和基的线性无关性得 <span class="math inline">\(c=Ac&#39;\)</span>，故
+<span class="math inline">\(c&#39;=A^{-1}c\)</span>。对新基向量 <span
+class="math inline">\(|\phi&#39;_\alpha\rangle=\sum_\mu|\phi_\mu\rangle
+A_{\mu\alpha}\)</span>，</p>
+<p><span class="math display">\[
+H&#39;_{\alpha\beta}
+=\sum_{\mu\nu}A_{\mu\alpha}^*H_{\mu\nu}A_{\nu\beta},
+\]</span></p>
+<p>即 <span class="math inline">\(H&#39;=A^\dagger HA\)</span>；把 <span
+class="math inline">\(\hat H\)</span> 换成恒等算符即得 <span
+class="math inline">\(S&#39;=A^\dagger SA\)</span>。常见错误是把相似变换
+<span class="math inline">\(A^{-1}HA\)</span>
+与基函数矩阵元的合同变换混用。</p>
+<h2 id="q2-05">Q2-05</h2>
+<p>旧基正交时 <span class="math inline">\(S=I\)</span>，所以 <span
+class="math inline">\(S&#39;=A^\dagger A\)</span>。只有 <span
+class="math inline">\(A\)</span> 幺正时 <span
+class="math inline">\(A^\dagger A=I\)</span>。由旧问题 <span
+class="math inline">\(Hc=Ec\)</span> 和 <span
+class="math inline">\(c&#39;=A^{-1}c\)</span>，</p>
+<p><span class="math display">\[
+H&#39;c&#39;=A^\dagger Hc=E A^\dagger c
+=E A^\dagger AA^{-1}c=ES&#39;c&#39;.
+\]</span></p>
+<p>若错误地求 <span
+class="math inline">\(H&#39;c&#39;=Ec&#39;\)</span>，等价于把新基误当作正交基，改变了内积度量。</p>
+<h2 id="q2-06">Q2-06</h2>
+<p>因为</p>
+<p><span class="math display">\[
+H&#39;-ES&#39;=A^\dagger(H-ES)A,
+\]</span></p>
+<p>所以</p>
+<p><span class="math display">\[
+\det(H&#39;-ES&#39;)
+=\det(A^\dagger)\det(H-ES)\det A
+=|\det A|^2\det(H-ES).
+\]</span></p>
+<p>只要 <span class="math inline">\(A\)</span>
+可逆，前因子非零，不改变关于 <span class="math inline">\(E\)</span>
+的根。若 <span class="math inline">\(A\)</span>
+奇异，新“基”线性相关或降维，<span class="math inline">\(|\det
+A|^2=0\)</span>，坐标逆变换不存在，不能由该式推出谱等价。</p>
+<h2 id="q2-07">Q2-07</h2>
+<p>可逆 <span class="math inline">\(M\times M\)</span>
+变换保持同一子空间，并在基、系数和矩阵之间建立双向映射；因此矩阵对只发生合同变换。删除基函数则改变投影算符和允许变分的子空间，原本的态可能无法表示，谱一般发生变化。</p>
+<p>若把有限基误差当成纯规范差异，会错误声称扩充/截断基组不应改变能量，进而无法区分表示对齐问题与基组收敛问题。</p>
+<h2 id="q2-08">Q2-08</h2>
+<p>计算得</p>
+<p><span class="math display">\[
+H&#39;=\begin{pmatrix}1&amp;\tfrac52\\[2pt]\tfrac52&amp;\tfrac54\end{pmatrix},
+\qquad
+S&#39;=\begin{pmatrix}1&amp;\tfrac12\\[2pt]\tfrac12&amp;\tfrac54\end{pmatrix}.
+\]</span></p>
+<p>广义特征多项式为</p>
+<p><span class="math display">\[
+\det(H&#39;-ES&#39;)=E^2-5,
+\]</span></p>
+<p>故正确谱为 <span class="math inline">\(\pm\sqrt5\)</span>。错误地忽略
+<span class="math inline">\(S&#39;\)</span> 时，</p>
+<p><span class="math display">\[
+\det(H&#39;-EI)=E^2-\frac94E-5,
+\]</span></p>
+<p>得到</p>
+<p><span class="math display">\[
+E_{\mathrm{wrong},\pm}=\frac{9\pm\sqrt{401}}8
+\approx -1.3781,3.6281.
+\]</span></p>
+<p>差异来自遗漏非正交基的 Gram
+矩阵，而不是物理算符在非幺正基变换下改变。自动数值复算将在 M4-07 的
+T-B03 中固化；本题当前可用解析行列式直接验收。</p>
+<h2 id="错误诊断汇总">错误诊断汇总</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>现象</th>
+<th>机制</th>
+<th>修复</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>相位改变后期望值变化</td>
+<td>改的是相对相位或未同步变换算符</td>
+<td>区分整体相位与基规范变换</td>
+</tr>
+<tr>
+<td>复数矩阵被判为非 Hermitian</td>
+<td>忽略转置与复共轭的组合</td>
+<td>检查 <span class="math inline">\(A-A^\dagger\)</span></td>
+</tr>
+<tr>
+<td>非幺正变换后谱变化</td>
+<td>错把 <span class="math inline">\(S&#39;\)</span> 设为 <span
+class="math inline">\(I\)</span></td>
+<td>求解 <span class="math inline">\((H&#39;,S&#39;)\)</span>
+广义问题</td>
+</tr>
+<tr>
+<td>删除基后仍声称谱必须不变</td>
+<td>把降维投影当作可逆坐标变换</td>
+<td>分开子空间误差和表示变化</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

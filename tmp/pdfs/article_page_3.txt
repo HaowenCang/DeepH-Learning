@@ -1,0 +1,92 @@
+NATure CompuTATionAl Science                                                                                                                       Articles
+by spherical harmonics. In contrast, the widely used Wannier func­                 layer normalization39 is employed to improve training efficiency,
+tions do not possess such advantages34. By taking advantage of the                 and Φ(vl) and Φ(el) are neural networks for updating vertex and
+sparseness and nearsightedness, only Hamiltonian matrix blocks Hij                 edge features, respectively. The local chemical environment of the
+between neighboring atoms (within RC) have to be learned, and only                 neighborhood within RC will be aggregated in an MP layer. As MP
+information about the neighborhood of atoms i and j (within RN) is                 layers are stacked, more and more information of the distant chemi­
+relevant to learning Hij.                                                          cal environment will be aggregated into the features, enabling the
+    A critical issue is to deal with covariant transformations of the              learning of H′ij ({R}N ).
+DFT Hamiltonian matrix. The Hamiltonian matrix itself is not                          A problem about the local coordinate should be noted. Because
+physically observable, and changes covariantly when varying coor­                  the local coordinate is defined for each edge according to its local
+dinate, basis or gauge globally or locally. Taking a four-atom struc­              chemical environment, sometimes minor modifications of local
+ture as an example (Fig. 1d), a global rotation of the atomic structure            structures could substantially change the coordinate axes, making
+(or basis functions) changes the DFT Hamiltonian matrix. The new                   the transformed H′ij considerably different and thus leading to inac­
+Hamiltonian matrix is related to the original one by a rotation trans­             curacy in the deep learning. We find that the problem is solvable
+formation. The local transformation is less obvious. In this example               by introducing one local coordinate message-passing (LCMP) layer
+structure, the atom pairs AB, AC and AD share the same local chem­                 after several MP layers. In the LCMP layer, orientation information
+                                                                                                   pq
+ical environment, and the Hamiltonian matrix blocks are related                    (unit vector r̂ik ) of bond ik relative to the local coordinate defined
+to each other by rotation transformations. Specifically, the trans­                for edge pq is added into the initial edge features, where i, k, q and p
+                                                                                                             pq        pq
+formed Hamiltonian matrix block H′AC ( H′AD) coincides with HAB                    are all atomic indices. θ ik and ϕik are the corresponding polar and
+under a clockwise rotation of the basis functions by 120° (240°) for               azimuthal angles, respectively, of the reference atoms i, k, q and p.
+AC (AD). In infinite crystalline materials, we may encounter atom                  The orientation information based on bonds between the central
+pairs with varying orientations. It is thus difficult (if not impossible)          atom and its neighbors was introduced for the study of total energy
+                                                                                                                               pq(L)        pq(L)
+to learn the covariant relations by neural network via data augmen­                in ref. 9. The vertex and edge features ( v i     and e ij ) defined for
+tation18. In this Article we propose a strategy to help DeepH work                 local coordinate pq are updated as follows:
+efficiently and accurately via local coordinates (details are described
+                                                                                                 pq(L)                                pq     pq }
+                                                                                                           ∑ ( L ) ( ( L− 1 ) {                   )
+in Supplementary Section 3; see Supplementary Information for                                  vi      =      Φv zik         ∥ YJm (θ ik , ϕik ) ,       (5)
+details of the computational methods and results, which includes                                         k ∈ Ni
+refs. 18[,19[,26), in which the locally transformed Hamiltonian matrix
+blocks H′ij are invariant under rotation (Fig. 1d). By changing the
+coordinate from local back to global, a rotation (or basis) transfor­                               pq(L)         (L)
+                                                                                                                        (
+                                                                                                                             pq(L)      pq(L)      (L−1)
+                                                                                                                                                           )
+mation is applied to H′ij. The obtained Hij will then naturally satisfy                           e ij      = Φe            vi       ∥ vj       ∥ eij          ,   (6)
+the covariant requirement.
+                                                                                   where a set of real spherical harmonic functions {YJm} are used
+Neural network architecture of DeepH. Next we present a deep                       to capture orientation information (where J is an integer ranging
+                                                                                                                                               ij(L)
+neural network representation of the DFT Hamiltonian based on a                    from 0 to 4 and m is an integer between −J and J.), and eij will
+message-passing neural network (MPNN)35, which is widely applied                   be used to represent H′ij. Note that the introduction of the LCMP
+in materials studies8,10,36–38. The rules of constructing crystal graphs           layer into DeepH is critical to improving the prediction accuracy
+and the MPNN are illustrated in Fig. 2a. Each atom is represented                  according to our test (Supplementary Table 3). Finally, Hij is cal­
+by a vertex, and atom pairs (with a distance smaller than RC) are rep­             culated from H′ij via rotation transformation. The neural network
+resented by edges. The MPNN uses edge embeddings to represent                      of DeepH is trained by DFT data and then applied to predict the
+H′ij. Self-loop edges are added in the graph to account for intra-site             DFT Hamiltonian for unseen atomic structures, which can bypass
+couplings. Let vi and eij denote the vertex feature of atom i and the              the time-consuming DFT self-consistent calculation and enable
+edge feature of atom pair ij, respectively. The initial vertex features            efficient electronic-structure calculations.
+are the embeddings of atomic number      Zi, and the initial edge fea­
+tures are the interatomic distance rij  expanded with the Gaussian               Capability of DeepH. Example studies were performed on vari­
+basis, centered at different points rn:                                            ous representative materials, including graphene, MoS2 and their
+                                                                                   curved counterparts (that is, nanotubes), as well as moiré-twisted
+                               (0)
+                              vi     = Embedding (Zi ),                      (1)   materials with negligible or strong SOC. The DFT Hamiltonian was
+                                                                                   computed by using 13, 19, 13 and 19 non-orthogonal atomic-like
+                       ( 0)                    2
+                                                                                   basis functions for C, Mo, S and Bi, respectively. The MPNN model,
+                      eij = exp(−(rij  − rn ) /σ 2 ).                      (2)
+                                   
+                                                                                   including five MP layers followed by one LCMP layer, was trained
+                                                                                   by minimizing the loss function defined as the mean-squared errors
+   The architecture and workflow of the MPNN are presented in                      of H′iα, jβ . Once ĤDFT ({R}) is learned by the neural network, vari­
+Fig. 2b. In a message-passing (MP) layer, the vertex and edge fea­                 ous kinds of physical property, such as band structure, Berry phase
+tures are updated successively as follows:                                         and physical responses to external fields, can be predicted while
+                                                                                   bypassing DFT self-consistent calculations (Fig. 1a). To check the
+                                                                                   reliability of our method, we studied eigen-energy-based quantities
+                                                 
+           (l)                             (l−1)      (l−1)
+                                    Φ(vl) zik
+                                         (      )
+          vi = LayerNorm                           + vi     ,  (3)
+                               ∑
+                                                                                   (density of states (DOS) or bands) as well as wavefunction-related
+                                            k ∈ Ni                                 properties (optical transition and shift current). Shift current is of
+                                                                                   particular interest, being an important photovoltaic effect gener­
+                       ( l)          ( l)
+                                            (
+                                                 (l)   (l)   (l−1)
+                                                                     )             ated by nonlinear optical progress and closely related to topologi­
+                      eij = Φe                  vi ∥ vj ∥ eij            ,   (4)   cal quantities (for example, Berry phase and curvature)33,40,41. The
+                                                                                   linear and nonlinear optical responses were studied using methods
+where Ni is a set containing neighboring vertices with edge connec­                developed by us33,41.
+tion to vertex i, ∥ denotes the concatenation of feature vectors, super­               The training of a neural network generally demands a large
+script l refers to the lth MP layer, z(ikl−1) ≡ v(i l−1) ∥ vk(l−1) ∥ e(ikl−1) is   amount of data. In our study, 5,000 configurations of the graphene
+the concatenation of vertex and edge features of the neighborhood,                 6 × 6 supercell were generated by ab initio MD at a temperature of
+
+Nature Computational Science | VOL 2 | June 2022 | 367–377 | www.nature.com/natcomputsci                                                                           369
+

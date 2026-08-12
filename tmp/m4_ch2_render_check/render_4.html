@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>readme</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<h1 id="第-2-章练习态算符矩阵与基变换">第 2
+章练习：态、算符、矩阵与基变换</h1>
+<p>这些练习用于检查材料覆盖，不要求学习者提交个人作答。每题均有对应参考解答、错误判据和验证入口。</p>
+<h2 id="q2-01-对象分类">Q2-01 对象分类</h2>
+<p>分别说明 <span class="math inline">\(\hat H\)</span>、有序基 <span
+class="math inline">\(\boldsymbol\Phi\)</span>、系数 <span
+class="math inline">\(c\)</span>、矩阵 <span
+class="math inline">\(H\)</span>、重叠矩阵 <span
+class="math inline">\(S\)</span> 和本征值 <span
+class="math inline">\(E_n\)</span>
+的对象类型。指出更换同一子空间内的基时哪些对象改变表示，哪些物理结论在一致变换下不变。</p>
+<h2 id="q2-02-整体相位与相对相位">Q2-02 整体相位与相对相位</h2>
+<p>在正交基中取</p>
+<p><span class="math display">\[
+c_1=\frac1{\sqrt2}\begin{pmatrix}1\\1\end{pmatrix},
+\qquad
+c_2=\frac1{\sqrt2}\begin{pmatrix}1\\i\end{pmatrix},
+\qquad
+X=\begin{pmatrix}0&amp;1\\1&amp;0\end{pmatrix}.
+\]</span></p>
+<p>计算两态的 <span class="math inline">\(X\)</span>
+期望值。再证明对任意实数 <span class="math inline">\(\theta\)</span>，把
+<span class="math inline">\(c\)</span> 替换为 <span
+class="math inline">\(e^{i\theta}c\)</span>
+不改变归一化期望值。解释为什么这两项结果不矛盾。</p>
+<h2 id="q2-03-复数-hermitian-矩阵">Q2-03 复数 Hermitian 矩阵</h2>
+<p>判断</p>
+<p><span class="math display">\[
+A=\begin{pmatrix}1&amp;i\\-i&amp;2\end{pmatrix}
+\]</span></p>
+<p>是否 Hermitian。说明“矩阵含复数元素”为什么不能作为否定 Hermiticity
+的理由，并证明任意归一化 <span class="math inline">\(c\)</span> 的 <span
+class="math inline">\(c^\dagger Ac\)</span> 为实数。</p>
+<h2 id="q2-04-列基与系数方向">Q2-04 列基与系数方向</h2>
+<p>已知 <span class="math inline">\(\boldsymbol\Phi&#39;=\boldsymbol\Phi
+A\)</span>，其中 <span class="math inline">\(A\)</span> 可逆。从同一态
+<span class="math inline">\(\boldsymbol\Phi
+c=\boldsymbol\Phi&#39;c&#39;\)</span> 推导 <span
+class="math inline">\(c&#39;=A^{-1}c\)</span>。再从矩阵元定义推导 <span
+class="math inline">\(H&#39;=A^\dagger H A\)</span> 和 <span
+class="math inline">\(S&#39;=A^\dagger S A\)</span>。</p>
+<h2 id="q2-05-非幺正变换后的本征问题">Q2-05 非幺正变换后的本征问题</h2>
+<p>旧基正交，<span class="math inline">\(S=I\)</span>。若 <span
+class="math inline">\(A\)</span> 可逆但非幺正，证明 <span
+class="math inline">\(S&#39;=A^\dagger A\ne
+I\)</span>（一般情形），并说明为什么新表示应求解 <span
+class="math inline">\(H&#39;c&#39;=ES&#39;c&#39;\)</span>，而不是 <span
+class="math inline">\(H&#39;c&#39;=Ec&#39;\)</span>。</p>
+<h2 id="q2-06-广义谱不变性">Q2-06 广义谱不变性</h2>
+<p>证明</p>
+<p><span class="math display">\[
+\det(H&#39;-ES&#39;)=|\det A|^2\det(H-ES).
+\]</span></p>
+<p>说明该式为什么只要求 <span class="math inline">\(A\)</span>
+可逆，不要求 <span class="math inline">\(A\)</span> 幺正；同时说明 <span
+class="math inline">\(A\)</span> 奇异时论证为何失效。</p>
+<h2 id="q2-07-表示变换与子空间改变">Q2-07 表示变换与子空间改变</h2>
+<p>比较以下两种操作：</p>
+<ol type="1">
+<li>在 <span class="math inline">\(M\)</span> 维子空间内用可逆 <span
+class="math inline">\(A\in\mathbb C^{M\times M}\)</span> 更换基；</li>
+<li>删除一个基函数，把问题投影到 <span
+class="math inline">\(M-1\)</span> 维子空间。</li>
+</ol>
+<p>解释为什么第一种操作保持广义谱，而第二种操作通常不保持。指出把有限基误差归为“纯规范差异”会造成什么判断错误。</p>
+<h2 id="q2-08-确定性失败复算">Q2-08 确定性失败复算</h2>
+<p>复算<a
+href="../../../../03_textbook/chapters/02_quantum_states_operators_matrices/examples.md">第
+2 章二能级例题</a>中的非幺正变换：</p>
+<p><span class="math display">\[
+H=\begin{pmatrix}1&amp;2\\2&amp;-1\end{pmatrix},
+\qquad
+A=\begin{pmatrix}1&amp;\tfrac12\\0&amp;1\end{pmatrix}.
+\]</span></p>
+<p>求 <span class="math inline">\(H&#39;=A^\dagger HA\)</span>、<span
+class="math inline">\(S&#39;=A^\dagger A\)</span>，比较广义谱和错误的
+<span class="math inline">\(H&#39;\)</span>
+普通谱，并给出差异的机制解释。</p>
+</body>
+</html>

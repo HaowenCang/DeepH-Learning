@@ -1,0 +1,77 @@
+NATure CompuTATionAl Science                                                                                                              Articles
+PhiSNet19 and so on), which are based on spherical harmonic func­              To investigate material systems with a strongly varying chemical
+tions and group representation theory. These methods require ten­              environment, one still needs to manually design an appropriate
+sor products that use Clebsch–Gordan coefficients in every layer               dataset to improve the training efficiency. Automatic construction
+of the neural network during training and inference processes to               of the dataset and on-the-fly optimization of the training process
+ensure rotational covariance. The tensor-product computation                   could be explored in the future.
+could be very expensive, especially for large-sized systems and for                Some generalizations of the method are straightforward, whereas
+calculations involving basis sets of high orbital angular momenta.             some others are not. For example, the method can be generalized
+As far as we know, applying these methods to study the electronic              to study large-scale systems without periodicity (for example, non-
+structure of large-scale material systems remains elusive.                     commensurate twisted materials or quasi-crystals). Some other
+    In contrast, our method only needs to perform the basis trans­             material systems (for example, disorder, defects23 and interfaces)
+formation once before the training process, which is computation­              in principle can be described by DeepH as well, but demand more
+ally very efficient. Moreover, benefitting from the rotation-invariant         training data to learn the varying chemical environment. Moreover,
+nature of the local coordinates, our approach can apply a rotation-            DeepH is compatible with DFT not only for exchange correlation
+invariant neural network to predict rotation-covariant quanti­                 functionals in the local density approximation or generalized gradi­
+ties, making the neural network architecture more flexible and                 ent approximation (GGA), but also for the more advanced func­
+efficient. Importantly, further development of the method would                tionals, such as meta-GGA, hybrid functionals and so on. Note that
+benefit from the great developments in transformation-invariant                the hybrid functionals demand a larger cutoff radius for construct­
+neural networks. Because all the important local bonding informa­              ing crystal graphs than usual. Furthermore, by combining deep-
+tion, including bond length and orientation information, has been              learning potential and DeepH together, efficient MD simulation
+included as input, our method is expressive enough to achieve high             and electronic-structure calculations can be performed simultane­
+prediction accuracy. Quantitative comparisons against the tensor-              ously, making the real-time simulation of electron–lattice coupling
+product-based method on studying molecule datasets18,19 indicate               possible. Another valuable extension of this current work is the
+that DeepH can achieve comparable accuracy with much less com­                 combination of DeepH and efficient linear algebra algorithms (for
+putation time and a smaller number of parameters (Supplementary                example, diagonalization for large sparse matrices and linear alge­
+Table 4).                                                                      bra algorithms on GPUs), which could further improve the compu­
+    Deep neural networks, in principle, can be applied to deal with            tational efficiency and promote exploration of mesoscopic physics
+complex problems with a large configuration space due to their                 and materials. There is much room for future development of the
+expressive power. The object of the present work is to learn the DFT           method, which we would like to consider in future works.
+Hamiltonian matrix as a function of atomic positions. For most
+physical problems, only atomic configurations near equilibrium                 Methods
+positions are of concern thermodynamically due to their relatively             Dataset preparation. We generated random structural configurations of 6 × 6
+low energies. We thus focused on the configuration space near equi­            monolayer graphene and 5 × 5 monolayer MoS2 supercells by ab initio MD
+                                                                               calculations using the Vienna ab initio simulation package52. Simulations were
+librium for a given material. Solids with nearly periodic structures           performed with the projector-augmented wave53,54 pseudopotentials and the
+(like graphene with lattice vibrations) usually have a small configu­          GGA parameterized by Perdew, Berke and Ernzerhof (PBE)55. The cutoff energy
+ration space. The DeepH method can work well for such kinds of                 of the plane waves was 450 eV and only the Γ point was used in our k-mesh. For
+system. On the other hand, training a model in a large configuration           the monolayer graphene supercells, two simulations were carried out under the
+                                                                               canonical ensemble: one with a constant temperature of 300 K and the other
+space is much more challenging and usually requires more train­
+                                                                               with temperature increasing from 100 K to 400 K. With a time step of 1 fs, our
+ing data and possibly demands methodological improvements to                   dataset consisted of 5,000 frames obtained at 300 K and 2,000 frames obtained
+achieve good accuracy.                                                         between 100 K and 400 K. As for the monolayer MoS2 supercells, 1,000 random
+    To test the performance of DeepH, we considered two kinds of               atomic structures of 5 × 5 supercells were generated by ab initio MD calculations
+material system with a relatively larger configuration space: (1) 3D           performed at 300 K with a time step of 1 fs.
+                                                                                   Furthermore, to train DeepH models for moiré-twisted vdW materials, we
+bulk structures including different allotropes of carbon (graphite             prepared datasets for TBGs (TBBs) from zero-twist-angle 4 × 4 (3 × 3) bilayer
+and diamond) and (2) quasi-0D molecules. For the former, one uni­              supercells by shifting one of the two vdW layers within the 2D plane and
+fied neural network was applied to predict the DFT Hamiltonian                 subsequently inserting random perturbations to each atomic site. The interlayer
+for the two kinds of carbon allotrope. The MAEs of DeepH do not                spacing of the fully relaxed bilayer unit cells with the most energetically favorable
+increase with respect to that of graphene, although the configura­             stacking was used to construct the training dataset and moiré-twisted supercells
+                                                                               (3.35 Å for TBG and 3.20 Å for TBB). In total, 300 and 576 shifted and perturbed
+tion space becomes larger. For the latter, we studied molecules of             supercell structures were included in the datasets for TBG and TBB, respectively.
+increasingly larger size (from 3 to 21 atoms) to consider the growth               We calculated DFT Hamiltonians with pseudo-atomic localized basis
+of the configuration space. Their averaged MAEs of H′iα, jβ are on             functions as implemented in the OpenMX software package version 3.956,57.
+the sub-millielectronvolt order, also lower than that for graphene.            Calculations were performed with the PBE exchange correlation functional and
+More detailed results are presented in Supplementary Sections                  norm-conserving pseudopotentials58. For monolayer graphene, CNTs and TBGs,
+                                                                               C6.0-s2p2d1 pseudo-atomic orbitals were used, including 13 atomic-like basis
+4 and 6. These experiments suggest that DeepH is very probably                 functions, with a cutoff radius of RC = 6.0 Bohr. For monolayer MoS2 and MoS2
+applicable to the study of material systems spanning a large con­              nanotubes, Mo7.0-s3p2d2 and S7.0-s2p2d1 pseudo-atomic orbitals were used,
+figuration space. We would like to do more critical experiments and            including 19 atomic-like basis functions for Mo and 13 for S (RC = 7.0 Bohr). For
+developments in future works.                                                  TBBs, Bi8.0-s3p2d2 pseudo-atomic orbitals were used, including 19 atomic-like
+                                                                               basis functions (RC = 8.0 Bohr). The energy cutoff was set to 300 Ry. A Monkhorst–
+                                                                               Pack k-mesh of 5 × 5 × 1 was used for supercells of monolayer graphene with 72
+Discussion                                                                     atoms, monolayer MoS2 with 75 atoms, bilayer graphene with 64 atoms and bilayer
+We have proposed a general framework to represent the DFT                      bismuthene with 36 atoms. For supercells with atom number larger than 1,000,
+Hamiltonian by a deep neural network, which universally builds                 only the Γ point was used. Meanwhile, a Monkhorst–Pack k-mesh of 1 × 1 × 29 was
+a mapping from materials structures to physical properties. The                used for CNTs and MoS2 nanotubes, then 1 × 1 × 1 (2 × 2 × 1) for TBGs (TBBs).
+method extends the scope of first-principles research and opens                SOC was considered in the calculation of bilayer bismuthene supercells and TBBs.
+opportunities to investigate fundamental physics and large-scale               Physical properties derived from the DFT Hamiltonian. In a non-orthogonal
+material systems, such as twisted vdW materials. However, the cur­             atomic orbital basis set, the Hamiltonian and overlap matrix elements are
+rent DeepH framework is not without limitations. For example,                  defined as
+the trained model has only been applied to study unseen materi­
+als that have a chemical bonding environment close to the dataset.                                             Hiα, jβ = ⟨ϕiα |Ĥ|ϕjβ ⟩                           (7)
+
+Nature Computational Science | VOL 2 | June 2022 | 367–377 | www.nature.com/natcomputsci                                                                        375
+

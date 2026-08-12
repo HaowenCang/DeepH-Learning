@@ -1,0 +1,115 @@
+NATure CompuTATionAl Science                                                                                                                                                                                                     Articles
+                       a                                                                                                   b                                                               (×105)
+                                                            MAE of H′iα,jβ
+                                                                                                                                                                                               3
+                                   1
+                                                                                                                                                            15,000
+
+
+
+
+                                                                                                                                                                                           Count
+                                                                                                                                                                                                   2
+
+                                   3
+                                                                                                             (meV)                                                                                 1
+
+                                                                                                                  8
+                                   5                                                                                                                                                               0
+                                                                                                                                                            10,000                                     0        2      4         6
+
+
+
+
+                                                                                                                            Count
+                      Orbital β
+
+
+                                                                                                                      5                                                                                    Atomic distance (Å)
+                                   7
+                                                                                                                                                                     S.d. = 315 meV
+                                                                                                                      2
+                                   9
+                                                                                                                                                             5,000
+
+                                  11
+
+
+                                  13
+                                                                                                                                                                0
+                                           1   3        5        7                           9    11    13                                                                     –11        –10              –9
+                                                              Orbital α                                                                                                              Value of H′i1,j1 (eV)
+
+                       c                                                                                                   d                                  200
+                                                                                                                                                                     I                                                 DFT
+                                                            DFT                                                                                                                                                        DeepH
+                                                            DeepH                                                I
+                                                                                        50
+                                                                                                                                                                0
+                                  200
+
+
+
+                                                                                                                            Shift current σyyy (µA Å V–2)
+                                                                  DOS (10–3 eV–1 Å–2)
+
+
+
+
+                                                   II                                   0
+                                                                                                                 II                                                  II
+                                                                                        50
+                                  150
+                                                                                                                                                                0
+                         Count
+
+
+
+
+                                                                                         0                                                                                                                             DFT
+                                  100                                                                                                                       –150                                                       DeepH
+                                                                                                                III
+                                           I                                            50                                                                    100
+                                                                                                                                                                     III
+
+                                   50                                                                                                                           0
+                                                                                        0
+                                                                                             –6        0         6                                                                                                     DFT
+                                                                                                  Energy (eV)   III                                         –100                                                       DeepH
+                                       0
+                                           0                     0.5                                   1.0                                                                 2           4                    6                8
+                                                        MAE of DOS (10–3 eV–1 Å–2)                                                                                                         ω (eV)
+
+
+Fig. 3 | Performance of DeepH on studying graphene. a, MAE of H′iα, jβ for different orbitals. b, Distribution of H′i1, j1 for the nearest neighbors (atomic
+distance between 1.28 and 1.6 Å; see the corresponding distribution in the inset). The s.d. of the computed H′i1, j1 is 315 meV for the test set. c,d, Distribution
+of the generalization MAE of the DOS for 2,000 unseen material structures (c). Three typical structures with the best, median and worst MAE values for
+the DOS (atomic structures included in Supplementary Data 1) are indicated. Their DOS (c, inset) and shift current conductivity σyyy (d), computed by DFT
+and DeepH, are compared.
+
+
+the averaged MAE of H′iα, jβ for Mo–Mo, Mo–S, S–Mo and S–S atom                                                           nanotubes with DFT. In contrast, their physical properties can
+pairs are as low as 1.3, 1.0, 0.7 and 0.8 meV, respectively. The pre­                                                     be accurately predicted by DeepH at much lower computational
+dicted material properties (band structure, electric susceptibility                                                       expense.
+and shift current conductivity) match well with DFT self-consis­                                                             Next we compared the computational cost of DFT and DeepH
+tent calculations (Fig. 4 and Supplementary Figs. 6–8). The results                                                       in constructing DFT Hamiltonian matrices for flat supercells and
+indicate that DeepH works well for systems containing multiple                                                            curved nanotubes of graphene and MoS2 (Supplementary Table 1).
+atomic types, and at no obvious expense of increased computational                                                        Compared to DFT (for which the computational time grows
+complexity.                                                                                                               approximately cubically with system size), the computational time
+   We also tested the generalization ability of DeepH by making                                                           of DeepH grows linearly with system size and the prefactor is much
+predictions on new structures that were unseen in the training                                                            smaller. For the example study of a MoS2 35 × 35 supercell, DeepH
+set (Fig. 5a). Test samples of carbon nanotubes (CNTs) and MoS2                                                           reduces the computation time by three orders of magnitude. This
+nanotubes were selected for this purpose, as these have a curved                                                          improvement would become even more considerable with increas­
+geometry that is suitable for checking the rotation covariance of                                                         ing system size. We have thus demonstrated the high efficiency of
+the method. For CNTs, the averaged MAE of the DFT Hamiltonian                                                             DeepH in dealing with large-scale material systems.
+matrix is insensitive to nanotube chirality and monotonically
+decreases with increasing nanotube diameter d, reducing to below                                                          Application to twisted vdW materials. Twisted bilayer graphene
+3.5 meV for d > 2 nm (Supplementary Fig. 5a). For a zigzag (25, 0)                                                        (TBG)—or twisted vdW materials in general—are rising stars of
+CNT (d ≈ 2 nm), the predicted band structure (Fig. 5b) and other                                                          materials science, with the ‘magic’ moiré twist providing oppor­
+physical properties (such as electric susceptibility; Supplementary                                                       tunities to explore exotic quantum phases, such as the correlated
+Fig. 5b) reproduce the DFT calculation results well. Similar results                                                      insulator, unconventional superconductivity, the (fractional)
+were obtained for a large-diameter MoS2 nanotube (Fig. 5c). Note                                                          Chern insulator and so on42–46. Despite their enormous impact,
+that it is computationally very expensive to study large-diameter                                                         investigating the twist-angle dependence of material properties
+
+Nature Computational Science | VOL 2 | June 2022 | 367–377 | www.nature.com/natcomputsci                                                                                                                                               371
+

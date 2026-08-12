@@ -1,0 +1,70 @@
+                                                                                                                                 Articles
+                                                                                                         https://doi.org/10.1038/s43588-022-00265-6
+
+
+
+
+Deep-learning density functional theory
+Hamiltonian for efficient ab initio
+electronic-structure calculation
+He Li 1,2,7, Zun Wang 1,7, Nianlong Zou1,7, Meng Ye                               1
+                                                                                   , Runzhang Xu1, Xiaoxun Gong1,3,
+Wenhui Duan 1,2,4,5 ✉ and Yong Xu 1,4,6 ✉
+
+The marriage of density functional theory (DFT) and deep-learning methods has the potential to revolutionize modern com-
+putational materials science. Here we develop a deep neural network approach to represent the DFT Hamiltonian (DeepH) of
+crystalline materials, aiming to bypass the computationally demanding self-consistent field iterations of DFT and substantially
+improve the efficiency of ab initio electronic-structure calculations. A general framework is proposed to deal with the large
+dimensionality and gauge (or rotation) covariance of the DFT Hamiltonian matrix by virtue of locality, and this is realized by
+a message-passing neural network for deep learning. High accuracy, high efficiency and good transferability of the DeepH
+method are generally demonstrated for various kinds of material system and physical property. The method provides a solution
+to the accuracy–efficiency dilemma of DFT and opens opportunities to explore large-scale material systems, as evidenced by a
+promising application in the study of twisted van der Waals materials.
+
+
+
+N
+         owadays, ab initio calculations based on density functional            fields. Instead of studying these physical quantities separately12–17,
+         theory (DFT)1,2 have become indispensable to scientific                applying the deep-learning method to the DFT Hamiltonian is an
+         research in physics, materials science, chemistry and biol­            essential and challenging task. In contrast to gauge-invariant quan­
+ogy3, while deep learning based on neural networks has revolution­              tities, the DFT Hamiltonian matrix transforms covariantly (that is,
+ized many disciplines, from computer vision and natural language                equivariantly) under changes of the coordinate, basis and gauge,
+processing to scientific discoveries4–6. The marriage of these two              thus demanding the design of a gauge (or rotation) covariant neural
+important fields has led to the emerging approach of deep-learning              network27–29. However, when applying a neural network to represent
+ab initio calculations7–24, which is contributing to the development            the relation between material structure and DFT Hamiltonian for
+of computational materials science. One critical problem with DFT               large-scale material structures, the number of independent vari­
+is that it is computationally rather demanding and not very appli­              ables and the dimension of the Hamiltonian matrix both become
+cable to routine calculations in material systems with more than                infinitely large. Previous works have designed neural networks to
+thousands of atoms. One can employ more efficient algorithms (for               study the DFT Hamiltonian of small molecules18,19. Another work
+example, the linear-scaling methods25), but usually at the expense              considered a specific one-dimensional material and circumvented
+of decreasing accuracy and transferability. In principle, as a result           the gauge issue by learning energy eigenvalues17. Despite these pre­
+of their expressive power, deep neural networks can learn well from             liminary attempts, developing a deep-learning DFT Hamiltonian to
+DFT results and be used to bypass computationally expensive steps.              carry out electronic-structure calculations of large-scale material
+The accuracy–efficiency dilemma of DFT might thus be solved                     systems remains elusive.
+by deep learning, facilitating the exploration of various important                 In this Article we propose a general theoretical framework—
+systems, including defects, disorder, interfaces, heterostructures,             the deep-learning DFT Hamiltonian (DeepH)—to study crystal­
+quasi-crystals, twisted van der Waals (vdW) materials and so on.                line materials by means of a message-passing neural network. The
+    Tremendous efforts have been devoted to develop deep learning               challenging issues related to the (infinitely) large dimensionality and
+to find interatomic interactions or potential energies from DFT by              gauge (or rotation) covariance of the DFT Hamiltonian matrix are
+using neural networks7–11. Molecular dynamics (MD) simulations in               solved by virtue of locality, including the use of the local coordinate,
+combination with deep-learning potential energies can demonstrate               local basis transformation and localized orbitals as basis functions.
+the efficiency of classical MD with ab initio accuracy, and the research        We systematically test the capability of the DeepH method by study­
+scope of material simulation is thus greatly expanded. It is naturally          ing various representative materials with flat or curved structures,
+desirable to generalize the deep-learning approach from the atomic              formed by strong chemical bonds or weak vdW bonds, containing
+simulation level to the level of electronic-structure simulation. The           single or multiple elements, excluding or including spin–orbit cou­
+most fundamental quantity to be learned is the DFT Hamiltonian26,               pling (SOC), and so on. The example studies consistently demon­
+from which almost all electron-related physical quantities in the               strate the high accuracy of DeepH, not only in the construction of the
+single-particle picture can be derived, such as charge density, band            DFT Hamiltonian (with minor error on the scale of millielectron­
+structure, Berry phase and physical responses to electromagnetic                volts), but also in the calculations of band- and wavefunction-related
+
+
+1
+ State Key Laboratory of Low Dimensional Quantum Physics and Department of Physics, Tsinghua University, Beijing, China. 2Institute for Advanced Study,
+Tsinghua University, Beijing, China. 3School of Physics, Peking University, Beijing, China. 4Frontier Science Center for Quantum Information, Beijing, China.
+5
+  Beijing Academy of Quantum Information Sciences, Beijing, China. 6RIKEN Center for Emergent Matter Science (CEMS), Wako, Saitama, Japan.
+7
+  These authors contributed equally: He Li, Zun Wang, Nianlong Zou. ✉e-mail: duanw@tsinghua.edu.cn; yongxu@mail.tsinghua.edu.cn
+
+Nature Computational Science | VOL 2 | June 2022 | 367–377 | www.nature.com/natcomputsci                                                                  367
+
