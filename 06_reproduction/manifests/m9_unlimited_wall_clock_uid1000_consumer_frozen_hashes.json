@@ -1,0 +1,40 @@
+{
+  "schema_version": "m9-unlimited-wall-clock-uid1000-consumer-frozen-hashes-v1",
+  "decision_id": "D-018",
+  "issue_ids": [
+    "D018-EGF-B01",
+    "D018-UID-B01",
+    "D018-UID-B02",
+    "D018-UID-B03",
+    "D018-UID-B02-R01",
+    "D018-UID-B04",
+    "D018-UID-B05",
+    "D018-UID-B06"
+  ],
+  "files": {
+    "/mnt/e/Projects/Codex/DeepH/00_scope/master_execution_plan.md": "1b440fc8f2645ac004339fd1ef85bdfecfbaadf960355726a75cdaa37f45ed78",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/configs/m9_overlap_only_contract.json": "19290a2bfeaf46b35185f0f61f6ee5d8fb688f3c67fefa8430cd143391fee70b",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/controllers/m9_budget_uid1000_consumer.py": "72297aff63ea0affc5f38b2bc15f94f7bcab4771e8a8634b529704b71b5c7524",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/controllers/m9_uid1000_consumer_bootstrap.py": "681901e066055411f2ea03f5fc8441697288c7be369fbde272c626d9905002b5",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/controllers/m9_uid1000_consumer_install.py": "acb06c9bc4d7ae6549b43c52ff50e957212c947c9a1cab53e50b373a66e62201",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/budget_contract.json": "0d281270160b7a127ab99035fa6f54cd83d220bb15a029a690e70aea6b5bd7a0",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_overlap_frozen_hashes.json": "db01a3d15c604b0fc8cc48858d38b3d28bc0c711eb0cba8634b94510f8139f95",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_uid1000_consumer_contract.json": "4c7a1e9aca3e01c8384178704b0cf742d2a9722372a0bf2e9623607b8df6e755",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_unlimited_wall_clock_contract.json": "2b451c42c2401a220d19038af2ee6ba1843106508f8b057b8ce5dd2584fccff4",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_unlimited_wall_clock_frozen_hashes.json": "f41553b6112482df1cb0bbb52e3311d6a60514b6f61252526924fa930489f4f9",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_budget.py": "25c92810de52229ff626b4d54f4bd2084453e2e834ff830232b8599033f6cce5",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_overlap_common.py": "a58cea8676b1825e44a2c8dbda16c591c148c15f8a513d1ee96fb8ffe9e4b52e",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_overlap_source_launcher.py": "4e3d4d11685d4d28ee3f708edbdfc1fe44b2148df423e817f4d6cacddfc67510",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/tests/test_m9_overlap_controls.py": "8fd7b0eafebbe0d58f1e7c13ba0d5ede9881efd9cb070ecaa0bf6ab648073e59",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/tests/test_m9_uid1000_consumer.py": "bf959be80e280253153efa5691006fd821fcbb008db3ed87bdb3cd7830463ef9",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_unlimited_wall_clock_authorization.md": "8655037c3dee93f4ae0f9819e7409ff373ff660ed110f8cee25cde68dddd7b9a",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_unlimited_wall_clock_execution_gate_fact_audit.md": "f64634e63f2ade35c070f4f4efc2389b831fa0b35669b0a75859bb0a974fb7fa",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_unlimited_wall_clock_migration_execution_final_verdict.json": "d6c0939a3f369d570c3db4c6fae5d9104efee886c19830a0df2b11427e43cefb",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_unlimited_wall_clock_migration_execution_independent_audit.md": "899d77448183a6b79c8f870c0473b18c4601274f0b6a0db78760519ce6d5090c",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_unlimited_wall_clock_uid1000_consumer_targeted_reaudit.md": "3ef2389280e0b566c495acf4694578a6c06cf1e2c74947bfc7e9400f5350df3a",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_unlimited_wall_clock_uid1000_consumer_second_targeted_reaudit.md": "e74f2207f71c83607f5fe853001b21e03168d81c2f714e1207b85a2e2040f2b9",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_unlimited_wall_clock_uid1000_consumer_work_package.md": "cf545ae65954f4bd6978abe0429d66b7a209ca8be11b2e76f45b15a7765193e2",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/progress_tracker.md": "e02468cf23132ddf80a568e98e745b554de42f668f126ed7a52896fc798f3cfd",
+    "/mnt/e/Projects/Codex/DeepH/decisions.md": "8966638e933123ffcd2c4f6bf8ab3447887d934386b6a88138e435e2b3b0c88a"
+  }
+}

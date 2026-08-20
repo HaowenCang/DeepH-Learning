@@ -1,13 +1,20 @@
 {
   "schema_version": "m9-budget-contract-v1",
-  "decision_ids": ["D-013", "D-014", "D-017"],
+  "decision_ids": ["D-013", "D-014", "D-017", "D-018"],
   "start_event": "first_mutating_m9_command_after_m9_01_reaudit_pass",
   "wall_clock": {
-    "limit_seconds": 604800,
+    "mode": "UNLIMITED",
+    "limit_seconds": null,
     "start_utc": null,
     "deadline_utc": null,
+    "historical_limit_seconds": 604800,
+    "historical_start_utc": "2026-08-11T14:50:05.7533015Z",
+    "historical_deadline_utc": "2026-08-18T14:50:05.7533015Z",
+    "decision_id": "D-018",
+    "historical_deadline_must_be_preserved": true,
     "precommand_check_required": true,
-    "command_timeout_is_remaining_seconds": true
+    "command_timeout_is_remaining_seconds": false,
+    "command_timeout_is_remaining_cpu_or_gpu_subbudget": true
   },
   "gpu": {
     "device_count": 1,
@@ -41,7 +48,22 @@
       "overlap_batch": 21600
     },
     "gpu_seconds_for_overlap_route": 0,
-    "limits_are_within_the_existing_overall_wall_clock": true
+    "limits_are_independent_of_wall_clock_after_D_018": true,
+    "overlap_operations_require_wrapper": true,
+    "overlap_gpu_bucket_must_be_none": true,
+    "overlap_cpu_bucket_must_be_non_none_and_action_specific": true,
+    "authorized_controllers": [
+      "budget-owned exact pinned apt-get install command in overlap_build",
+      "budget-owned source-only launcher action source_prepare or source_build in overlap_build",
+      "budget-owned source-only launcher action smoke_prepare/smoke_run/project in overlap_smoke",
+      "budget-owned source-only launcher action batch_prepare/batch_run for one frozen non-smoke ID in overlap_batch"
+    ],
+    "free_commands_and_free_argv_for_overlap_forbidden": true,
+    "child_authorization": "one-shot private capability bound to budget PID, child PID, transaction ID, action, structure, bucket, forecast and exact launcher argv; atomically consumed before source-only dispatch",
+    "public_environment_variables_do_not_prove_authorization": true,
+    "fixed_child_path": "/usr/sbin:/usr/bin:/sbin:/bin",
+    "formal_python_flags": ["-I", "-S", "-B"],
+    "python_bootstrap_policy": "isolated no-site stdlib bootstrap; exact dependency site-packages appended only after capability without .pth processing; project control modules loaded only from frozen UTF-8 source; control directory contains no cache, subdirectory, or unfrozen Python file"
   },
   "storage": {
     "linux_root": "/home/evan-williams/deeph-m9",
@@ -80,6 +102,27 @@
       "combined_allocated_bytes",
       "host_vhdx_growth_from_start_bytes"
     ],
+    "overlap_sublimit": {
+      "limit_bytes": 10737418240,
+      "baseline_event": "OVERLAP_BUDGET_START after independent PASS gate",
+      "metrics": [
+        "combined_apparent_bytes_since_overlap_baseline",
+        "combined_allocated_bytes_since_overlap_baseline",
+        "host_vhdx_growth_since_overlap_baseline_bytes"
+      ],
+      "forecast_is_required_nonnegative_and_applied_to_all_three_metrics": true,
+      "single_structure_projection_control_overhead_bytes": 1048576
+      ,
+      "operation_forecast_lower_bounds_bytes": {
+        "apt_install": 536870912,
+        "source_prepare": 1073741824,
+        "source_build": 4294967296,
+        "smoke_prepare": 1048576,
+        "smoke_run": 67108864,
+        "project": 1048576,
+        "batch_prepare_and_run": "at least workflow per_structure_forecast_bytes from the passed 450x1.25 projection"
+      }
+    },
     "forecast_required_before": [
       "download",
       "extract",
@@ -96,7 +139,64 @@
     "write_event": "HARD_STOP",
     "evidence_must_not_be_deleted_to_evade_limit": true,
     "large_or_runtime_artifacts_outside_linux_root_forbidden": true,
-    "only_project_audit_allowlist_may_exist_outside_linux_root": true
+    "only_project_audit_allowlist_may_exist_outside_linux_root": true,
+    "overlap_first_failure_hard_stops_budget_and_workflow": true,
+    "overlap_batch_requires_structure_500_pass_then_450_point_factor_1_25_projection": true,
+    "overlap_order": "500 smoke, then 510..4990 ascending; each output validates before the next input",
+    "timeout_terminates_the_entire_child_process_group": true
+    ,
+    "dual_state_transaction": "journaled PREPARED/RUNNING/SUCCESS_COMMITTED or FAILED_COMMITTED transaction; incomplete transaction recovery hard-stops both budget and workflow",
+    "apt_failure_controller_failure_sigkill_timeout_all_dual_hard_stop": true
+  },
+  "offline_recovery": {
+    "decision_id": "D-017-offline-recovery-v1",
+    "explicit_user_authorization": "approved in thread after apt timeout; raw ledger values remain immutable",
+    "authorization_record": {
+      "id": "AUTH-M9-OFFLINE-RECOVERY-2026-08-13-01",
+      "path": "08_audits/M9_offline_recovery_authorization.md",
+      "must_be_sha256_bound_by_recovery_gate": true
+    },
+    "entrypoint": "overlap-recover-offline-apt",
+    "only_allowed_from_stage": "HARD_STOP",
+    "raw_cpu_seconds_are_immutable": true,
+    "noncompute_apt_timeout_credit": {
+      "kind": "noncompute_apt_timeout",
+      "must_bind_parent_failed_transaction": true,
+      "credit_must_equal_parent_elapsed_seconds": true,
+      "credit_must_not_exceed_parent_elapsed_seconds": true,
+      "effective_formula": "max(0, raw_overlap_build_seconds - approved_credit_seconds)",
+      "append_only_ledger_event": "OVERLAP_OFFLINE_RECOVERY_CPU_ADJUSTMENT"
+    },
+    "recovery_wall_seconds_limit": 300,
+    "archive_manifest": "06_reproduction/manifests/m9_offline_apt_manifest.json",
+    "local_only_solver": {
+      "network_required": false,
+      "sources_list": "/dev/null",
+      "source_parts": "empty temporary directory",
+      "proxy_disabled": true,
+      "retries": 0,
+      "expected_packages": {"upgraded": 0, "new": 45, "removed": 0},
+      "install_command": "dpkg --unpack fixed absolute manifest paths, then dpkg --configure -a"
+    },
+    "failure_policy": "any verification, timeout, process, package, or post-state failure commits HARD_STOP and forbids replay"
+  },
+  "unlimited_wall_clock_migration": {
+    "decision_id": "D-018",
+    "authorization_record": "08_audits/M9_unlimited_wall_clock_authorization.md",
+    "contract": "06_reproduction/manifests/m9_unlimited_wall_clock_contract.json",
+    "entrypoint": "overlap-migrate-unlimited-wall-clock",
+    "preserve_all_historical_usage_and_evidence": true,
+    "cpu_gpu_storage_limits_unchanged": true,
+    "generic_commands_forbidden_after_migration_until_separately_audited": true,
+    "ledger_partial_append_recovery_required": true,
+    "prepared_journal_must_precede_snapshot_commit": true,
+    "old_overlap_gate_inode_identity_required": true,
+    "deterministic_failure_requires_budget_and_workflow_hard_stop": true,
+    "requires_independent_zero_issue_audit": true,
+    "requires_independent_execution_fact_audit": true,
+    "execution_fact_gate_required_before_source_prepare": true,
+    "gate_and_wall_mode_verification_must_be_inside_budget_lock": true,
+    "preserved_D_017_recovery_transaction_and_gate_required": true
   },
   "ledger_path": "/home/evan-williams/deeph-m9/manifests/budget_ledger.jsonl"
 }

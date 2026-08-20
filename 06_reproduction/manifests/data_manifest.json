@@ -2,7 +2,7 @@
   "schema_version": "m9-data-manifest-v1",
   "generated_utc": "2026-08-11T16:58:20.7560617Z",
   "stage": "M9-04",
-  "status": "BLOCKED_M9_DATA_B01_OVERLAP_WORK_PACKAGE_REVIEW",
+  "status": "BLOCKED_M9_DATA_B01_OVERLAP_WORK_PACKAGE_REAUDIT",
   "source": {
     "record": "Zenodo 6555484",
     "doi": "10.5281/zenodo.6555484",
@@ -99,7 +99,50 @@
     "authorized_route_decision": "D-017",
     "authorized_route": "overlap_only_openmx_same_basis_for_frozen_450_structures",
     "work_package": "08_audits/M9_overlap_only_openmx_work_package.md",
-    "work_package_status": "REVIEW",
+    "work_package_status": "BLOCKING_REAUDIT_PENDING",
+    "work_package_initial_audit": {
+      "status": "FAIL",
+      "blocking": 6,
+      "non_blocking": 0,
+      "report": "08_audits/M9_overlap_only_openmx_work_package_independent_audit.md",
+      "report_sha256": "d0e8d9d4a60e93d0106f369fb70022db0acafb906dee267c60bacbed4c4efb90"
+    },
+    "work_package_first_reaudit": {
+      "status": "FAIL",
+      "closed": ["M9-OLP-B03", "M9-OLP-B05"],
+      "open": ["M9-OLP-B01", "M9-OLP-B02", "M9-OLP-B04", "M9-OLP-B06", "M9-OLP-B07"],
+      "blocking": 5,
+      "non_blocking": 0,
+      "report": "08_audits/M9_overlap_only_openmx_work_package_first_blocking_reaudit.md",
+      "report_sha256": "69b74d2dd5e3ef26208cf9db59c77f2c3962f3da46cee4cd80299e0c5aac25d5"
+    },
+    "work_package_second_reaudit": {
+      "status": "FAIL",
+      "closed": ["M9-OLP-B02", "M9-OLP-B04", "M9-OLP-B06"],
+      "open": ["M9-OLP-B01", "M9-OLP-B07"],
+      "blocking": 2,
+      "non_blocking": 0,
+      "report": "08_audits/M9_overlap_only_openmx_work_package_second_blocking_reaudit.md",
+      "report_sha256": "a88ba0ac3321313d249f88edcf9e2a225ad4b87935da51a8dff664af7a90c342"
+    },
+    "work_package_third_reaudit": {
+      "status": "FAIL",
+      "closed": ["M9-OLP-B01", "M9-OLP-B02", "M9-OLP-B04", "M9-OLP-B06"],
+      "open": ["M9-OLP-B07"],
+      "blocking": 1,
+      "non_blocking": 0,
+      "report": "08_audits/M9_overlap_only_openmx_work_package_third_blocking_reaudit.md",
+      "report_sha256": "aa93a3711ae5143d2c968deae4dfb54df75727d72106b9e9f5b1443218915de4"
+    },
+    "work_package_fourth_reaudit": {
+      "status": "FAIL",
+      "closed": ["M9-OLP-B01", "M9-OLP-B02", "M9-OLP-B04", "M9-OLP-B06"],
+      "open": ["M9-OLP-B07"],
+      "blocking": 1,
+      "non_blocking": 0,
+      "report": "08_audits/M9_overlap_only_openmx_work_package_fourth_blocking_reaudit.md",
+      "report_sha256": "1499bb8993e341cedcaa5e7d243853b575d2cdea550a80d4d48d11bf6b58444c"
+    },
     "training_remains_forbidden_until_M9_DATA_B01_closed": true
   }
 }

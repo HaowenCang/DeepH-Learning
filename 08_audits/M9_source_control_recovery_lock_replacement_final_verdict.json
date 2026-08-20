@@ -1,0 +1,11 @@
+{
+  "schema_version": "m9-source-control-recovery-audit-verdict-v1",
+  "decision_id": "D-017-source-control-recovery-v1",
+  "verdict": "PASS",
+  "blocking": 0,
+  "non_blocking": 0,
+  "scope": "ONE_TIME_SOURCE_CONTROL_RECOVERY",
+  "audit_report_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_control_recovery_thirty_second_lock_refresh_final_reaudit.md",
+  "audit_report_sha256": "cfdbd46798e90c84f076bfa82badcb5be70b0942d883b3b02662a268f7baaebf",
+  "frozen_hashes_sha256": "af86278da0cf6d68330f065dd8fbe50963b04b5c9c5b198f4cce5d2e0442e21d"
+}

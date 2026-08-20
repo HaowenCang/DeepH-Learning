@@ -3,11 +3,15 @@
   "runtime_manifest": "/home/evan-williams/deeph-m9/manifests/openmx_overlap_source_manifest.json",
   "runtime_manifest_sha256": "bdce33ea88a5214e631dd917fe6717967dd38e8bd2804ad53f3fbdc85f17397c",
   "scope": "source_identity_only_no_extraction_build_install_or_calculation",
+  "application_order_scope": "executable_order_frozen_by_D_017_not_the_historical_runtime_source_identity_observation_order",
   "application_order": [
-    "extract_openmx3.9_base",
-    "apply_official_patch3.9.9_into_openmx3.9/source",
-    "overwrite_openmx.c_and_truncation.c_from_overlap_only_commit",
-    "apply_frozen_makefile_contract"
+    "safely_extract_openmx3.9_base",
+    "apply_all_official_patch3.9.9_regular_members_except_kpoint.in_to_openmx3.9/source",
+    "place_official_patch3.9.9_kpoint.in_at_openmx3.9/work/kpoint.in",
+    "apply_unique_frozen_makefile_CC_FC_LIB_definitions",
+    "write_official_combined_source_manifest_and_compile_link_official_3.9.9",
+    "overwrite_only_openmx.c_and_truncation.c_from_frozen_overlap_only_commit",
+    "write_final_combined_source_manifest_and_clean_rebuild"
   ],
   "archives": {
     "openmx_base": {

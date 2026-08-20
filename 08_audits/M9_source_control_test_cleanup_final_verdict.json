@@ -1,0 +1,20 @@
+{
+  "schema_version": "m9-source-control-test-cleanup-audit-verdict-v1",
+  "decision_id": "D-017-source-control-test-cleanup-v1",
+  "verdict": "PASS",
+  "blocking": 0,
+  "non_blocking": 0,
+  "report_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_control_recovery_twenty_first_final_reaudit.md",
+  "report_sha256": "54b7fc518c3083c3030138d588e246d08c8c4ca0aa0a3219c8d8984491967289",
+  "frozen_sha256": {
+    "06_reproduction/scripts/m9_budget.py": "cbc3ee8aadb6f9494af4fc870fff392d53bcb72b45fa91de90f546f51f7deb5c",
+    "06_reproduction/tests/test_m9_overlap_controls.py": "0f2c86a13637ff4cec376d287e387e5dc1d317219e6afdc33cfce6812a96b91a",
+    "06_reproduction/manifests/m9_source_control_recovery_frozen_hashes.json": "795a6f3816862920286f7b47ba1a7cd9b5313a1d3a4fa7ec775e37686f3bc57c",
+    "06_reproduction/manifests/m9_source_control_test_cleanup_frozen_hashes.json": "e7fd76bd71f421ab10ad44b67efb0bfc6182dc1c0014a85b01cdde34b989472b"
+  },
+  "closed_issue_ids": [
+    "M9-SPR-R19-B01",
+    "M9-SPR-R9-B01"
+  ],
+  "scope": "CREATE_CLEANUP_GATE_ONLY"
+}

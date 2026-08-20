@@ -2,7 +2,7 @@
 
 本目录保存 M9 的小型可审计产物；正式软件、数据、环境和大体积运行结果位于 WSL 内的 `/home/evan-williams/deeph-m9`，其 Linux 虚拟磁盘由 Windows 注册在 `E:\Laptop\WSL`。项目侧白名单小型产物合计上限为 1 GiB，并与 Linux 工作根合并计入 100 GiB 总预算；不得在本目录保存数据集、环境或检查点。
 
-M9-01 已由同一独立审计员第二次定点复核为 `PASS`、问题为 0。M9-02/M9-03 固定环境与实机兼容性已通过。M9-04 的冻结 Zenodo ZIP 下载、哈希、CRC、安全解包、逐文件清单和 450 结构全量数据合同已经完成；所有结构均为非正交基且发布包没有 overlap。独立全量审计确认 `M9-DATA-B01` 为唯一开放阻塞，`BLOCKING=1`、`NON_BLOCKING=0`，M9-05 不允许启动。用户已通过 D-017 授权受限 overlap-only OpenMX 路线；新增 [`M9_overlap_only_openmx_work_package.md`](../08_audits/M9_overlap_only_openmx_work_package.md)、[`m9_overlap_only_contract.json`](configs/m9_overlap_only_contract.json)、来源检查器、输入生成器和 overlap 验证器。当前只进入独立工作包审计，尚未安装、编译、生成输入或计算。原阶段工作包见 [`M9_stageF_work_package.md`](../08_audits/M9_stageF_work_package.md)；环境对象见 [`environment_manifest.json`](environment/environment_manifest.json)，数据阻塞证据见 [`data_manifest.json`](manifests/data_manifest.json)、[`M9_data_contract_report.md`](reports/M9_data_contract_report.md) 和 [`M9_data_contract_independent_audit.md`](../08_audits/M9_data_contract_independent_audit.md)。
+M9-01—03 已通过。M9-04 的冻结 Zenodo ZIP、安全解包、逐文件清单和 450 结构全量数据合同已经完成；所有结构均为非正交基且发布包没有 overlap，`M9-DATA-B01` 保持开放，M9-05 不允许启动。D-017 受限 overlap-only 工作包第四次定点复核确认 `.pth` 主穿透关闭，但 B07 因 `overlap-init` 未核对冻结解释器身份而保持开放。第五轮最小修复已把解释器身份检查移入公共 bootstrap，覆盖 init/run 且先于任何状态读写；系统 Python 3.10 的 init 零写入负例通过，19/19 合成穿透通过，等待同一审计员第五次复核。复核通过前仍禁止安装、解压、编译、生成输入或运行 OpenMX。正式对象见 [`M9_overlap_only_openmx_work_package.md`](../08_audits/M9_overlap_only_openmx_work_package.md)、[`m9_overlap_source_launcher.py`](scripts/m9_overlap_source_launcher.py) 与 [`test_m9_overlap_controls.py`](tests/test_m9_overlap_controls.py)。
 
 项目文件不得包含 Linux 认证口令或其他敏感凭据。需要提权时使用宿主 WSL root 入口；不把口令传入命令行或日志。
 

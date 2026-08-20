@@ -1,0 +1,11 @@
+{
+  "schema_version": "m9-unlimited-wall-clock-audit-verdict-v1",
+  "decision_id": "D-018",
+  "verdict": "PASS",
+  "blocking": 0,
+  "non_blocking": 0,
+  "work_package_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_unlimited_wall_clock_migration_work_package.md",
+  "work_package_sha256": "e23d59ea673421e1b2ca4755b3ea91806c7c7ba04573141d2ebdf3ff40f80ef3",
+  "report_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_unlimited_wall_clock_migration_second_targeted_reaudit.md",
+  "report_sha256": "5209d6bda24e00634a27f60fc409eb1d792f334f0cacb3ffc6ef515290759292"
+}

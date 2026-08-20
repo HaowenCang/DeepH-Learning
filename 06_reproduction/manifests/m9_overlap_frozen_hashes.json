@@ -1,0 +1,25 @@
+{
+  "schema_version": "m9-overlap-frozen-hashes-v1",
+  "generated_utc": "2026-08-20T00:00:00Z",
+  "decision_id": "D-018",
+  "purpose": "post-D-018 independent-audit input freeze before unlimited-wall-clock migration or source preparation",
+  "contract_sha256": "19290a2bfeaf46b35185f0f61f6ee5d8fb688f3c67fefa8430cd143391fee70b",
+  "files": {
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/configs/m9_overlap_only_contract.json": "19290a2bfeaf46b35185f0f61f6ee5d8fb688f3c67fefa8430cd143391fee70b",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/budget_contract.json": "0d281270160b7a127ab99035fa6f54cd83d220bb15a029a690e70aea6b5bd7a0",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/openmx_overlap_source_manifest.json": "c000810f1df35f5aa96aa68c276104dcaf34324ea847806ace63a56a1bb2d70a",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_budget.py": "25c92810de52229ff626b4d54f4bd2084453e2e834ff830232b8599033f6cce5",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_compatibility_smoke.py": "983dfc35d116d3dff031603f6604f7d80c03d22be10ea7a3183a33416ce84890",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_dataset_archive.py": "2c4a80e54d6ec9c155f6967fa1a5f44e59f0a4f1addd5c7ce562ebca6c5ea060",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_data_contract.py": "253bd3daeefa69dc204263074578c3659d52e26bff111afac67c2ce54ab860f4",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_openmx_build.py": "53c6e04cedce994b088b7b6dc738753d378cbcbc15d40600b30d85d87ff78268",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_openmx_input.py": "1b7d4acc6b455c9dd3ad3ace51d64a53c792cf45be253553b2a1d2aa3588f19b",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_openmx_source_inspect.py": "69b7fbb59d2b9d6b0fbdc24c37af85cbb124f5cf3ecc9cb3ce2252c5ad54c9c6",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_overlap_common.py": "a58cea8676b1825e44a2c8dbda16c591c148c15f8a513d1ee96fb8ffe9e4b52e",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_overlap_contract.py": "3c95e18023965c88dd16b15d944c3d3f50409371d51e63066349302dcf199ed0",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_overlap_executor.py": "2ed8c12a1ad8b179aaecc18acb2ea84f9aae0887b3accb06f68c1951289a8de2",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_overlap_source_launcher.py": "4e3d4d11685d4d28ee3f708edbdfc1fe44b2148df423e817f4d6cacddfc67510",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_range_download.py": "6697be45763e4a2b0c4230810a8e4cdcac77681c1e7c28799cbacfa415231db0",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/tests/test_m9_overlap_controls.py": "8fd7b0eafebbe0d58f1e7c13ba0d5ede9881efd9cb070ecaa0bf6ab648073e59"
+  }
+}

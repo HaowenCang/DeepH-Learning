@@ -1,0 +1,34 @@
+{
+  "schema_version": "m9-source-control-post-failure-migration-verdict-v1",
+  "decision_id": "D-017-source-control-post-failure-migration-v1",
+  "verdict": "PASS",
+  "blocking": 0,
+  "non_blocking": 0,
+  "scope": "MIGRATE_AND_RESUME_SAME_SOURCE_CONTROL_RECOVERY_TRANSACTION",
+  "report_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_control_post_failure_migration_second_targeted_reaudit.md",
+  "report_sha256": "dc0b4d4672934b63ec075b639420b73cb175b302f6f21d7f082fcac2568c8ab8",
+  "replacement_verdict_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_control_post_failure_replacement_final_verdict.json",
+  "replacement_verdict_sha256": "b62c65e02c247eae56a8fae687cd05946dcf6aedfa6c4f2177bf4298255e84b4",
+  "frozen_hashes_sha256": "03ed6d0e4b2ff126d11d0e5e772e479bf9c3f14f5bb2833de0358fa500fb0350",
+  "authorization_record_sha256": "8c9602d5cc774c64f87a41c13d68223583cc91d19596568055ea6c2eaef0e42b",
+  "contract_sha256": "dbb93a26d7a5b80b6992ead374dda8421d763679ce63ecf349688b4a38426c2e",
+  "failed_runtime": {
+    "recovery_transaction_sha256": "89483c5653b05063308896d5fe61809916f210a906e09eeda068867608bed44e",
+    "recovery_transaction_id": "4783a27441019358a0f15127f26d957d",
+    "recovery_event_id": "4783a27441019358a0f15127f26d957d:source-control-recovery",
+    "parent_snapshot_sha256": "12f475b7468036e1bb1370506a0d7f71cb8db283cec2d21e356d3ce3e7b66309",
+    "parent_transaction_sha256": "12f475b7468036e1bb1370506a0d7f71cb8db283cec2d21e356d3ce3e7b66309",
+    "state_sha256": "1a998b1383810df371cccb9d799d4ac91bb2023e539155eae782345700a4d7dc",
+    "workflow_sha256": "73a3522af8a29d8300255b8deb9c2014628a27930ffb05b81f49255a8d5a8fbf",
+    "ledger_sha256": "25103d9a794a36a4e058a45ecb40b4b128dc3905d364a046640571684498da4f",
+    "recovery_event_count": 0,
+    "retired_capability_path": "/home/evan-williams/deeph-m9/manifests/overlap_capabilities/f7c3b060e19e37e6da03f461d754d38c.retired.json",
+    "retired_capability_sha256": "0a4352dafb4718084ddac286fc24b05b863d284583741c67dffd356c7274e91e",
+    "active_gate_sha256": "381c8fd6e9fa28479de4f2144e975ed32756af9ac9dfe90a6d5457208da1cefa"
+  },
+  "closed_problem_ids": [
+    "M9-SPR-R34-B01",
+    "M9-SPR-R34-B02",
+    "M9-SPR-R34-B03"
+  ]
+}

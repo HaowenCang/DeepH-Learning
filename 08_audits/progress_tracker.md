@@ -8,13 +8,13 @@
 
 ## 当前快照
 
-- 最后更新时间：2026-08-12
+- 最后更新时间：2026-08-21
 - 当前阶段：M9 最小 DeepH 复现闭环
 - 当前里程碑：M9-04 官方 graphene 数据下载与数据契约
-- 当前主任务：按 D-017 冻结受限 overlap-only OpenMX 工作包，并执行正式独立审计
+- 当前主任务：关闭 UID1000 consumer 第三次定点复核阻塞 `D018-UID-B06`
 - 当前里程碑状态：`IN_PROGRESS`
-- 当前主任务状态：`REVIEW`
-- 下一门控：`M9_overlap_only_openmx_work_package.md` 独立审计 `PASS` 且问题为 0；通过前禁止安装、编译、生成输入或计算
+- 当前主任务状态：`IMPLEMENTED_AWAITING_THIRD_INDEPENDENT_REAUDIT`
+- 下一门控：UID1000 消费证明实现独立审计 `PASS` 且问题为 0；机械建 gate 后完成真实 UID1000 事实复核，才允许 `source_prepare`
 - 当前限制：只允许 same-basis overlap 和必要 provenance；禁止 Hamiltonian、SCF、能量、力、密度矩阵及其他 DFT 标签，不自动重启，不静默更换 DeepH、数据、材料、basis、总体预算或高级物理范围
 
 ## 里程碑状态
@@ -32,7 +32,7 @@
 | M7 | 群表示与等变网络 | `COMPLETED` | `M7_stageE_final_independent_audit.md`：总审计 `PASS`、问题为 0，明确允许进入 M7-I | 保持阶段 E 对象链与哈希可追溯 |
 | M7-I | 阶段 A—E 全量独立总审计 | `COMPLETED` | 同一 `gpt-5.6-sol`、`max` 审计员定点复核：N01—N03 全部关闭，新增及剩余问题 0 | 保持审计报告与哈希迁移台账可追溯 |
 | M8 | 实践方案冻结 | `COMPLETED` | D-013；`00_scope/M8_decision_package.md` | 保持冻结对象和授权边界可追溯 |
-| M9 | 最小 DeepH 复现闭环 | `IN_PROGRESS` | M9-01—03 通过；M9-04 下载/安全/结构合同通过；D-017 已授权受限 overlap-only 路线 | 先通过新增工作包独立审计，再执行单结构 smoke |
+| M9 | 最小 DeepH 复现闭环 | `IN_PROGRESS` | M9-01—03 通过；M9-04 下载/安全/结构合同通过；D-017 恢复链通过；D-018 迁移与执行事实审计通过 | 关闭 `D018-UID-B06`，完成 consumer 机械安装与真实 UID1000 gate 事实复核，再执行 `source_prepare` |
 | M10 | 方法谱系深读 | `PLANNED` | M1 提供初始地图 | M9 基线形成后开展代码级比较 |
 | M11 | 受控研究改进 | `PLANNED` | 尚无 | M9、M10 完成后开始 |
 | M12 | 教材与项目总验收 | `PLANNED` | 尚无 | M3—M11 完成后执行 |
@@ -149,14 +149,14 @@ M7 按第 15—20 章依赖顺序建设群表示、球谐/Wigner 表示、张量
 
 ## 当前工作包：M9
 
-M9 只执行 D-013/D-014 冻结的 DeepH-pack v0.2.2、官方 graphene 处理数据、非磁无 SOC 基线和 7 天/24 GPU 小时/100 GiB 预算：
+M9 只执行 D-013/D-014 冻结的 DeepH-pack v0.2.2、官方 graphene 处理数据和非磁无 SOC 基线。D-018 已把总墙钟策略改为无时限；24 GPU 小时、100 GiB 总存储及全部 CPU/GPU/存储子预算不重置、不增加，原 7 天起点、截止时间、历史用量与证据继续保留：
 
 | 任务 ID | 任务 | 状态 | 完成证据或下一门控 |
 |---|---|---|---|
 | M9-01 | 工作包、授权、预算和停止合同独立审计 | `COMPLETED` | `M9_stageF_work_package_second_reaudit.md` 判定 `PASS`，B01—B05 全部关闭，问题为 0 |
 | M9-02 | WSL、系统工具、固定 Python/Julia 环境与精确锁 | `COMPLETED` | `environment_manifest.json`、三份环境锁、`pip check`；Julia 1.6.6；预算无违规 |
 | M9-03 | DeepH 固定源码与 CPU/CUDA/PyG/e3nn/CLI smoke | `COMPLETED` | commit `66703c5...f89859` 且 source clean；sm_89 前后向通过；双进程摘要 SHA `dc3f1e08...79d83` |
-| M9-04 | 官方 graphene 下载、安全解包与数据契约 | `IN_PROGRESS` | ZIP 与 450 结构全量合同已完成；`M9-DATA-B01` 仍为 `OPEN`；D-017 已授权受限 overlap-only 路线，新增工作包正在审计前冻结 |
+| M9-04 | 官方 graphene 下载、安全解包与数据契约 | `IN_PROGRESS` | ZIP 与 450 结构全量合同已完成；`M9-DATA-B01` 仍为 `OPEN`；D-017 恢复链和 D-018 无时限迁移事实均已通过，`D018-EGF-B01` 关闭后才允许 `source_prepare` |
 | M9-05 | 固定划分、配置与受预算训练 | `PENDING` | 依赖 M9-04 数据合同通过 |
 | M9-06 | 矩阵、对称性、广义本征和物理验证 | `PENDING` | 依赖冻结模型及数据合同 |
 | M9-07 | 复现报告、自动测试与失败矩阵 | `PENDING` | 汇集环境、数据、训练和物理证据 |
@@ -164,15 +164,31 @@ M9 只执行 D-013/D-014 冻结的 DeepH-pack v0.2.2、官方 graphene 处理数
 
 ## 决策提醒
 
-计算资源、数据、DeepH 软件对象、时间与训练预算、首个材料体系和高级物理范围已由 D-013 冻结，原 M9 外部动作由 D-014 授权。M9-04 的独立审计确认发布包缺少非正交物理验收所需 overlap；用户随后通过 D-017 只授权受限 overlap-only OpenMX 路线。OpenMX 对象、HDF5、PAO/VPS、basis、450 结构映射、输出模式和原预算内子上限已写入新增工作包，但 `M9-DATA-B01` 仍为 `OPEN`。工作包独立审计通过前不得安装、编译或计算，M9-05 仍不得启动。
+计算资源、数据、DeepH 软件对象、首个材料体系和高级物理范围已由 D-013 冻结，原 M9 外部动作由 D-014 授权。M9-04 的独立审计确认发布包缺少非正交物理验收所需 overlap；用户随后通过 D-017 只授权受限 overlap-only OpenMX 路线。工作包、离线 apt 恢复和 source-control recovery 已通过独立审计；正式 `source_prepare` 尚未执行。用户通过 D-018 仅取消总墙钟约束，CPU/GPU/存储预算与全部历史证据不变；一次性迁移及执行事实审计已经通过。当前门控是 `D018-UID-B06` 的第三次定点复核、consumer 机械安装及真实 UID1000 gate 事实复核；`M9-DATA-B01` 仍为 `OPEN`，M9-05 仍不得启动。
 
 ## 更新记录
 
 | 日期 | 更新 | 依据 |
 |---|---|---|
+| 2026-08-20 | 用户批准 D-018：M9 改为无总墙钟期限，不重置或增加 CPU、GPU、存储预算，并保留全部历史用量与证据。首次独立审计为 `FAIL`（`BLOCKING=6`、`NON_BLOCKING=0`），冻结 `D018-B01`—`D018-B06`；主 agent 已按最小关闭条件加固 ledger 部分追加、gate inode、D-017/执行事实门控、通用无计量命令拒绝、失败双硬停及终态证据闭集，等待同一审计员定点复核。正式 state/ledger/gate 尚未迁移，`source_prepare` 未执行 | `M9_unlimited_wall_clock_migration_independent_audit.md`，SHA-256 `9958CC768EE1DC55251216CF9207D6863DEFD3AD374155FB8A6E88FEC3D59B`；`M9_unlimited_wall_clock_migration_work_package.md` |
+| 2026-08-20 | D-018 第一次定点复核为 `FAIL`（`BLOCKING=3`、`NON_BLOCKING=0`），冻结 `D018-R01`—`D018-R03`：snapshot 先于 journal 的孤儿窗口、overlap gate 锁外陈旧授权、generic run 锁外 wall-mode 竞态。主 agent 已改为 PREPARED journal 先行，并把 gate/runtime/action scope 与 generic run wall-mode 全部移入既存 budget lock；新增进程死亡、确定性失败、migration/source_prepare、source_prepare/source_build 和四类 bucket 交错测试，等待第二次定点复核 | `M9_unlimited_wall_clock_migration_targeted_reaudit.md`，SHA-256 `6B9EF51CFE2509B18DC8C2F271EAC28E69820D311F9088D0AA3DD664970AC983` |
+| 2026-08-20 | D-018 第二次定点复核 `PASS`；一次性迁移执行成功，随后执行事实独立审计 `PASS`。迁移仅把 wall-clock policy 改为 `UNLIMITED` 并追加唯一 ledger 事件，原 59097-byte ledger 前缀、CPU/GPU/存储预算、历史用量、workflow、D-017 证据及旧 gate 退休收据保持闭合 | `M9_unlimited_wall_clock_migration_second_targeted_reaudit.md`，SHA-256 `5209D6BDA24E00634A27F60FC409EB1D792F334F0CACB3FFC6EF515290759292`；`M9_unlimited_wall_clock_migration_execution_independent_audit.md`，SHA-256 `899D77448183A6B79C8F870C0473B18C4601274F0B6A0DB78760519CE6D5090C` |
+| 2026-08-20 | 正式 execution-fact gate 已机械创建，但真实 UID1000 事实审计为 `FAIL`（`BLOCKING=1`、`NON_BLOCKING=0），冻结 `D018-EGF-B01`。首次消费层实现审计新增 `D018-UID-B01`—`B03`；第一次定点复核仍为 `FAIL`（`BLOCKING=3`、`NON_BLOCKING=0`），冻结 `D018-UID-B02-R01`、`B04`、`B05`：项目侧 adapter 在验证前被 root installer 导入、悬空产品 symlink 被误判缺席、封存 staging 的 rename 失败不可续提。主 agent 已加入审计哈希驱动的 single-FD root bootstrap、`lexists` 产品闭集和 bootstrap/snapshot 两级可恢复 staging；等待同一审计员第二次定点复核 | `M9_unlimited_wall_clock_execution_gate_fact_audit.md`，SHA-256 `F64634E63F2ADE35C070F4F4EFC2389B831FA0B35669B0A75859BB0A974FB7FA`；`M9_unlimited_wall_clock_uid1000_consumer_independent_audit.md`，SHA-256 `5B034B772F6A03FD093968690873042F0A73DD0ACAE30C27A263BBC0C17D9BAD`；`M9_unlimited_wall_clock_uid1000_consumer_targeted_reaudit.md`，SHA-256 `3EF2389280E0B566C495ACF4694578A6C06CF1E2C74947BFC7E9400F5350DF3A` |
+| 2026-08-21 | UID1000 consumer 第二次定点复核确认 `D018-UID-B02-R01`、`B04`、`B05` 已关闭，但判定 `FAIL`（`BLOCKING=1`、`NON_BLOCKING=0`）并冻结 `D018-UID-B06`：项目侧 installer 直接执行时，在 trusted-path 拒绝前执行项目 adapter。主 agent 已将 `__main__` trusted-path 拒绝前移到任何 adapter loader 之前，并加入真实子进程负例；第三次定点复核通过前不创建 consumer gate、不执行 `source_prepare` | `M9_unlimited_wall_clock_uid1000_consumer_second_targeted_reaudit.md`，SHA-256 `E74F2207F71C83607F5FE853001B21E03168D81C2F714E1207B85A2E2040F2B9` |
+| 2026-08-20 | source-control recovery 同一事务续提已完成并通过独立执行事实审计：同一 transaction/event 收敛为 `SUCCESS_COMMITTED/COMMITTED`，ledger 事件恰好一次，state/workflow 恢复为非 hard-stop/AUDIT_PASSED，六项 source/build 产品缺席；只允许进入 D-018 门控后的 UID1000 `source_prepare` | `M9_source_control_recovery_resume_execution_independent_audit.md`，SHA-256 `067394EBC9E3FB9904E0B4354C7B3B2E18E376F720D4DA89057EC30B7E5EE4A4` |
 | 2026-08-12 | M9-04 完成官方 graphene ZIP 的 Range 安全下载、字节/MD5/SHA-256、4050 成员 CRC、安全路径、原子解压、3600 文件逐项 SHA 和 450 结构全量数据合同。结构训练合同通过；但 450/450 均为 `isorthogonal=false` 且发布包无 overlap/参考能带，登记 `M9-DATA-B01`，M9/M9-04 转为 `BLOCKED`，M9-05 未启动，等待独立复核与用户路线决策 | `06_reproduction/manifests/data_manifest.json`；`06_reproduction/reports/M9_data_contract_report.md`；运行时合同 SHA `A23E84DB...2B31B0` |
 | 2026-08-12 | 新独立审计员全量读取官方 ZIP、3600 个解压文件、1,296,000 个 rc 数组和 1,296,000 个 rh 数组，并核对 DeepH v0.2.2 源码、预算和授权边界；确认 `M9-DATA-B01 OPEN`、`BLOCKING=1`、`NON_BLOCKING=0`，无新增实施缺陷，明确不允许启动 M9-05 | `M9_data_contract_independent_audit.md`，SHA-256 `F2F59785164FC4CA112D30501D181787B7B2DD6D5C077BD17F5BF8813D8CE40D` |
 | 2026-08-12 | 用户授权受限 overlap-only OpenMX 路线；登记 D-017，冻结 OpenMX 3.9→官方 patch3.9.9→overlap-only 提交、HDF5 1.12.1、C6.0-s2p2d1/C_PBE19、450 结构映射、HDF5 输出合同和原总预算内 CPU/存储子上限；当前只进入独立工作包审计，尚未安装或计算 | `M9_overlap_only_openmx_work_package.md`；`m9_overlap_only_contract.json`；运行时来源清单 SHA `BDCE33EA...F17397C` |
+| 2026-08-13 | M9 overlap-only 工作包正式独立初审判定 `FAIL`：冻结 `M9-OLP-B01`—`B06` 六项阻塞，分别为 GNU11 编译标志、安全源码组合/补丁顺序、冻结数据与 basis 绑定、封闭特殊模式的受控 executor、严格禁止输出及 onsite 对称性、CPU/10 GiB/450 投影硬预算。`BLOCKING=6`、`NON_BLOCKING=0`；明确禁止 apt 安装、解压/构建、结构 500 输入和 smoke，无新增用户路线决策 | `M9_overlap_only_openmx_work_package_independent_audit.md`，SHA-256 `D0E8D9D4A60E93D0106F369FB70022DB0ACAFB906DEE267C60BACBED4C4EFB90` |
+| 2026-08-13 | 主 agent 在 D-017 内完成 B01—B06 第一轮修复主体：冻结 GNU11 标志、安全 source/build 驱动、3600 文件与 basis 绑定、无自由 argv executor、严格输出验证和硬预算状态机；未安装、解压、编译、生成正式输入或运行 OpenMX，提交同一审计员定点复核 | `m9_openmx_build.py`、`m9_overlap_executor.py`、`test_m9_overlap_controls.py` |
+| 2026-08-13 | 第一次定点复核判定 `FAIL`：B03/B05 `CLOSED`；B01/B02/B04/B06 `OPEN`；新增 B07，指出 PATH/实际库身份、两阶段完整树/HDF5 inventory、公开环境变量伪造、forecast 下界/双状态硬停止及预置 pycache 穿透。`BLOCKING=5`、`NON_BLOCKING=0`；继续禁止 audit gate、安装、解压、构建、输入和 smoke，无新增用户决策 | `M9_overlap_only_openmx_work_package_first_blocking_reaudit.md`，SHA-256 `69B74D2DD5E3EF26208CF9DB59C77F2C3962F3DA46CEE4CD80299E0C5AAC25D5` |
+| 2026-08-13 | 主 agent 完成第二轮修复主体：固定系统工具路径/版本/哈希并解析动态库实际路径、包版本与 SHA；重新枚举两阶段完整树并建立 build artifact allowlist，记录 HDF5 configure/check/完整安装 inventory；改为预算动作 API、一次性 PID/事务/动作/forecast capability 与 source-only loader；为操作冻结非零 forecast 下界，batch 强制投影值，journaled 事务在 apt/异常/kill/超时/恢复时双硬停止；DeepH parser 也用 source-only loader。16/16 合成穿透通过，仍未触碰正式运行对象，等待第二次定点复核 | `m9_overlap_source_launcher.py`、`m9_budget.py`、`m9_openmx_build.py`、`test_m9_overlap_controls.py` |
+| 2026-08-13 | 第二次定点复核关闭 B02/B04/B06，保留 B01/B07：冻结 PATH 仍允许 `/usr/local/bin` 影子化 MPI wrapper 的底层编译器，普通 `python -B script.py` 启动前仍可读相邻 sourceless 恶意 pyc。`BLOCKING=2`、`NON_BLOCKING=0`，不允许 audit gate 或任何外部动作，无需用户路线决策 | `M9_overlap_only_openmx_work_package_second_blocking_reaudit.md`，SHA-256 `A88BA0AC3321313D249F88EDCF9E2A225AD4B87935DA51A8DFF664AF7A90C342` |
+| 2026-08-13 | 主 agent 完成第三轮最小修复：PATH 收紧为 `/usr/sbin:/usr/bin:/sbin:/bin`，MPI wrapper 的 `--showme:command` 必须解析到登记的 GCC/GFortran；两个正式入口改为 `-I -B`，记录四个 bootstrap stdlib 模块 loader/origin/hash，控制目录成为冻结 Python 文件闭集并删除历史 pycache。新增固定 PATH 影子、相邻 sourceless pyc 和控制目录缓存负例，18/18 通过；仍未创建正式运行对象，等待第三次定点复核 | `m9_openmx_build.py`、`m9_budget.py`、`m9_overlap_source_launcher.py`、`test_m9_overlap_controls.py` |
+| 2026-08-13 | 第三次定点复核关闭 B01，B02/B04/B06 无回归；B07 因 `-I -B` 仍在入口正文前执行 venv site-packages `.pth` import 行而保持开放。独立临时 venv 重放得到 `MALICIOUS_PTH`，`-I -S -B` 只输出安全正文。`BLOCKING=1`、`NON_BLOCKING=0`，不允许 audit gate 或外部动作，无需用户路线决策 | `M9_overlap_only_openmx_work_package_third_blocking_reaudit.md`，SHA-256 `AA93A3711AE5143D2C968DEAE4DFB54DF75727D72106B9E9F5B1443218915DE4` |
+| 2026-08-13 | 主 agent 完成第四轮 B07 最小修复：正式入口与 launcher 改为 `-I -S -B` 并核对 `no_site`，bootstrap `sys.path` 禁 site-packages；冻结依赖目录只在 capability、源码和合同验证后以 `sys.path.append` 加入，回执固定 `site_addsitedir_called=false`、`pth_processed=false`。同一 18 项矩阵加入临时 venv 恶意 `.pth` 端到端负例，正式 `-I -S -B` 只输出 `SAFE_BODY`；仍未创建正式运行对象，等待第四次定点复核 | `m9_budget.py`、`m9_overlap_source_launcher.py`、`test_m9_overlap_controls.py` |
+| 2026-08-13 | 第四次定点复核确认 `.pth`/site 主缺口关闭且 B01/B02/B04/B06 无回归；B07 因 `overlap-init` 只核 flags、不核冻结 Python 3.9 身份而保持开放。系统 Python 3.10 `-I -S -B` 可通过旧 bootstrap。`BLOCKING=1`、`NON_BLOCKING=0`，不允许 gate 或外部动作 | `M9_overlap_only_openmx_work_package_fourth_blocking_reaudit.md`，SHA-256 `1499BB8993E341CEDCAA5E7D243853B575D2CDEA550A80D4D48D11BF6B58444C` |
+| 2026-08-13 | 主 agent 完成第五轮 B07 最小修复：冻结解释器身份核对移入公共 `isolated_bootstrap_provenance()`，init/run 在任何 gate/状态读写前统一拒绝错误 Python；新增 `/usr/bin/python3.10 -I -S -B ... overlap-init` 零写入负例。冻结 Python 下 19/19 通过，仍未创建正式运行对象，等待第五次定点复核 | `m9_budget.py`、`test_m9_overlap_controls.py` |
 | 2026-08-03 | 建立主执行计划与进度台账；当前主任务设为 M2-I 资料缺口关闭 | M0、M1、M2 现有产物与审计记录 |
 | 2026-08-03 | 完成 M2I-01—03；新增 FND-04—05；修正广义扰动式条件；M2I-05 转为唯一 `READY` 主任务 | 来源台账、PDF 页面复核、送审前检查 |
 | 2026-08-03 | 独立子 agent 完成 M2I-05，结论为“有条件通过”；冻结 B-01 一个阻塞项和 4 个非阻塞建议；M2I-06 转为唯一 `READY` 主任务 | `M2I_chapter1_independent_content_audit.md` |

@@ -26,15 +26,42 @@
   },
   "runtime_paths": {
     "linux_root": "/home/evan-williams/deeph-m9",
+    "project_contract": "/mnt/e/Projects/Codex/DeepH/06_reproduction/configs/m9_overlap_only_contract.json",
+    "project_frozen_hashes": "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_overlap_frozen_hashes.json",
+    "project_budget_script": "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_budget.py",
+    "project_source_launcher": "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_overlap_source_launcher.py",
     "source_downloads": "/home/evan-williams/deeph-m9/downloads/overlap_sources",
     "openmx_build_root": "/home/evan-williams/deeph-m9/software/openmx-overlap-build",
     "overlap_repository": "/home/evan-williams/deeph-m9/software/overlap-only-OpenMX",
+    "deeph_source": "/home/evan-williams/deeph-m9/software/DeepH-pack",
     "hdf5_prefix": "/home/evan-williams/deeph-m9/env/hdf5-1.12.1",
     "processed_data": "/home/evan-williams/deeph-m9/data/graphene/processed",
+    "dataset_inventory": "/home/evan-williams/deeph-m9/manifests/graphene_inventory.json",
+    "dataset_contract": "/home/evan-williams/deeph-m9/manifests/graphene_data_contract.json",
     "run_root": "/home/evan-williams/deeph-m9/runs/overlap-only-openmx",
-    "manifest_root": "/home/evan-williams/deeph-m9/manifests"
+    "manifest_root": "/home/evan-williams/deeph-m9/manifests",
+    "source_manifest": "/home/evan-williams/deeph-m9/manifests/openmx_overlap_source_manifest.json",
+    "official_tree_manifest": "/home/evan-williams/deeph-m9/manifests/openmx_official_3.9.9_tree_manifest.json",
+    "overlap_tree_manifest": "/home/evan-williams/deeph-m9/manifests/openmx_overlap_tree_manifest.json",
+    "build_manifest": "/home/evan-williams/deeph-m9/manifests/openmx_overlap_build_manifest.json",
+    "audit_gate": "/home/evan-williams/deeph-m9/manifests/overlap_work_package_audit_gate.json",
+    "workflow_state": "/home/evan-williams/deeph-m9/manifests/overlap_workflow_state.json",
+    "budget_state": "/home/evan-williams/deeph-m9/manifests/budget_state.json",
+    "overlap_transaction": "/home/evan-williams/deeph-m9/manifests/overlap_transaction.json",
+    "overlap_capability_root": "/home/evan-williams/deeph-m9/manifests/overlap_capabilities",
+    "openmx_binary": "/home/evan-williams/deeph-m9/software/openmx-overlap-build/openmx3.9/source/openmx",
+    "openmx_data": "/home/evan-williams/deeph-m9/software/openmx-overlap-build/openmx3.9/DFT_DATA19"
+  },
+  "dataset_provenance": {
+    "inventory_schema": "m9-dataset-inventory-v1",
+    "inventory_sha256": "048e376ffdf52b3c3a5aba53904a00bda7f55280ed3afd8de55e8515d8247800",
+    "inventory_file_count": 3600,
+    "inventory_total_bytes": 2360825225,
+    "data_contract_schema": "m9-graphene-data-contract-v1",
+    "data_contract_sha256": "a23e84db1ac3b3d496b73d3103d307619daac32c80c8c87be35a684ca12b31b0"
   },
   "software": {
+    "source_manifest_sha256": "bdce33ea88a5214e631dd917fe6717967dd38e8bd2804ad53f3fbdc85f17397c",
     "openmx_base": {
       "version": "3.9",
       "url": "https://www.openmx-square.org/openmx3.9.tar.gz",
@@ -67,6 +94,58 @@
       "compiler": "gcc 11.4.0",
       "cflags": "-O2 -fPIC"
     },
+    "toolchain": {
+      "gcc_dumpversion": "11.4.0",
+      "gfortran_dumpversion": "11.4.0",
+      "openmpi_showme_version": "mpicc: Open MPI 4.1.2 (Language: C)",
+      "fixed_path": "/usr/sbin:/usr/bin:/sbin:/bin",
+      "mpi_wrapper_compilers": {
+        "mpicc": {
+          "showme_command": "gcc",
+          "registered_executable": "gcc"
+        },
+        "mpif90": {
+          "showme_command": "gfortran",
+          "registered_executable": "gfortran"
+        }
+      },
+      "executables": {
+        "gcc": {"path": "/usr/bin/gcc", "resolved": "/usr/bin/x86_64-linux-gnu-gcc-11"},
+        "gfortran": {"path": "/usr/bin/gfortran", "resolved": "/usr/bin/x86_64-linux-gnu-gfortran-11"},
+        "mpicc": {"path": "/usr/bin/mpicc", "resolved": "/usr/bin/opal_wrapper"},
+        "mpif90": {"path": "/usr/bin/mpif90", "resolved": "/usr/bin/opal_wrapper"},
+        "make": {"path": "/usr/bin/make", "resolved": "/usr/bin/make"},
+        "git": {"path": "/usr/bin/git", "resolved": "/usr/bin/git"},
+        "ldd": {"path": "/usr/bin/ldd", "resolved": "/usr/bin/ldd"},
+        "dpkg_query": {"path": "/usr/bin/dpkg-query", "resolved": "/usr/bin/dpkg-query"},
+        "dpkg": {"path": "/usr/bin/dpkg", "resolved": "/usr/bin/dpkg"}
+      },
+      "required_runtime_packages": {
+        "libopenmpi3": "4.1.2-2ubuntu1",
+        "libscalapack-openmpi2.1": "2.1.0-4",
+        "libfftw3-double3": "3.3.8-2ubuntu8",
+        "liblapack3": "3.10.0-2ubuntu1",
+        "libblas3": "3.10.0-2ubuntu1",
+        "libgfortran5": "12.3.0-1ubuntu1~22.04.3"
+      },
+      "required_ldd_soname_prefixes": [
+        "libhdf5.so",
+        "libmpi.so",
+        "libscalapack-openmpi.so",
+        "libfftw3.so",
+        "liblapack.so",
+        "libblas.so",
+        "libgfortran.so"
+      ],
+      "required_soname_packages": {
+        "libmpi.so": "libopenmpi3",
+        "libscalapack-openmpi.so": "libscalapack-openmpi2.1",
+        "libfftw3.so": "libfftw3-double3",
+        "liblapack.so": "liblapack3",
+        "libblas.so": "libblas3",
+        "libgfortran.so": "libgfortran5"
+      }
+    },
     "ubuntu_packages": {
       "openmpi-bin": "4.1.2-2ubuntu1",
       "libopenmpi-dev": "4.1.2-2ubuntu1",
@@ -78,16 +157,19 @@
       "make": "4.3-4.1build1"
     },
     "openmx_makefile": {
-      "cc": "mpicc -O3 -fopenmp -Dkcomp -I${HDF5_PREFIX}/include",
-      "fc": "mpif90 -O3 -fopenmp -Dkcomp",
+      "cc": "/usr/bin/mpicc -O3 -fopenmp -fcommon -Dkcomp -I${HDF5_PREFIX}/include",
+      "fc": "/usr/bin/mpif90 -O3 -fopenmp -fallow-argument-mismatch -Dkcomp",
       "lib": "-L${HDF5_PREFIX}/lib -Wl,-rpath,${HDF5_PREFIX}/lib -lhdf5 -lscalapack-openmpi -lfftw3 -llapack -lblas -lmpi_usempif08 -lmpi_usempi_ignore_tkr -lmpi_mpifh -lgfortran -lm -lpthread"
     },
     "application_order": [
       "safely extract OpenMX 3.9 base",
-      "safely apply all official patch3.9.9 members to openmx3.9/source",
+      "safely apply all official patch3.9.9 regular members except kpoint.in to openmx3.9/source",
+      "move official patch3.9.9 kpoint.in to openmx3.9/work/kpoint.in",
+      "apply the frozen GNU/OpenMPI/HDF5 makefile lines and assert one active CC/FC/LIB definition",
+      "write the official OpenMX 3.9.9 combined-source manifest",
       "compile-link smoke of official OpenMX 3.9.9 before overlap-only overwrite",
       "overwrite only openmx.c and truncation.c from the frozen overlap-only commit",
-      "apply the frozen GNU/OpenMPI/HDF5 makefile lines",
+      "write the final overlap-only combined-source manifest",
       "clean rebuild and link overlap-only OpenMX"
     ]
   },
@@ -131,14 +213,80 @@
     "reverse_key": "[-R1,-R2,-R3,j,i]",
     "reverse_relation": "S(R,i,j)=transpose(S(-R,j,i))",
     "reverse_absolute_tolerance": 1e-10,
+    "onsite_symmetry_absolute_tolerance": 1e-10,
     "parsed_coordinate_absolute_tolerance_angstrom": 1e-10,
     "finite_values_required": true,
     "raw_rank_files_allowed": ["overlaps_0.h5"],
-    "forbid_additional_hdf5_outputs": true
+    "run_file_allowlist_before_report": [
+      "openmx.dat",
+      "structure_mapping.json",
+      "openmx.std",
+      "openmx.err",
+      "openmx.out",
+      "execution_receipt.json",
+      "output/overlaps_0.h5",
+      "parsed/overlaps.h5",
+      "parsed/lat.dat",
+      "parsed/rlat.dat",
+      "parsed/site_positions.dat",
+      "parsed/orbital_types.dat",
+      "parsed/element.dat"
+    ],
+    "run_file_allowlist_before_parser": [
+      "openmx.dat",
+      "structure_mapping.json",
+      "openmx.std",
+      "openmx.err",
+      "openmx.out",
+      "output/overlaps_0.h5"
+    ],
+    "forbidden_filename_tokens_casefold": [
+      "hamilton",
+      "density",
+      "force",
+      "stress",
+      "energy",
+      "scfout",
+      "rho",
+      "dm_onsite"
+    ],
+    "forbid_additional_hdf5_outputs": true,
+    "required_stdout_markers": [
+      "Calc. OLP ...",
+      "Finish calc. OLP",
+      "The calculation was normally finished."
+    ],
+    "forbidden_log_markers_casefold": [
+      "check_force",
+      "check_stress",
+      "forcetest",
+      "stresstest",
+      "neb calculation",
+      "total energy (hartree) at md",
+      "scf iteration"
+    ]
   },
   "execution": {
     "smoke_structure_id": "500",
-    "smoke_command": "env OMP_NUM_THREADS=1 LD_LIBRARY_PATH=${HDF5_PREFIX}/lib mpirun --bind-to none -np 1 ${OPENMX_BINARY} openmx.dat > openmx.out 2> openmx.err",
+    "python_executable": "/home/evan-williams/deeph-m9/env/deeph-v022/bin/python3.9",
+    "python_flags": ["-I", "-S", "-B"],
+    "dependency_site_packages": "/home/evan-williams/deeph-m9/env/deeph-v022/lib/python3.9/site-packages",
+    "bootstrap_policy": {
+      "isolated": true,
+      "no_site": true,
+      "dont_write_bytecode": true,
+      "script_and_current_directories_forbidden_on_sys_path": true,
+      "site_packages_forbidden_on_bootstrap_sys_path": true,
+      "dependency_path_append_only_after_capability": true,
+      "pth_processing_forbidden": true,
+      "control_directory_python_files_must_be_frozen": true,
+      "control_directory_cache_and_subdirectories_forbidden": true,
+      "receipt_bootstrap_modules": ["argparse", "hashlib", "json", "pathlib"]
+    },
+    "local_module_loading": "source-only launcher compiles each frozen m9 module from verified UTF-8 source and never consults bytecode loaders",
+    "smoke_command": "env OMP_NUM_THREADS=1 LD_LIBRARY_PATH=${HDF5_PREFIX}/lib /usr/bin/mpirun --bind-to none -np 1 ${OPENMX_BINARY} openmx.dat > openmx.std 2> openmx.err",
+    "argv": ["/usr/bin/mpirun", "--bind-to", "none", "-np", "1", "${OPENMX_BINARY}", "openmx.dat"],
+    "free_argv_allowed": false,
     "batch_order": "ascending numeric structure ID",
     "continue_after_failure": false,
     "require_source_and_input_hash_before_run": true,
@@ -146,7 +294,19 @@
     "parser": "DeepH-pack v0.2.2 deeph.preprocess.openmx_parse_overlap"
   },
   "budget": {
-    "overall_wall_clock_and_storage_contract_unchanged": true,
+    "wall_clock_policy": "UNLIMITED_BY_D-018",
+    "overall_wall_clock_seconds": null,
+    "overall_deadline_utc": null,
+    "historical_wall_clock_seconds": 604800,
+    "historical_start_utc": "2026-08-11T14:50:05.7533015Z",
+    "historical_deadline_utc": "2026-08-18T14:50:05.7533015Z",
+    "historical_wall_clock_evidence_preserved": true,
+    "cpu_gpu_storage_contract_unchanged": true,
+    "generic_run_forbidden_until_separately_audited": true,
+    "d018_execution_fact_gate_required_before_overlap_action": true,
+    "d018_gate_and_action_scope_verified_inside_budget_lock": true,
+    "d017_recovery_evidence_must_remain_bound": true,
+    "overall_storage_limit_bytes": 107374182400,
     "gpu_seconds_allocated": 0,
     "cpu_wall_subbudget_seconds": {
       "package_install_hdf5_and_build": 7200,
@@ -154,11 +314,30 @@
       "full_450_structure_batch": 21600
     },
     "storage_increment_sublimit_bytes": 10737418240,
+    "per_structure_control_overhead_bytes": 1048576,
+    "operation_forecast_lower_bounds_bytes": {
+      "apt_install": 536870912,
+      "source_prepare": 1073741824,
+      "source_build": 4294967296,
+      "smoke_prepare": 1048576,
+      "smoke_run": 67108864,
+      "project": 1048576
+    },
+    "storage_increment_metrics": [
+      "combined_apparent_bytes_since_overlap_baseline",
+      "combined_allocated_bytes_since_overlap_baseline",
+      "host_vhdx_growth_since_overlap_baseline_bytes"
+    ],
+    "forecast_required_and_nonnegative": true,
+    "overlap_cpu_bucket_required": true,
+    "projection_rule": "ceil(max(smoke_elapsed_seconds,1)*450*1.25) and ceil((max(smoke_payload_increment_bytes,1)+1048576)*450*1.25), compared with overlap_batch, overlap 10 GiB and all remaining overall limits",
     "hard_stop_if_smoke_projection_exceeds_batch_subbudget": true,
     "hard_stop_if_next_operation_exceeds_overall_or_overlap_sublimit": true
   },
   "gate": {
     "before_install_build_or_calculation": "independent work-package audit PASS with zero remaining issues",
+    "audit_gate_schema": "m9-overlap-audit-gate-v1",
+    "workflow_state_schema": "m9-overlap-workflow-state-v1",
     "after_smoke": "source/input/output/schema/reverse/key/coordinate checks PASS before batch",
     "after_batch": "450/450 contracts PASS and independent M9-DATA-B01 blocking re-audit"
   }

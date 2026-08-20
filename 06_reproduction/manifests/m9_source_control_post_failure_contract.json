@@ -1,0 +1,76 @@
+{
+  "schema_version": "m9-source-control-post-failure-contract-v1",
+  "decision_id": "D-017-source-control-post-failure-migration-v1",
+  "scope": "MIGRATE_AND_RESUME_SAME_SOURCE_CONTROL_RECOVERY_TRANSACTION",
+  "failed_execution_audit": {
+    "path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_control_recovery_failed_execution_independent_audit.md",
+    "sha256": "6d144f9622b512b41b65f2bb7e0e67a7e8275d23ced8d2956c3e8c12aab8dea6"
+  },
+  "failed_runtime": {
+    "recovery_transaction_sha256": "89483c5653b05063308896d5fe61809916f210a906e09eeda068867608bed44e",
+    "recovery_transaction_id": "4783a27441019358a0f15127f26d957d",
+    "recovery_event_id": "4783a27441019358a0f15127f26d957d:source-control-recovery",
+    "parent_snapshot_sha256": "12f475b7468036e1bb1370506a0d7f71cb8db283cec2d21e356d3ce3e7b66309",
+    "parent_transaction_sha256": "12f475b7468036e1bb1370506a0d7f71cb8db283cec2d21e356d3ce3e7b66309",
+    "state_sha256": "1a998b1383810df371cccb9d799d4ac91bb2023e539155eae782345700a4d7dc",
+    "workflow_sha256": "73a3522af8a29d8300255b8deb9c2014628a27930ffb05b81f49255a8d5a8fbf",
+    "ledger_sha256": "25103d9a794a36a4e058a45ecb40b4b128dc3905d364a046640571684498da4f",
+    "recovery_event_count": 0,
+    "retired_capability_path": "/home/evan-williams/deeph-m9/manifests/overlap_capabilities/f7c3b060e19e37e6da03f461d754d38c.retired.json",
+    "retired_capability_sha256": "0a4352dafb4718084ddac286fc24b05b863d284583741c67dffd356c7274e91e",
+    "active_gate_sha256": "381c8fd6e9fa28479de4f2144e975ed32756af9ac9dfe90a6d5457208da1cefa"
+  },
+  "ledger_append": {
+    "existing_file_only": true,
+    "required_open_flags": [
+      "O_RDWR",
+      "O_APPEND",
+      "O_CLOEXEC",
+      "O_NOFOLLOW"
+    ],
+    "forbidden_open_flags": [
+      "O_CREAT",
+      "O_TRUNC"
+    ],
+    "expected_uid": 1000,
+    "expected_gid": 1000,
+    "expected_mode_octal": "0644",
+    "expected_nlink": 1,
+    "fsync_file": true,
+    "fsync_parent_directory": true,
+    "same_descriptor_prefix_sha256_required": true,
+    "partial_suffix_rule": "only an exact proper prefix of the frozen event bytes may be truncated to the frozen parent prefix and resumed"
+  },
+  "migration": {
+    "command": "overlap-migrate-source-control-post-failure",
+    "requires_root": true,
+    "requires_existing_lock_r_plus": true,
+    "root_private_original_transaction_snapshot": "/root/deeph-m9-control/source-control-failed-recovery-original.json",
+    "root_private_journal": "/root/deeph-m9-control/source-control-post-failure-migration.json",
+    "retired_old_gate": "/home/evan-williams/deeph-m9/manifests/overlap_source_control_recovery_gate.pre-ledger-fix.retired.json",
+    "states": [
+      "PREPARED",
+      "GATE_RETIRED",
+      "REPLACEMENT_CREATED",
+      "RECOVERY_RECEIPT_MIGRATED",
+      "SUCCESS_COMMITTED"
+    ],
+    "preserve_original_failed_transaction_bytes": true,
+    "preserve_original_event_id": true,
+    "preserve_parent_snapshot": true,
+    "preserve_retired_capability": true,
+    "preserve_ledger_prefix": true,
+    "new_recovery_transaction_forbidden": true,
+    "new_recovery_event_forbidden": true
+  },
+  "authorization_boundary": {
+    "migration_gate_requires_independent_zero_issue_pass": true,
+    "migration_execution_requires_independent_fact_audit": true,
+    "recovery_resume_requires_independent_zero_issue_pass": true,
+    "source_prepare_authorized": false,
+    "source_build_authorized": false,
+    "smoke_authorized": false,
+    "batch_authorized": false,
+    "m9_05_authorized": false
+  }
+}

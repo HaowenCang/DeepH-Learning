@@ -1,0 +1,52 @@
+{
+  "schema_version": "m9-offline-recovery-independent-verdict-v1",
+  "audit_round": "preflight-targeted-reaudit",
+  "decision_id": "D-017-offline-recovery-v1",
+  "verdict": "PASS",
+  "blocking": 0,
+  "non_blocking": 0,
+  "closed_findings": [
+    "M9-REC-PREFLIGHT-B01"
+  ],
+  "scope": "strict classification of the 45 offline-recovery target package states and unchanged 45-new solver contract",
+  "authorization_record_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_offline_recovery_authorization.md",
+  "authorization_record_sha256": "ce2c61035c7ee1e99f178f43ae51073dd8895bd892e8e1e31e4e813326c5e1cc",
+  "budget_script_path": "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_budget.py",
+  "budget_script_sha256": "d8530d9d1a46ce7fc9b22d769948bbfaf704c416db9960a61f3852441ea17c14",
+  "tests_path": "/mnt/e/Projects/Codex/DeepH/06_reproduction/tests/test_m9_overlap_controls.py",
+  "tests_sha256": "2876ae64ebea87934a4a490554aba70bf15ab8e0951741f6c1001b899a7ff642",
+  "frozen_hashes_path": "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_offline_recovery_frozen_hashes.json",
+  "frozen_hashes_sha256": "faefb243c7319466503c6098de754b0a5a927f331570e229e0ccfe91a0a57bd6",
+  "offline_manifest_path": "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_offline_apt_manifest.json",
+  "offline_manifest_sha256": "f54d61cbf4f6cb82dcd1cd0daa17ff2cf013f328b19d3222cff1a37dba637616",
+  "previous_audit_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_offline_recovery_preflight_fact_audit.md",
+  "previous_audit_sha256": "896d3d3ce36d08fca92fc4a0c3a5c01fae2f7c1b536af748228a2deb315f7bc6",
+  "observed_preflight": {
+    "expected": 45,
+    "absent": 43,
+    "placeholder_unknown_ok_not_installed_empty_version": 2,
+    "installed": 0,
+    "unsafe": 0,
+    "placeholder_packages": [
+      "autoconf",
+      "automake"
+    ]
+  },
+  "verification": {
+    "frozen_python_tests": "25/25 PASS",
+    "actual_dpkg_query_partition": "43 absent, 2 strict empty-version unknown ok not-installed placeholders, 0 installed, 0 unsafe",
+    "query_negative_matrix": "unexpected diagnostics, incomplete missing set, return-code mismatch, malformed or duplicate stdout, duplicate diagnostics and returned/missing overlap rejected",
+    "solver_contract": "unchanged: 0 upgraded, 45 newly installed, 0 removed; 45 local-deb targets",
+    "frozen_file_hashes": "18/18 PASS",
+    "ast_parse": "PASS",
+    "control_directory": "no __pycache__, .pyc or .pyo",
+    "runtime_install_or_package_mutation": "none"
+  },
+  "permission": {
+    "replace_stale_one_shot_recovery_gate": true,
+    "execute_authorized_offline_recovery": true,
+    "execute_m9_05": false,
+    "execute_batch_overlap": false,
+    "generate_additional_dft_labels": false
+  }
+}

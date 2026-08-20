@@ -1,0 +1,20 @@
+{
+  "schema_version": "m9-source-control-recovery-audit-verdict-v1",
+  "decision_id": "D-017-source-control-recovery-v1",
+  "verdict": "PASS",
+  "blocking": 0,
+  "non_blocking": 0,
+  "scope": "CREATE_POST_FAILURE_REPLACEMENT_SOURCE_CONTROL_RECOVERY_GATE_ONLY",
+  "report_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_control_post_failure_migration_second_targeted_reaudit.md",
+  "report_sha256": "dc0b4d4672934b63ec075b639420b73cb175b302f6f21d7f082fcac2568c8ab8",
+  "frozen_hashes_sha256": "03ed6d0e4b2ff126d11d0e5e772e479bf9c3f14f5bb2833de0358fa500fb0350",
+  "contract_sha256": "dbb93a26d7a5b80b6992ead374dda8421d763679ce63ecf349688b4a38426c2e",
+  "authorization_record_sha256": "8c9602d5cc774c64f87a41c13d68223583cc91d19596568055ea6c2eaef0e42b",
+  "recovery_transaction_id": "4783a27441019358a0f15127f26d957d",
+  "recovery_event_id": "4783a27441019358a0f15127f26d957d:source-control-recovery",
+  "closed_problem_ids": [
+    "M9-SPR-R34-B01",
+    "M9-SPR-R34-B02",
+    "M9-SPR-R34-B03"
+  ]
+}

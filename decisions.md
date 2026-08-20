@@ -166,4 +166,25 @@
 - 允许输出：same-basis overlap、OpenMX 坐标/执行日志、哈希和派生验证报告。禁止输出、保存或使用 Hamiltonian、SCF 密度/能量、力、密度矩阵及其他 DFT 标签；补丁共享例程内部的临时 kinetic 数组不构成允许输出，若被序列化即失败。
 - 预算：不重置 D-013/D-014 的 7 天与 100 GiB 总预算，不占 GPU。原总预算内另设 apt/HDF5/OpenMX 准备与编译 7200 CPU 墙钟秒、单结构 smoke 1800 秒、450 结构批次 21600 秒和 10 GiB 新增存储子上限；任一投影或实测越界即硬停止。
 - 门控：正式工作包为 `08_audits/M9_overlap_only_openmx_work_package.md`。在独立子 agent 审计 `PASS` 且剩余问题为 0 前，不安装系统包、不解压/编译 HDF5/OpenMX、不生成输入、不运行结构计算。通过后先执行结构 500 单结构 smoke；其全部来源、键、逆边、坐标回读、禁止输出和预算检查通过后，才可按 ID 升序处理 450 个结构。完成后必须交回同一数据契约审计员定点复核 `M9-DATA-B01`，不得由主 agent 自行宣布关闭。
+- 审计状态：2026-08-13 工作包初审判定 `FAIL`，冻结 `M9-OLP-B01`—`B06` 六项实施阻塞，未要求新的路线选择。主 agent 只在本决策边界内补充 GNU11 编译标志、安全组合、冻结数据/basis 绑定、受控 executor、严格禁止输出和硬预算状态机；同一审计员定点复核 `PASS` 前，上述禁止动作继续有效。
+- 第一次定点复核状态：B03/B05 已关闭，B01/B02/B04/B06 仍开放并新增 B07；剩余问题均为执行控制完整性，不改变本决策的软件、数据、basis、材料、允许输出或预算。第二轮修复改用固定实际工具/库 provenance、预算动作 API、一次性事务 capability、非零 forecast 下界、双状态硬停止与 source-only loader；再次复核通过前仍不执行外部动作。
+- 第二次定点复核状态：B02/B04/B06 已关闭，B01/B07 仍开放，未新增问题。第三轮修复将正式 PATH 收紧为 `/usr/sbin:/usr/bin:/sbin:/bin` 并冻结 MPI wrapper 的底层编译器展开；预算入口和 source launcher 统一使用 `-I -B`，记录 stdlib bootstrap loader/origin/hash，控制目录改为冻结 Python 文件闭集并删除历史 pycache。第三次复核通过前仍不执行外部动作。
+- 第三次定点复核状态：B01 已关闭，B02/B04/B06 保持关闭；B07 因 `-I -B` 仍会在入口正文前处理虚拟环境 `.pth` 而保持开放，未新增问题。第四轮修复统一使用 `-I -S -B` 并核对 `no_site`，bootstrap `sys.path` 禁止 site-packages；冻结依赖目录只在 capability 与项目源码验证后以普通 `sys.path.append` 加入，禁止 `site.addsitedir` 并在回执中记录 `pth_processed=false`。第四次复核通过前仍不执行外部动作。
+- 第四次定点复核状态：`.pth`、相邻 pyc 与依赖路径主穿透已关闭；B07 因 `command_overlap_init()` 未核对 `sys.executable` 而保持开放，未新增问题。第五轮修复将冻结解释器身份检查移入公共 bootstrap，在 init/run 的任何 gate 或状态读写前执行；系统 Python 3.10 的 overlap-init 端到端负例确认失败且正式状态零新增。第五次复核通过前仍不执行外部动作。
+- D-017 恢复附录（2026-08-13）：apt 在线事务因代理下载超时触发 `HARD_STOP`，原始 `overlap_build=7200.075310528 s` 不得删除、归零或覆盖。用户明确批准离线恢复规则：新增一次性 `noncompute_apt_timeout` credit（精确绑定该失败事务，credit 不超过其 elapsed），并设置一次性离线恢复墙钟上限 300 s；有效构建计量按 `max(0, raw-credit)` 展示，原始值永久保留。恢复只允许通过新 `overlap-recover-offline-apt` 入口、冻结 45 包 manifest、签名索引哈希链和 `unshare --net` 执行；恢复失败立即再次双硬停止，禁止重放。该附录对象须经同一独立审计员通过并建立新 gate 后才可执行。
 - 重新评估条件：需要改变 OpenMX/HDF5/PAO/VPS/basis、结构映射、允许输出、总体预算、材料、DeepH 版本或物理范围；需要 Windows 重启；或独立审计/单结构 smoke 发现冻结路线不能产生合法同 basis overlap 时，暂停并请求新的用户决策。
+
+## D-018：M9 改为无总墙钟期限并保留其他预算与全部历史证据
+
+- 日期：2026-08-20。
+- 状态：已授权，等待迁移工作包独立审计与正式运行态迁移。
+- 用户授权：用户明确批准“改为无时限，不重置或增加 CPU、GPU、存储预算，保留全部历史用量与证据”。该授权取代 D-013/D-014 中 7 天总墙钟上限的未来执行约束，但不覆盖或删除原决策及其历史事实。
+- 墙钟语义：原起点 `2026-08-11T14:50:05.7533015Z`、原 604800 秒额度、原截止时间 `2026-08-18T14:50:05.7533015Z` 和实际超期记录继续作为不可变历史证据保存。迁移后 `wall_clock_policy.mode=UNLIMITED`，预算检查不再产生 `wall_clock_limit`，子进程 timeout 不再取总墙钟余量。
+- 不变预算：GPU 总预算 86400 秒及 compatibility/training/physical-validation 分桶不变；overlap build/smoke/batch CPU 子预算 7200/1800/21600 秒不变；100 GiB 总存储、1 GiB 项目审计白名单和 10 GiB overlap 新增存储子限不变。raw CPU、既有 credit、GPU 用量、存储/VHDX 基线、ledger、失败与恢复事务、capability、gate 和审计报告均不得归零、回写或删除。
+- 迁移门控：正式状态只能通过 `M9_unlimited_wall_clock_migration_work_package.md` 定义的一次性 `overlap-migrate-unlimited-wall-clock` 入口迁移。代码、合同、测试、冻结清单和运行态前置哈希须由独立子 agent 审计为 `PASS`、`BLOCKING=0`、`NON_BLOCKING=0`；正式迁移后再做独立执行事实审计。
+- 门控加固：首次独立审计冻结 `D018-B01`—`D018-B06` 并判定 `FAIL`。修订实现必须覆盖 ledger 严格前缀/部分追加续提、旧 gate `st_dev/st_ino` 绑定、D-017 历史 recovery transaction/gate 连续性、迁移后独立执行事实 gate、通用 `run` 在全部 bucket 下零写拒绝、确定性失败的 budget/workflow 双硬停止，以及 journal/snapshot/retired gate/ledger/state/transaction 终态闭集。只有同一独立审计员复核为零问题后方可执行迁移。
+- 时序加固：第一次定点复核继续判定 `FAIL`，冻结 `D018-R01`—`D018-R03`。`PREPARED` journal 必须先于 snapshot 持久化；overlap 的 wall mode、D-017/D-018/执行事实 gate、完整 runtime 与 action scope 必须在既存 `budget.lock` 内验证；通用 `run` 的禁用判断同样必须在锁内完成并覆盖至子进程创建。锁外快照不得作为实际授权依据。
+- 迁移事实：第二次定点复核、正式一次性迁移及迁移执行事实审计均为 `PASS`、问题为 0；D-018 transaction 与 journal 已进入 `SUCCESS_COMMITTED`，budget state 仅把总墙钟策略改为 `UNLIMITED` 并保留原始期限，CPU/GPU/存储上限、历史用量、ledger 前缀及全部失败/恢复证据不变。
+- UID1000 消费边界：正式 execution-fact gate 的实际事实审计冻结 `D018-EGF-B01`。root 完整验证器依赖 root:root、`0600` 历史证据，不能直接由 UID1000 重放。首次消费层实现审计又冻结 `D018-UID-B01`—`B03`；第一次定点复核确认 EGF-B01、B01、B03 的代码条件已关闭，但冻结 `D018-UID-B02-R01`、`B04`、`B05`：root installer 在验证前导入项目侧 adapter、悬空产品 symlink 被误判缺席、封存 staging 的 rename 失败不可续提。第二次定点复核确认这些问题已经关闭，但新增 `D018-UID-B06`：项目侧 installer 作为 `__main__` 直接启动时，仍会在 trusted-path 拒绝前执行项目 adapter。修复不得降低历史证据权限；项目 installer 必须在选择或执行任何 adapter loader 之前按实际 `__file__` 拒绝非信任目录入口。正式安装应先通过审计后固定的 single-FD SHA loader 执行 root bootstrap，把 bootstrap/installer/adapter 安装为 root:group1000、`0550/0440` 的闭集信任根，再从该信任根安装完整快照和只读 consumer gate。UID1000 仅从完整快照加载适配器与原控制器，在既存 budget lock 内核验运行态字节及 owner/group/mode/nlink，以 `lexists` 判定产品存在，完成终态复读，并在第一次状态写入边界再次全量核验；bootstrap 与 snapshot 的封存 staging 均须支持 rename 失败幂等续提。该实现仍须原审计员第三次零问题定点复核、机械安装和真实 UID1000 gate 事实复核。
+- 授权边界：D-018 只解除墙钟阻塞，不直接授权 `source_prepare`、source build、smoke、batch、GPU、Hamiltonian/SCF 标签或 M9-05。迁移事实审计通过后，仍按 D-017 的 source_prepare → source build → 结构 500 smoke → 450 批次 → `M9-DATA-B01` 定点复核顺序推进。
+- 重新评估条件：拟增加或重置 CPU/GPU/存储预算、改变软件/数据/basis/材料/物理范围、放宽禁止输出，或 smoke 投影触发既有 CPU/存储硬上限时，必须形成新的用户决策。

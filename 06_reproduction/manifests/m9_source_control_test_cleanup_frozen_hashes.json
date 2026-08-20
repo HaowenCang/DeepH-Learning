@@ -1,0 +1,18 @@
+{
+  "schema_version": "m9-source-control-test-cleanup-frozen-hashes-v1",
+  "decision_id": "D-017-source-control-test-cleanup-v1",
+  "files": {
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_budget.py": "8a21f1768cc14a086d4b8edb7ea8c8e76a7213ef9871eb5489a9463ef0cd8d8a",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/tests/test_m9_overlap_controls.py": "6e6d6463631fd44b7b592353ecb8ad611ca2822f81b00572edbc6b626ad95e98",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_control_test_artifact_cleanup_authorization.md": "5ab95822f6f5edbb2d7f2e332e2e0b395d59231612a7a78bb1b4453984fdf65e",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_source_control_recovery_frozen_hashes.json": "03ed6d0e4b2ff126d11d0e5e772e479bf9c3f14f5bb2833de0358fa500fb0350"
+  },
+  "artifact_sha256": "2e0aa63648b7ab890eebb140b9b1bd4d416dd22085aab0351f3e39bb1ec9fc74",
+  "runtime_sha256": {
+    "/home/evan-williams/deeph-m9/manifests/budget_state.json": "1a998b1383810df371cccb9d799d4ac91bb2023e539155eae782345700a4d7dc",
+    "/home/evan-williams/deeph-m9/manifests/overlap_workflow_state.json": "2dbad901ea059f7ab7ea766f1fdc933e4a95a40aeeded304258599dd4626685d",
+    "/home/evan-williams/deeph-m9/manifests/overlap_transaction.json": "12f475b7468036e1bb1370506a0d7f71cb8db283cec2d21e356d3ce3e7b66309",
+    "/home/evan-williams/deeph-m9/manifests/budget_ledger.jsonl": "25103d9a794a36a4e058a45ecb40b4b128dc3905d364a046640571684498da4f",
+    "/home/evan-williams/deeph-m9/manifests/overlap_capabilities/f7c3b060e19e37e6da03f461d754d38c.json": "0a4352dafb4718084ddac286fc24b05b863d284583741c67dffd356c7274e91e"
+  }
+}

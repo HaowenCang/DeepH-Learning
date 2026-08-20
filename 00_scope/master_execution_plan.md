@@ -79,7 +79,7 @@
 - 原始 DeepH 补充材料中数据生成、数据划分、局域坐标、轨道选择和能带验证的页码或节号；
 - 现代 DeepH 软件中 Hamiltonian、overlap、density matrix 的预测、读取或计算分工。
 
-历史执行说明：截至 2026-08-12，M2-I 和 M3—M7 已通过相应独立审计；D-011 指定的 `gpt-5.6-sol`、`max` M7-I 全量总审计经主 agent 修复和同一审计员定点复核后也已通过，新增及剩余问题为 0。用户已按 D-013 冻结 M8，并通过 D-014 单独授权 M9 的 WSL 配置、冻结软件/依赖安装、官方 graphene 下载和复现实验。M9-01 工作包经两次定点复核后 `PASS`、问题为 0；M9-02/M9-03 的 WSL、固定环境、Julia、DeepH 固定提交、sm_89 CUDA/PyG/e3nn smoke、CLI、双新进程摘要和精确锁均已通过。M9-04 已完成官方 ZIP 的大小、MD5、SHA-256、CRC、安全解包、逐文件清单及 450 个结构的全量矩阵合同核验；训练数据结构合同通过，但所有结构均声明非正交且发布包没有 overlap，登记 `M9-DATA-B01`。新的独立审计员全量复核后确认该项为唯一开放阻塞，`BLOCKING=1`、`NON_BLOCKING=0`，明确不允许启动 M9-05。用户随后通过 D-017 明确授权受限 overlap-only OpenMX 路线；当前已冻结精确 OpenMX/HDF5/PAO/VPS/basis、450 结构映射、命令、输出模式和预算子上限，正在执行新增工作包独立审计。审计通过前不安装、编译或计算；Hamiltonian、SCF 和其他 DFT 标签仍禁止生成，M9-05 仍未解锁。
+历史执行说明：M2-I 和 M3—M7 已通过相应独立审计；D-011/M7-I 全量总审计也已通过。用户按 D-013 冻结 M8，并通过 D-014 授权 M9；M9-01—03 已通过。M9-04 完成官方 ZIP、安全解包、逐文件清单及 450 结构全量矩阵合同，但非正交发布包缺 overlap，登记 `M9-DATA-B01`。用户通过 D-017 授权受限 overlap-only OpenMX 路线，系统包离线恢复和 source-control recovery 均已完成并通过独立执行事实审计；尚未执行 `source_prepare`，六项 source/build 产品仍缺席。用户于 2026-08-20 通过 D-018 将 M9 改为无总墙钟期限，同时明确不重置或增加 CPU、GPU、存储预算并保留全部历史用量与证据。D-018 第二次定点复核、正式一次性迁移及迁移执行事实审计均已 `PASS`；正式 state 现为 `UNLIMITED`，历史期限、全部其他预算与历史证据保持不变。随后正式 execution-fact gate 的实际事实审计冻结 `D018-EGF-B01`，首次 UID1000 消费层审计冻结 `D018-UID-B01`—`B03`，第一次定点复核冻结 `D018-UID-B02-R01`、`B04`、`B05`；第二次定点复核确认上述问题关闭，但新增 `D018-UID-B06`，即项目侧 installer 在 trusted-path 拒绝前执行 adapter。当前修复采用审计哈希驱动的 single-FD root bootstrap、root:group1000 `0550/0440` 的两级代码与证据闭集、入口先验 trusted-path 拒绝、完整运行态元数据绑定、`lexists` 产品判定、终态复读、首次写入前再验证和可恢复 staging；同一审计员第三次零问题定点复核、机械安装和真实 UID1000 gate 事实复核通过前不得执行 `source_prepare`。Hamiltonian、SCF 和其他 DFT 标签仍禁止生成，M9-05 未解锁。
 
 ### 5.2 独立内容审计
 

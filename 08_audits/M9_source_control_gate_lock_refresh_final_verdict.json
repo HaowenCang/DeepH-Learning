@@ -1,0 +1,27 @@
+{
+  "schema_version": "m9-source-control-gate-lock-refresh-audit-verdict-v1",
+  "decision_id": "D-017-source-control-gate-lock-refresh-v1",
+  "verdict": "PASS",
+  "blocking": 0,
+  "non_blocking": 0,
+  "scope": "RETIRE_PRE_LOCK_MODE_GATE_AND_CREATE_REPLACEMENT_ONLY",
+  "old_gate_sha256": "5553de21184082b3ace505f4981f20c3116df7389805f2070ebf7e8b8dad5936",
+  "old_gate_bytes": 1723,
+  "report_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_control_recovery_thirty_second_lock_refresh_final_reaudit.md",
+  "report_sha256": "cfdbd46798e90c84f076bfa82badcb5be70b0942d883b3b02662a268f7baaebf",
+  "replacement_verdict_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_control_recovery_lock_replacement_final_verdict.json",
+  "replacement_verdict_sha256": "8a329ec9edce4a1c1b984ec561847cfce0ed4493e4b6dedb404fc8a9b816c739",
+  "frozen_hashes_sha256": "af86278da0cf6d68330f065dd8fbe50963b04b5c9c5b198f4cce5d2e0442e21d",
+  "authorization_record_sha256": "6b3e7a714a0adc8f00d56a45b5cedba99cbf941287109666cb1aac74bcf72da1",
+  "runtime_sha256": {
+    "state_sha256": "1a998b1383810df371cccb9d799d4ac91bb2023e539155eae782345700a4d7dc",
+    "workflow_sha256": "2dbad901ea059f7ab7ea766f1fdc933e4a95a40aeeded304258599dd4626685d",
+    "transaction_sha256": "12f475b7468036e1bb1370506a0d7f71cb8db283cec2d21e356d3ce3e7b66309",
+    "ledger_sha256": "25103d9a794a36a4e058a45ecb40b4b128dc3905d364a046640571684498da4f",
+    "stale_capability_sha256": "0a4352dafb4718084ddac286fc24b05b863d284583741c67dffd356c7274e91e",
+    "disposition_journal_sha256": "e97dc9b00a798f5a26807e5af18c78c2779be4ab144adeaa39f5be4338dc8ece",
+    "invalid_retired_gate_sha256": "6bdd2fdbff6df6a7a8cfa1ba3cda038ca7cfe96b3b5dfb48905ef0f5151f5821",
+    "recovery_transaction_absent": true,
+    "recovery_parent_absent": true
+  }
+}

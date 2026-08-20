@@ -1,0 +1,34 @@
+{
+  "schema_version": "m9-source-control-recovery-audit-verdict-v1",
+  "decision_id": "D-017-source-control-recovery-v1",
+  "verdict": "PASS",
+  "blocking": 0,
+  "non_blocking": 0,
+  "report_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_control_recovery_twenty_second_final_reaudit.md",
+  "report_sha256": "9ff43addd1addd263db1675db4088a34a90550da6094ace22522c5a6ea9d14d4",
+  "frozen_sha256": {
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_budget.py": "0b49bd41f17caa56fa088cee2620dcb965df9c57b3e9b02bf3eeba853e178e49",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/tests/test_m9_overlap_controls.py": "3cfccbeb70dcf7311889738b52b387e890c33170e89d74eb129f8ec366959351",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_source_control_recovery_frozen_hashes.json": "7875ff2e2114210e33c52de2de59ee1c8d3f64171a85dc78d30514e7e91357ed",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_source_control_test_cleanup_frozen_hashes.json": "332e25c05ab0739da10a991601883fc6363d962ef18ee5da9e2199e08226908c"
+  },
+  "closed_issue_ids": [
+    "M9-SPR-IMP-B01",
+    "M9-SPR-IMP-B02",
+    "M9-SPR-IMP-B03",
+    "M9-SPR-IMP-B04",
+    "M9-SPR-IMP-B05",
+    "M9-SPR-IMP-B06",
+    "M9-SPR-R3-B01"
+  ],
+  "test_result": {
+    "python": "/home/evan-williams/deeph-m9/env/deeph-v022/bin/python3.9",
+    "flags": ["-I", "-S", "-B"],
+    "tests_run": 66,
+    "tests_passed": 66,
+    "source_manifest_matches": "17/17",
+    "cleanup_manifest_matches": "4/4",
+    "cache_count": 0
+  },
+  "scope": "CREATE_SOURCE_CONTROL_RECOVERY_GATE_ONLY"
+}

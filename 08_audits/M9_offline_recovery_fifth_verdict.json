@@ -1,0 +1,45 @@
+{
+  "schema_version": "m9-offline-recovery-independent-verdict-v1",
+  "audit_round": 5,
+  "decision_id": "D-017-offline-recovery-v1",
+  "verdict": "PASS",
+  "blocking": 0,
+  "non_blocking": 0,
+  "closed_findings": [
+    "M9-REC-B01",
+    "M9-REC-B02",
+    "M9-REC-B03",
+    "M9-REC-B04",
+    "M9-REC-B05",
+    "M9-REC-B06",
+    "M9-REC-B07"
+  ],
+  "scope": "one-shot D-017 offline apt recovery and recovered overlap follow-up gate",
+  "authorization_record_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_offline_recovery_authorization.md",
+  "authorization_record_sha256": "ce2c61035c7ee1e99f178f43ae51073dd8895bd892e8e1e31e4e813326c5e1cc",
+  "budget_script_path": "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_budget.py",
+  "budget_script_sha256": "1afda59bcec86e3a5df6dc8aa74647a179b1244fc6bc55dc6e0add9598400318",
+  "frozen_hashes_path": "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_offline_recovery_frozen_hashes.json",
+  "frozen_hashes_sha256": "59bbb54b5965bc17e0a8b309ed24d4b5b1f1ae878384f3521fb8ce74b1ac4994",
+  "offline_manifest_path": "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_offline_apt_manifest.json",
+  "offline_manifest_sha256": "f54d61cbf4f6cb82dcd1cd0daa17ff2cf013f328b19d3222cff1a37dba637616",
+  "previous_audit_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_offline_recovery_fourth_blocking_reaudit.md",
+  "previous_audit_sha256": "e89c2c8c173cf19434345aae58524dd3b3ac325493492f1f7e69e38252c62241",
+  "verification": {
+    "frozen_python_tests": "22/22 PASS",
+    "ast_parse": "PASS",
+    "frozen_file_hashes": "18/18 PASS",
+    "control_directory": "12 regular .py files; no symlink, subdirectory, .pyc or .pyo",
+    "structured_verdict_negative_matrix": "FAIL, nonzero blocking and nonzero non_blocking all rejected",
+    "candidate_recovery_gate": "PASS",
+    "candidate_recovered_followup_gate": "PASS",
+    "runtime_mutation": "none"
+  },
+  "permission": {
+    "create_one_shot_recovery_gate": true,
+    "execute_authorized_offline_recovery": true,
+    "execute_m9_05": false,
+    "execute_batch_overlap": false,
+    "generate_additional_dft_labels": false
+  }
+}

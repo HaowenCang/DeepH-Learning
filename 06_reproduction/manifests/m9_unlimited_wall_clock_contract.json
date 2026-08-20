@@ -1,0 +1,69 @@
+{
+  "schema_version": "m9-unlimited-wall-clock-contract-v1",
+  "decision_id": "D-018",
+  "authorization_record": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_unlimited_wall_clock_authorization.md",
+  "policy": {
+    "mode": "UNLIMITED",
+    "historical_limit_seconds": 604800.0,
+    "historical_start_utc": "2026-08-11T14:50:05.7533015Z",
+    "historical_deadline_utc": "2026-08-18T14:50:05.7533015Z",
+    "deadline_enforcement_disabled": true,
+    "deadline_is_retained_as_history": true,
+    "subprocess_timeout_excludes_wall_clock": true,
+    "generic_commands_forbidden_until_separately_audited": true
+  },
+  "unchanged_limits": {
+    "gpu_total_seconds": 86400.0,
+    "gpu_buckets_seconds": {
+      "compatibility": 7200.0,
+      "training": 57600.0,
+      "physical_validation": 21600.0
+    },
+    "cpu_buckets_seconds": {
+      "overlap_build": 7200.0,
+      "overlap_smoke": 1800.0,
+      "overlap_batch": 21600.0
+    },
+    "storage_total_bytes": 107374182400,
+    "project_audit_sublimit_bytes": 1073741824,
+    "overlap_storage_sublimit_bytes": 10737418240
+  },
+  "preserved_evidence": [
+    "budget start and historical deadline",
+    "raw CPU seconds and append-only CPU adjustments",
+    "GPU seconds",
+    "storage and VHDX baselines",
+    "budget ledger prefix",
+    "all failed and recovered transactions",
+    "all retired capabilities and gates",
+    "all independent audit reports"
+  ],
+  "migration": {
+    "entrypoint": "overlap-migrate-unlimited-wall-clock",
+    "required_euid": 0,
+    "single_transaction": true,
+    "append_only_event": "M9_UNLIMITED_WALL_CLOCK_MIGRATION",
+    "event_count": 1,
+    "retire_previous_overlap_gate": true,
+    "replacement_gate_uid": 0,
+    "replacement_gate_gid": 1000,
+    "replacement_gate_mode": 416,
+    "crash_resumable": true,
+    "partial_ledger_append_resumable": true,
+    "prepared_journal_precedes_state_snapshot": true,
+    "old_gate_dev_inode_bound": true,
+    "deterministic_failure_double_hard_stop": true,
+    "source_or_build_products_forbidden": true
+  },
+  "postcondition": {
+    "status_deadline_remaining_seconds": null,
+    "status_wall_clock_mode": "UNLIMITED",
+    "wall_clock_limit_absent_from_violations": true,
+    "source_prepare_requires_separate_execution_fact_audit": true,
+    "source_prepare_requires_preserved_d017_recovery_evidence": true,
+    "overlap_gate_verification_occurs_inside_existing_budget_lock": true,
+    "generic_command_policy_check_occurs_inside_existing_budget_lock": true,
+    "execution_fact_gate_schema": "m9-unlimited-wall-clock-execution-gate-v1",
+    "execution_fact_gate_scope": "ALLOW_ONE_D017_SOURCE_PREPARE_AFTER_D018"
+  }
+}

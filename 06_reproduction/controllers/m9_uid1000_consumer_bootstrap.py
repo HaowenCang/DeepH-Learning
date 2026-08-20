@@ -1,0 +1,301 @@
+#!/usr/bin/env python3
+"""Root bootstrap for the audited UID1000 consumer installer.
+
+This file is executed only through the work-package single-FD SHA-256 loader.
+It copies the frozen bootstrap, installer, adapter, verdict, and audit report
+into a root-owned read-only directory before either module is imported.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+import sys
+
+
+PROJECT_ROOT = Path("/mnt/e/Projects/Codex/DeepH")
+REPRODUCTION = PROJECT_ROOT / "06_reproduction"
+PROJECT_BOOTSTRAP = REPRODUCTION / "controllers/m9_uid1000_consumer_bootstrap.py"
+PROJECT_INSTALLER = REPRODUCTION / "controllers/m9_uid1000_consumer_install.py"
+PROJECT_ADAPTER = REPRODUCTION / "controllers/m9_budget_uid1000_consumer.py"
+PROJECT_VERDICT = (
+    PROJECT_ROOT
+    / "08_audits/M9_unlimited_wall_clock_uid1000_consumer_final_verdict.json"
+)
+PROJECT_REPORT = (
+    PROJECT_ROOT
+    / "08_audits/M9_unlimited_wall_clock_uid1000_consumer_third_targeted_reaudit.md"
+)
+FROZEN_HASHES = (
+    REPRODUCTION
+    / "manifests/m9_unlimited_wall_clock_uid1000_consumer_frozen_hashes.json"
+)
+TRUSTED_ROOT = Path("/home/evan-williams/deeph-m9/controls/uid1000-consumer-bootstrap")
+STAGING_ROOT = TRUSTED_ROOT.with_name(TRUSTED_ROOT.name + ".staging")
+TRUSTED_BOOTSTRAP = TRUSTED_ROOT / PROJECT_BOOTSTRAP.name
+TRUSTED_INSTALLER = TRUSTED_ROOT / PROJECT_INSTALLER.name
+TRUSTED_ADAPTER = TRUSTED_ROOT / PROJECT_ADAPTER.name
+TRUSTED_VERDICT = TRUSTED_ROOT / PROJECT_VERDICT.name
+TRUSTED_REPORT = TRUSTED_ROOT / PROJECT_REPORT.name
+TRUSTED_RECEIPT = TRUSTED_ROOT / "bootstrap_receipt.json"
+FROZEN_PYTHON = Path("/home/evan-williams/deeph-m9/env/deeph-v022/bin/python3.9")
+
+
+def stable_bytes(path: Path, expected_sha256: str) -> bytes:
+    flags = os.O_RDONLY | getattr(os, "O_CLOEXEC", 0) | getattr(os, "O_NOFOLLOW", 0)
+    descriptor = os.open(path, flags)
+    try:
+        before = os.fstat(descriptor)
+        if not stat.S_ISREG(before.st_mode) or before.st_nlink != 1:
+            raise SystemExit(f"bootstrap source metadata mismatch: {path}")
+        payload = bytearray()
+        while len(payload) < before.st_size:
+            chunk = os.read(descriptor, before.st_size - len(payload))
+            if not chunk:
+                raise SystemExit(f"bootstrap source read was short: {path}")
+            payload.extend(chunk)
+        after = os.fstat(descriptor)
+        linked = os.lstat(path)
+        fields = ("st_dev", "st_ino", "st_mode", "st_uid", "st_gid", "st_nlink", "st_size")
+        if (
+            any(getattr(before, key) != getattr(after, key) for key in fields)
+            or any(getattr(after, key) != getattr(linked, key) for key in fields)
+            or stat.S_ISLNK(linked.st_mode)
+            or hashlib.sha256(payload).hexdigest() != expected_sha256
+        ):
+            raise SystemExit(f"bootstrap source changed or hash mismatched: {path}")
+        return bytes(payload)
+    finally:
+        os.close(descriptor)
+
+
+def durable_member(path: Path, payload: bytes) -> None:
+    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_CLOEXEC", 0)
+    flags |= getattr(os, "O_NOFOLLOW", 0)
+    try:
+        descriptor = os.open(path, flags, 0o440)
+    except FileExistsError:
+        descriptor = os.open(
+            path,
+            os.O_RDONLY | getattr(os, "O_CLOEXEC", 0) | getattr(os, "O_NOFOLLOW", 0),
+        )
+        try:
+            current = os.fstat(descriptor)
+            existing = os.read(descriptor, current.st_size + 1)
+        finally:
+            os.close(descriptor)
+        if (
+            not stat.S_ISREG(current.st_mode)
+            or current.st_uid != 0
+            or current.st_gid != 1000
+            or stat.S_IMODE(current.st_mode) != 0o440
+            or current.st_nlink != 1
+            or existing != payload
+        ):
+            raise SystemExit(f"bootstrap staging member differs: {path}")
+        return
+    try:
+        os.fchown(descriptor, 0, 1000)
+        os.fchmod(descriptor, 0o440)
+        offset = 0
+        while offset < len(payload):
+            written = os.write(descriptor, payload[offset:])
+            if written <= 0:
+                raise OSError("bootstrap member write was short")
+            offset += written
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+
+
+def trusted_member(path: Path, expected_sha256: str) -> dict[str, object]:
+    payload = stable_bytes(path, expected_sha256)
+    observed = os.lstat(path)
+    if (
+        observed.st_uid != 0
+        or observed.st_gid != 1000
+        or stat.S_IMODE(observed.st_mode) != 0o440
+        or observed.st_nlink != 1
+    ):
+        raise SystemExit(f"trusted bootstrap member metadata mismatch: {path}")
+    return {"sha256": expected_sha256, "bytes": len(payload)}
+
+
+def verify_tree(
+    root: Path, expected: dict[Path, str], frozen_sha256: str
+) -> dict[str, object]:
+    root_stat = os.lstat(root)
+    if (
+        not stat.S_ISDIR(root_stat.st_mode)
+        or root_stat.st_uid != 0
+        or root_stat.st_gid != 1000
+        or stat.S_IMODE(root_stat.st_mode) != 0o550
+    ):
+        raise SystemExit("trusted bootstrap tree metadata mismatch")
+    expected_names = {path.name for path in expected} | {TRUSTED_RECEIPT.name}
+    if {path.name for path in root.iterdir()} != expected_names:
+        raise SystemExit("trusted bootstrap directory is not closed")
+    members = {
+        destination.as_posix(): trusted_member(root / destination.name, digest)
+        for destination, digest in expected.items()
+    }
+    expected_receipt = {
+        "schema_version": "m9-uid1000-consumer-bootstrap-v1",
+        "decision_id": "D-018",
+        "frozen_hashes_sha256": frozen_sha256,
+        "members": members,
+    }
+    expected_receipt_payload = (
+        json.dumps(expected_receipt, ensure_ascii=False, indent=2) + "\n"
+    ).encode()
+    receipt_payload = stable_bytes(
+        root / TRUSTED_RECEIPT.name,
+        hashlib.sha256(expected_receipt_payload).hexdigest(),
+    )
+    receipt = json.loads(receipt_payload.decode("utf-8"))
+    if (
+        receipt.get("schema_version") != "m9-uid1000-consumer-bootstrap-v1"
+        or receipt.get("decision_id") != "D-018"
+        or receipt.get("frozen_hashes_sha256") != frozen_sha256
+        or receipt != expected_receipt
+    ):
+        raise SystemExit("trusted bootstrap receipt mismatch")
+    return receipt
+
+
+def verify_installed(expected: dict[Path, str], frozen_sha256: str) -> dict[str, object]:
+    return verify_tree(TRUSTED_ROOT, expected, frozen_sha256)
+
+
+def main() -> int:
+    if not hasattr(os, "geteuid") or os.geteuid() != 0:
+        raise SystemExit("consumer bootstrap requires root")
+    if (
+        Path(sys.executable).resolve(strict=True) != FROZEN_PYTHON.resolve(strict=True)
+        or not sys.flags.isolated
+        or not sys.flags.no_site
+        or not sys.flags.dont_write_bytecode
+        or len(sys.argv) != 7
+    ):
+        raise SystemExit("consumer bootstrap requires frozen Python -I -S -B and six hashes")
+    bootstrap_sha, installer_sha, adapter_sha, frozen_sha, verdict_sha, report_sha = (
+        sys.argv[1:]
+    )
+    expected_hashes = {
+        PROJECT_BOOTSTRAP: bootstrap_sha,
+        PROJECT_INSTALLER: installer_sha,
+        PROJECT_ADAPTER: adapter_sha,
+        PROJECT_VERDICT: verdict_sha,
+        PROJECT_REPORT: report_sha,
+    }
+    frozen_payload = stable_bytes(FROZEN_HASHES, frozen_sha)
+    frozen = json.loads(frozen_payload.decode("utf-8"))
+    files = frozen.get("files")
+    frozen_sources = {PROJECT_BOOTSTRAP, PROJECT_INSTALLER, PROJECT_ADAPTER}
+    if not isinstance(files, dict) or any(
+        files.get(path.as_posix()) != expected_hashes[path] for path in frozen_sources
+    ):
+        raise SystemExit("consumer bootstrap arguments are not frozen-manifest bound")
+    payloads = {path: stable_bytes(path, digest) for path, digest in expected_hashes.items()}
+    destination_hashes = {
+        TRUSTED_BOOTSTRAP: bootstrap_sha,
+        TRUSTED_INSTALLER: installer_sha,
+        TRUSTED_ADAPTER: adapter_sha,
+        TRUSTED_VERDICT: verdict_sha,
+        TRUSTED_REPORT: report_sha,
+    }
+
+    parent = TRUSTED_ROOT.parent
+    if not parent.exists():
+        parent.mkdir(parents=True, mode=0o750)
+        os.chown(parent, 0, 1000)
+        os.chmod(parent, 0o750)
+    parent_stat = os.lstat(parent)
+    if (
+        parent_stat.st_uid != 0
+        or parent_stat.st_gid != 1000
+        or stat.S_IMODE(parent_stat.st_mode) != 0o750
+    ):
+        raise SystemExit("consumer controls parent metadata mismatch")
+    if os.path.lexists(TRUSTED_ROOT):
+        receipt = verify_installed(destination_hashes, frozen_sha)
+        print(json.dumps({"status": "consumer_bootstrap_exists", "receipt": receipt}, sort_keys=True))
+        return 0
+
+    if not os.path.lexists(STAGING_ROOT):
+        STAGING_ROOT.mkdir(mode=0o700)
+        os.chown(STAGING_ROOT, 0, 1000)
+        os.chmod(STAGING_ROOT, 0o700)
+    staging_stat = os.lstat(STAGING_ROOT)
+    if (
+        stat.S_ISDIR(staging_stat.st_mode)
+        and staging_stat.st_uid == 0
+        and staging_stat.st_gid == 1000
+        and stat.S_IMODE(staging_stat.st_mode) == 0o550
+    ):
+        verify_tree(STAGING_ROOT, destination_hashes, frozen_sha)
+        os.replace(STAGING_ROOT, TRUSTED_ROOT)
+        parent_descriptor = os.open(parent, os.O_RDONLY | os.O_DIRECTORY)
+        try:
+            os.fsync(parent_descriptor)
+        finally:
+            os.close(parent_descriptor)
+        receipt = verify_installed(destination_hashes, frozen_sha)
+        print(json.dumps({"status": "consumer_bootstrap_resumed", "receipt": receipt}, sort_keys=True))
+        return 0
+    if (
+        not stat.S_ISDIR(staging_stat.st_mode)
+        or staging_stat.st_uid != 0
+        or staging_stat.st_gid != 1000
+        or stat.S_IMODE(staging_stat.st_mode) != 0o700
+    ):
+        raise SystemExit("consumer bootstrap staging metadata mismatch")
+    source_to_destination = {
+        PROJECT_BOOTSTRAP: STAGING_ROOT / TRUSTED_BOOTSTRAP.name,
+        PROJECT_INSTALLER: STAGING_ROOT / TRUSTED_INSTALLER.name,
+        PROJECT_ADAPTER: STAGING_ROOT / TRUSTED_ADAPTER.name,
+        PROJECT_VERDICT: STAGING_ROOT / TRUSTED_VERDICT.name,
+        PROJECT_REPORT: STAGING_ROOT / TRUSTED_REPORT.name,
+    }
+    members: dict[str, object] = {}
+    for source, target in source_to_destination.items():
+        durable_member(target, payloads[source])
+        digest = expected_hashes[source]
+        members[(TRUSTED_ROOT / target.name).as_posix()] = {
+            "sha256": digest, "bytes": len(payloads[source])
+        }
+    receipt = {
+        "schema_version": "m9-uid1000-consumer-bootstrap-v1",
+        "decision_id": "D-018",
+        "frozen_hashes_sha256": frozen_sha,
+        "members": members,
+    }
+    receipt_payload = (json.dumps(receipt, ensure_ascii=False, indent=2) + "\n").encode()
+    durable_member(STAGING_ROOT / TRUSTED_RECEIPT.name, receipt_payload)
+    expected_names = {path.name for path in source_to_destination.values()} | {
+        TRUSTED_RECEIPT.name
+    }
+    if {path.name for path in STAGING_ROOT.iterdir()} != expected_names:
+        raise SystemExit("consumer bootstrap staging directory is not closed")
+    os.chmod(STAGING_ROOT, 0o550)
+    descriptor = os.open(STAGING_ROOT, os.O_RDONLY | os.O_DIRECTORY)
+    try:
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+    os.replace(STAGING_ROOT, TRUSTED_ROOT)
+    parent_descriptor = os.open(parent, os.O_RDONLY | os.O_DIRECTORY)
+    try:
+        os.fsync(parent_descriptor)
+    finally:
+        os.close(parent_descriptor)
+    verify_installed(destination_hashes, frozen_sha)
+    print(json.dumps({"status": "consumer_bootstrap_installed", "receipt": receipt}, sort_keys=True))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
