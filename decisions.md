@@ -197,3 +197,21 @@
 - Python 3.9 consumer 第二次定点复核：R01/R02 已关闭，但新增 `M9-SP-PY39-CONS-R03`，因为 pristine 路径可能在锁内完整历史闭集与 authorization 缺席复核之前写 replacement snapshot。修订要求 `install_under_lock()` 先执行完整历史逐成员闭集和 authorization `lexists` guard，再调用任何 snapshot prepare/staging；写后、refresh 后和 consumer-gate 后的同一 guard 保留。顺序回归必须证明 `history -> authorization -> prepare_snapshot`，并在两类漂移下证明 prepare 零次调用。23 项 consumer 回归通过不替代原审计员关闭 R03。
 - 授权边界：D-018 只解除墙钟阻塞，不直接授权 `source_prepare`、source build、smoke、batch、GPU、Hamiltonian/SCF 标签或 M9-05。迁移事实审计通过后，仍按 D-017 的 source_prepare → source build → 结构 500 smoke → 450 批次 → `M9-DATA-B01` 定点复核顺序推进。
 - 重新评估条件：拟增加或重置 CPU/GPU/存储预算、改变软件/数据/basis/材料/物理范围、放宽禁止输出，或 smoke 投影触发既有 CPU/存储硬上限时，必须形成新的用户决策。
+
+## D-019：M9 持续执行授权不替代独立技术门控
+
+- 日期：2026-08-31。
+- 状态：已采用；授权解释已独立复核为 `PASS/BLOCKING=0/NON_BLOCKING=0`。
+- 用户授权：除当前阶段门控通过本身外，批准完成 M9 所需的其他权限及后续新增权限需求；门控通过仍必须按既定程序由独立子 agent 审核，不由主 agent 自行替代。
+- 执行含义：门控通过后的普通安装、下载、计算、失败恢复及版本化重试不再逐次请求人工批准，但每次一次性机器 capability、permit、失败硬停、证据封存、恢复审计和预算检查继续有效。持续授权不能重放旧 operation、permit 或 consumed capability。
+- 不变边界：不增加或重置 CPU、GPU、存储预算；不改变 D-013 的 DeepH 对象、材料体系、随机种子与高级物理范围；D-017 仍只允许 same-basis overlap 和必要 provenance，Hamiltonian、SCF、能量、力、密度矩阵及其他 DFT 标签继续禁止。
+- 证据：`00_scope/D019_standing_execution_authorization.md` 与 `08_audits/M9_standing_execution_authorization_20260831_independent_review.md`。解释复核只确定权限语义，不是任何具体实施、安装或执行门控的通过结论。
+
+## D-020：v5 实施包冻结后暂停，并以 Git 检查点迁移进度文件
+
+- 日期：2026-09-03。
+- 状态：`PENDING_INDEPENDENT_IMPLEMENTATION_AUDIT`。
+- 当前事实：v4 WSL shutdown 中断已由 recovery v2 正式恢复；恢复执行事实独立审计更正版为 `PASS/BLOCKING=0/NON_BLOCKING=0`。v5 source-build consumer、install、launcher、父 namespace 证据、工作包和测试已完成，26 成员冻结清单 SHA-256 为 `124beb3e1734caf7e4660b7377f5b3187b3932b74fa6edfd74acb3d72b2ebe40`，主端测试 57/57 通过。
+- 暂停边界：依用户关于套餐额度的要求，当前工作收尾后暂停。尚未启动 v5 独立实现审计，未创建 v5 正式 snapshot、gate 或 permit，未执行新的 source_build、结构计算、数据生成或训练。
+- 恢复顺序：下一动作唯一确定为 v5 冻结包的独立实现审计；只有 `PASS/BLOCKING=0/NON_BLOCKING=0` 后，才按机械安装、独立安装事实审计、单次 permit、执行前复核和冻结构建顺序继续。`M9-DATA-B01` 保持开放，M9-05 不得启动。
+- 证据迁移：在改写总控进度文件前，先以 Git 提交 `0dbc7d5e420507be25a9a89600961347fce7834e` 保存 recovery/v5 检查点及旧总控文件精确字节。后续进度更新不改写该提交，也不改变旧独立审计报告、verdict、正式运行态或冻结清单的历史结论。

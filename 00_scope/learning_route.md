@@ -165,7 +165,7 @@ H_{ij}(R\mathcal X)
 
 ## 阶段 F：最小 DeepH 复现闭环
 
-**当前门控状态。** M9-04 已验证冻结的官方 graphene 发布包可安全下载和解压，其 450 个结构足以支持旋转后 Hamiltonian 的普通 MPNN 监督训练；但所有结构均为非正交基，发布包没有 overlap 或参考能带对象。独立全量数据契约审计确认 `M9-DATA-B01` 为唯一开放阻塞，不能以单位 overlap、训练 loss 或 Hamiltonian 块误差替代广义本征与物理量验收。用户已通过 D-017 授权只为冻结结构生成同 basis overlap。工作包第四次定点复核确认 `.pth` 主穿透关闭，只剩 B07 的 `overlap-init` 解释器身份缺口；主 agent 已完成第五轮公共 bootstrap 最小修复，当前等待同一审计员再次复核。复核通过并完成 overlap 全量验证前，`M9-DATA-B01` 保持开放，M9-05 不得启动。
+**当前门控状态（2026-09-03）。** M9-04 已验证冻结的官方 graphene 发布包可安全下载和解压，其 450 个结构足以支持旋转后 Hamiltonian 的普通 MPNN 监督训练；但所有结构均为非正交基，发布包没有 overlap 或参考能带对象。独立全量数据契约审计确认 `M9-DATA-B01` 仍为开放阻塞，不能以单位 overlap、训练 loss 或 Hamiltonian 块误差替代广义本征与物理量验收。用户已通过 D-017 授权只为冻结结构生成同 basis overlap，并通过 D-019 覆盖后续普通执行和恢复权限，但独立技术门控不因持续授权而取消。Python 3.9 `source_prepare`、source-build 的版本化失败恢复及最近一次 WSL shutdown recovery v2 均已形成独立执行事实证据；当前 runtime 为非 hard-stop 的 `SOURCES_PREPARED`。v5 source-build 实施包已冻结，26 成员清单 SHA-256 为 `124beb3e1734caf7e4660b7377f5b3187b3932b74fa6edfd74acb3d72b2ebe40`，主端测试 57/57 通过，但尚未取得独立实现审计结论。依用户暂停要求，当前固定为 `PENDING_INDEPENDENT_IMPLEMENTATION_AUDIT`；恢复时须从 v5 独立实现审计开始，之后依次完成安装事实审计、单次 permit 和执行前复核。完成合法 overlap 全量验证并由独立审计关闭 `M9-DATA-B01` 前，M9-05 不得启动。
 
 **学习目标。** 在冻结的代码、数据和配置上完成“数据 → 预处理 → 训练 → 推理 → 矩阵检查 → 能带重建 → 误差分析”的最小闭环。
 
