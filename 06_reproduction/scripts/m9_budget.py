@@ -46,8 +46,12 @@ CONTROL_FILES = (
 HOST_VHDX = Path("/mnt/e/Laptop/WSL/ext4.vhdx")
 OVERLAP_AUDIT_GATE = MANIFESTS / "overlap_work_package_audit_gate.json"
 OVERLAP_CONTRACT = REPRODUCTION / "configs/m9_overlap_only_contract.json"
-OVERLAP_FROZEN_HASHES = REPRODUCTION / "manifests/m9_overlap_frozen_hashes.json"
-OVERLAP_WORK_PACKAGE = AUDITS / "M9_overlap_only_openmx_work_package.md"
+OVERLAP_FROZEN_HASHES = (
+    REPRODUCTION / "manifests/m9_overlap_py39_recovery_frozen_hashes.json"
+)
+OVERLAP_WORK_PACKAGE = (
+    AUDITS / "M9_source_prepare_py39_consumer_replacement_work_package.md"
+)
 OVERLAP_PYTHON = Path("/home/evan-williams/deeph-m9/env/deeph-v022/bin/python3.9")
 OVERLAP_SOURCE_LAUNCHER = REPRODUCTION / "scripts/m9_overlap_source_launcher.py"
 OVERLAP_WORKFLOW_STATE = MANIFESTS / "overlap_workflow_state.json"

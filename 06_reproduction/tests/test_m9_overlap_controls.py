@@ -46,7 +46,7 @@ from m9_openmx_build import (
     verify_build_artifact_allowlist,
     verify_mpi_wrapper_compilers,
 )
-from m9_overlap_common import require_budget_context
+from m9_overlap_common import require_budget_context, write_utf8_lf
 from m9_overlap_source_launcher import FrozenSourceLoader, verify_control_directory
 from m9_openmx_input import load_structure, render_input, verify_rendered_input
 from m9_overlap_contract import (
@@ -118,6 +118,19 @@ def cleanup_security_gate(parent: Path, migration: Path, gate_path: Path) -> dic
 
 
 class BuildContractTests(unittest.TestCase):
+    def test_python39_lf_writer_emits_exact_utf8_bytes(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary) / "rendered.txt"
+            write_utf8_lf(target, "alpha\nbeta\n")
+            self.assertEqual(target.read_bytes(), b"alpha\nbeta\n")
+            with self.assertRaises(ValueError):
+                write_utf8_lf(target, "alpha\r\nbeta\r\n")
+        for script in (
+            SCRIPTS / "m9_openmx_build.py",
+            SCRIPTS / "m9_openmx_input.py",
+        ):
+            self.assertNotIn("newline=", script.read_text(encoding="utf-8"))
+
     def test_makefile_unique_flags_and_negative_matrix(self) -> None:
         make = contract()["software"]["openmx_makefile"]
         base = "CC = old\nFC = old\nLIB = old\n"

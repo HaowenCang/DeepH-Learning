@@ -1,0 +1,9 @@
+{
+  "schema": "m9-source-build-implementation-verdict-v3",
+  "status": "PASS",
+  "blocking": 0,
+  "non_blocking": 0,
+  "frozen_sha256": "01a2a8f438d27d582abcf4536775b54605051a3458b06f2bc29c2c56222d4e58",
+  "report_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_build_v3_implementation_audit.md",
+  "report_sha256": "0b306f893d87aae84fae4c1d87bf0fb6d0875a32054918092e00ca64e39c87e4"
+}

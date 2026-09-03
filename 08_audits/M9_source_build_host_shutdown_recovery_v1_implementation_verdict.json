@@ -1,0 +1,9 @@
+{
+  "schema": "m9-host-shutdown-recovery-implementation-verdict-v1",
+  "status": "PASS",
+  "blocking": 0,
+  "non_blocking": 0,
+  "frozen_sha256": "3334010925f97486f58b2b3116b52b6b4cc48f34d4c8e0e1ec801de577bbc668",
+  "report_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_build_host_shutdown_recovery_v1_implementation_audit.md",
+  "report_sha256": "fd1778bdbf3807f8ae25edeae7047c53dd4152bed7a1c12edca9d2c3bef5b518"
+}

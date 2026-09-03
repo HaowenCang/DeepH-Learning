@@ -1,0 +1,29 @@
+{
+  "schema_version": "m9-source-prepare-py39-recovery-frozen-v1",
+  "decision_id": "D-018",
+  "issue_id": "M9-SP-PY39-B01",
+  "files": {
+    "/mnt/e/Projects/Codex/DeepH/00_scope/master_execution_plan.md": "86d0df27db0f4fdee9fd5c7fe8a4f57fb4085bc9deef3dc1d544dc340d54241d",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/configs/m9_overlap_only_contract.json": "19290a2bfeaf46b35185f0f61f6ee5d8fb688f3c67fefa8430cd143391fee70b",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/controllers/m9_source_prepare_py39_recovery.py": "9a3adee564563a7c8e5d05c4378c5d288f60d41b39ce4aae132f0e838faa380c",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/budget_contract.json": "0d281270160b7a127ab99035fa6f54cd83d220bb15a029a690e70aea6b5bd7a0",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_overlap_frozen_hashes.json": "db01a3d15c604b0fc8cc48858d38b3d28bc0c711eb0cba8634b94510f8139f95",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_source_prepare_py39_recovery_contract.json": "c1583a02cc7e1d6393f015e9a5bff2165e62b0941ffa47d00694f5d002ed1d7b",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_uid1000_consumer_contract.json": "4c7a1e9aca3e01c8384178704b0cf742d2a9722372a0bf2e9623607b8df6e755",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_unlimited_wall_clock_uid1000_consumer_frozen_hashes.json": "8916df81d334718b12f9b6949425e6875809066b3c99841b6e235325b4ada40b",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_openmx_build.py": "ab6632784a744fd3f66c95aac30a56767f67af3d8d81147df2fc0d72b67102ec",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_openmx_input.py": "9d37b10d5c1916151684a60675efb6d962d8de984b7e9f4bcb2e666abd6f5102",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_overlap_common.py": "91d2a6a824be1a4c715ee7dc6ba83d9e75931f781d669d796aaad2666739eb14",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/tests/test_m9_overlap_controls.py": "2e4a1c235e45764200c7a77ada852bd5a628a775dd43bcefa017d2bdd4caa86e",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/tests/test_m9_source_prepare_py39_recovery.py": "cbdaeab164496a8eac773ce4a376f53355a20976c55a7a7c11fb8c5e22ed02ab",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_prepare_python39_failure_independent_audit.md": "bb4182f555dbd93b04eae50c79ba8e9e855cec75393465ac56ef23e505406bed",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_prepare_rejected_invocation_independent_audit.md": "83737838614088e8aacc51b4c85112069878d3a15b7ebfd701a6e2969863f8f0",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_prepare_py39_recovery_work_package.md": "804406a561b7f86ce46321aa3286552ddeabf07b430e3f29736570f9b9f7a72d",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_unlimited_wall_clock_authorization.md": "8655037c3dee93f4ae0f9819e7409ff373ff660ed110f8cee25cde68dddd7b9a",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_unlimited_wall_clock_uid1000_consumer_final_verdict.json": "edc3c9050ab5ca73ec6e145b4da02f78733d10266f7950a6e693b6cf04a2eee7",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_unlimited_wall_clock_uid1000_consumer_installation_execution_independent_audit.md": "5839fc51111dbd8906eabe2abdbe340a850300d8eba114bcae3e348345a43f44",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_unlimited_wall_clock_uid1000_consumer_third_targeted_reaudit.md": "602c47cf4b4c8504b32ac747f75397a33561214f3d20e736f0543ea004920d75",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/progress_tracker.md": "2da907a71b55ff0473546cfa51aee2da9ed6ee175f1ef0c12c6cf7d7cdf7e85e",
+    "/mnt/e/Projects/Codex/DeepH/decisions.md": "bfbc8fb9f13465bc789ae9fa2db1e4254ceb8336d735391675932e0c63f11306"
+  }
+}

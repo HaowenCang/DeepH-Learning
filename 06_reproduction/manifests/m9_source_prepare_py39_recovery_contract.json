@@ -1,0 +1,63 @@
+{
+  "schema_version": "m9-source-prepare-py39-recovery-contract-v1",
+  "decision_id": "D-018",
+  "issue_id": "M9-SP-PY39-B01",
+  "recovery_id": "m9-source-prepare-py39-recovery-20260827-01",
+  "failure_transaction_id": "80e28da82f076f4f7b1811f5897216bd",
+  "failure_capability_id": "acc4548498ba22d8ce894b2725f89daf",
+  "expected_runtime": {
+    "lock": {"path": "/home/evan-williams/deeph-m9/manifests/budget.lock", "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "bytes": 0, "uid": 1000, "gid": 1000, "mode": 420, "nlink": 1, "st_dev": 2096, "st_ino": 50700},
+    "state": {"path": "/home/evan-williams/deeph-m9/manifests/budget_state.json", "sha256": "8a128719f80e584c2a1fbfafcc309e534b1b7d375e428a195c8f6349ea2b5656", "bytes": 2106, "uid": 1000, "gid": 1000, "mode": 420, "nlink": 1, "st_dev": 2096, "st_ino": 153213},
+    "workflow": {"path": "/home/evan-williams/deeph-m9/manifests/overlap_workflow_state.json", "sha256": "92783147133967dc6dc6494220d7628de2e05de9c260b4ea4fa2bd2f1f44e4e2", "bytes": 610, "uid": 1000, "gid": 1000, "mode": 420, "nlink": 1, "st_dev": 2096, "st_ino": 50595},
+    "ledger": {"path": "/home/evan-williams/deeph-m9/manifests/budget_ledger.jsonl", "sha256": "a2170772c37b601112f0d957a18a6e9375dc7cf2eb22697a26b61a5db3ed770d", "bytes": 61248, "uid": 1000, "gid": 1000, "mode": 420, "nlink": 1, "st_dev": 2096, "st_ino": 50691},
+    "failure_transaction": {"path": "/home/evan-williams/deeph-m9/manifests/overlap_transaction.json", "sha256": "0a982e876e43768c6069fdeafd07e6e43ae03be3b1a0abc8584aa8d137bbcae7", "bytes": 2347, "uid": 1000, "gid": 1000, "mode": 420, "nlink": 1, "st_dev": 2096, "st_ino": 153683},
+    "consumed_capability": {"path": "/home/evan-williams/deeph-m9/manifests/overlap_capabilities/acc4548498ba22d8ce894b2725f89daf.consumed.json", "sha256": "7a3e21145fa31b2613d5d1a740e56ead4e28c3b06b3b371d529a7fbb77ebd905", "bytes": 4439, "uid": 1000, "gid": 1000, "mode": 384, "nlink": 1, "st_dev": 2096, "st_ino": 156759},
+    "launcher_receipt": {"path": "/home/evan-williams/deeph-m9/manifests/overlap_capabilities/acc4548498ba22d8ce894b2725f89daf.launcher-receipt.json", "sha256": "8217945664427eea38d7f546fa5a91689701a989601fbe539951214f7e872924", "bytes": 4764, "uid": 1000, "gid": 1000, "mode": 384, "nlink": 1, "st_dev": 2096, "st_ino": 162439},
+    "consumer_gate": {"path": "/home/evan-williams/deeph-m9/manifests/overlap_unlimited_wall_clock_uid1000_consumer_gate.json", "sha256": "2ba96b8566f2ba38a528e4002dbaa0bebf4f9a7b8c5f10a92b89d643d11a85f2", "bytes": 4283, "uid": 0, "gid": 1000, "mode": 416, "nlink": 1, "st_dev": 2096, "st_ino": 156731},
+    "bootstrap_receipt": {"path": "/home/evan-williams/deeph-m9/controls/uid1000-consumer-bootstrap/bootstrap_receipt.json", "sha256": "3172bf9516fed5dd2abb3669c705211428cbe6ebeea34fe96fcb6a3016d5f1ba", "bytes": 1347, "uid": 0, "gid": 1000, "mode": 288, "nlink": 1, "st_dev": 2096, "st_ino": 154803},
+    "snapshot_manifest": {"path": "/home/evan-williams/deeph-m9/controls/uid1000-consumer/snapshot_manifest.json", "sha256": "2d13e0c1fb1c1e635ad1730f44f21901340e7483d06356aa8eeb0e07f83dcec9", "bytes": 9022, "uid": 0, "gid": 1000, "mode": 288, "nlink": 1, "st_dev": 2096, "st_ino": 156724},
+    "d017_transaction": {"path": "/home/evan-williams/deeph-m9/manifests/overlap_source_control_recovery.json", "sha256": "e9b8babcff8a2f42adea21d5cbce614b38f0854271d3389eae0bbcdd7d5e53bc", "bytes": 8383, "uid": 1000, "gid": 1000, "mode": 420, "nlink": 1, "st_dev": 2096, "st_ino": 130268},
+    "d017_gate": {"path": "/home/evan-williams/deeph-m9/manifests/overlap_source_control_recovery_gate.json", "sha256": "8e66d65d17d3195f3df09db954afca4066c3ec91e2d8dad6d2aea06078d0d5ce", "bytes": 2398, "uid": 0, "gid": 0, "mode": 384, "nlink": 1, "st_dev": 2096, "st_ino": 153209},
+    "active_overlap_gate": {"path": "/home/evan-williams/deeph-m9/manifests/overlap_work_package_audit_gate.json", "sha256": "78311a978c2472c85b35a745d80e1f33724c1500cf8d7bd244cdbe83c3fa3698", "bytes": 960, "uid": 0, "gid": 1000, "mode": 416, "nlink": 1, "st_dev": 2096, "st_ino": 153476},
+    "retired_overlap_gate": {"path": "/home/evan-williams/deeph-m9/manifests/overlap_work_package_audit_gate.pre-d018.retired.json", "sha256": "dbe4756142d0e921c3834330550310e85652503c04254b30bea1a069ff35377c", "bytes": 804, "uid": 1000, "gid": 1000, "mode": 420, "nlink": 1, "st_dev": 2096, "st_ino": 1163},
+    "d018_gate": {"path": "/home/evan-williams/deeph-m9/manifests/overlap_unlimited_wall_clock_gate.json", "sha256": "286a0e409a80f85ca6bb39b76bdb977fc67ffa56f4646b00d3aad5943c98e880", "bytes": 2114, "uid": 0, "gid": 1000, "mode": 416, "nlink": 1, "st_dev": 2096, "st_ino": 153466},
+    "d018_transaction": {"path": "/home/evan-williams/deeph-m9/manifests/overlap_unlimited_wall_clock_transaction.json", "sha256": "41cbfbd4da1c3a0eea92731a00758355f46321d5b0a66260f53f628290d847ad", "bytes": 3835, "uid": 0, "gid": 1000, "mode": 416, "nlink": 1, "st_dev": 2096, "st_ino": 153646},
+    "d018_execution_gate": {"path": "/home/evan-williams/deeph-m9/manifests/overlap_unlimited_wall_clock_execution_gate.json", "sha256": "bc51209c13570839c08dd4fc304fe39865a98ade69caeb23886602de2d8be6e9", "bytes": 1764, "uid": 0, "gid": 1000, "mode": 416, "nlink": 1, "st_dev": 2096, "st_ino": 153521},
+    "d018_journal": {"path": "/root/deeph-m9-control/unlimited-wall-clock-migration.json", "sha256": "27a92edded459948150c750a4339692434e08a84cbc8879c63c71b6c14cb0e8a", "bytes": 4896, "uid": 0, "gid": 0, "mode": 384, "nlink": 1, "st_dev": 2096, "st_ino": 153685},
+    "d018_pre_state": {"path": "/root/deeph-m9-control/unlimited-wall-clock-pre-state.json", "sha256": "00a32bd7f28ad26fa600c8abe9d0fa64efe57e410eacb82ad2d201fa9adc5439", "bytes": 1422, "uid": 0, "gid": 0, "mode": 384, "nlink": 1, "st_dev": 2096, "st_ino": 153645}
+  },
+  "ledger": {
+    "bytes": 61248,
+    "sha256": "a2170772c37b601112f0d957a18a6e9375dc7cf2eb22697a26b61a5db3ed770d",
+    "prefix_bytes": 60288,
+    "prefix_sha256": "178106f0be9f80ff669ebd0865e214a4b9a60d115074ad0c97ae8de5f1ae33b7",
+    "failure_suffix_bytes": 960,
+    "failure_suffix_sha256": "2b5b69e8d3be617e357b177633c36a5d447dd244bd74e25c808f567c83c5aa20"
+  },
+  "staging_inventory": {
+    "root": "/home/evan-williams/deeph-m9/software/openmx-overlap-build.staging",
+    "directories": 140,
+    "regular_files": 5179,
+    "records": 5319,
+    "apparent_bytes": 619112384,
+    "allocated_bytes": 632029184,
+    "inventory_sha256": "0c0389f29f3a87e26af3c884b13bcc7c6dc6f183b50d803b9affa5fbd4e3920e",
+    "independent_audit_inventory_sha256": "05c20c3455994889efe81c9f8f02d193c8a086c77149c641b0a9ac6ea8652d97",
+    "makefile_sha256": "bf01251254b3f0e3ee010346835bcbe4707aaa57c1f741eb1c84244e849e9d9b"
+  },
+  "budget_invariants": {
+    "raw_overlap_build_seconds": 7206.669426146001,
+    "credited_seconds": 7200.075310528,
+    "wall_clock_mode": "UNLIMITED",
+    "gpu_compatibility_seconds": 54.84820560599999,
+    "gpu_training_seconds": 0.0,
+    "gpu_physical_validation_seconds": 0.0
+  },
+  "products_required_absent": [
+    "/home/evan-williams/deeph-m9/software/openmx-overlap-build",
+    "/home/evan-williams/deeph-m9/env/hdf5-1.12.1",
+    "/home/evan-williams/deeph-m9/manifests/openmx_official_3.9.9_tree_manifest.json",
+    "/home/evan-williams/deeph-m9/manifests/openmx_overlap_tree_manifest.json",
+    "/home/evan-williams/deeph-m9/manifests/openmx_overlap_build_manifest.json"
+  ]
+}

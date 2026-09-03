@@ -1,0 +1,9 @@
+{
+  "schema": "m9-mpi-recovery-verdict-v1",
+  "status": "PASS",
+  "blocking": 0,
+  "non_blocking": 0,
+  "frozen_sha256": "743e3e596d816a7c316a2f7c901b812c650f72bb926aa6698f3c7f72e40818bc",
+  "report_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_build_mpi_recovery_v1_implementation_audit.md",
+  "report_sha256": "da6f0acdd95dafcd0bb907464f182f1312412d4fab2b3ef668f67c96dad097ee"
+}

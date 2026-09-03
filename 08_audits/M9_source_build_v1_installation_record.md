@@ -1,0 +1,15 @@
+# M9 source_build v1 主实施安装记录
+
+日期：2026-08-30。记录角色：主agent；本记录不替代独立审计或签发执行许可。
+
+用户批准见 `M9_source_build_v1_user_authorization.md`，SHA `d0582a1b2a581ddd990f1114e8742f70e3b0afee2fa57b6a5142c859f3db9d1b`。实施独立审计为PASS/BLOCKING=0/NON_BLOCKING=0；报告SHA `17b9c8df633c01680fe1f5140e3b560eaf177789e726b613ae60b92c975902f2`，verdict SHA `493e6d7e8fe1137bdf48f0152c86d3ecc6ff2ea9ba190474f9c41fe668bc4e46`。冻结10文件manifest SHA `b3a344e00d3cac19edcf23c69a2631307d6e08714c3a85c85eca8572f2496641`。
+
+主端32项新增测试及原110/23/13项测试通过；独立审计员另行复跑178项并核验正式130对象与两棵5319项receipt树不变。主端与独立审计分别通过真实root、固定Python3.9.23 `-I -S -B`、旧工作包提取的精确single-FD loader执行零写preflight，均返回rc0和writes=0。旧工作包SHA `dc1d0d992f7e1328f79a4436eb4535b79ba2ab48fcee1b44fa498c31c30e91a2`，加载器SHA `c68e43b5de4fdadb44254fbfdd543f5ba2a29b6e41994021c55a3287b5f7491f`。
+
+独立审计结束只读采集并允许按既定顺序安装后，主agent使用同一加载器执行一次action=`install`。工具session为7606，退出码0，未自动重试。installer SHA `f6c0f0e1edfa1aa6167ffa540e90c98b7378bb60d79567597f93cdc3c5c18cf5`，consumer SHA `2dc69a146221016136862e84227222424bca8552a2590020f06a155b775931b9`；loader其余参数为上述冻结manifest、实施verdict和报告SHA。
+
+返回状态为 `build_snapshot_and_readiness_installed`。实际readiness gate SHA为 `90d91575a5d53a2efd015d72ebf6c7ac04440aca1a5b6ea3fee3df09461b3a7c`，snapshot_manifest SHA为 `75f05a9e11a818f40f7b85cebf92410fc0fb2b6c64ce2ddcfdf1c0872fbac313`，与零写预检完全相同；返回 `execution_permit_present=false`。
+
+主端安装命令正常返回后未调用permit、consumer run或构建程序，已交独立安装事实复核。安装仅建立控制快照与readiness，不证明HDF5/OpenMX已编译，不关闭M9-DATA-B01，也不授权材料结构、下载或训练。后续应依次取得独立安装事实PASS、签发许可、真实UID1000执行前复核，再执行一次冻结source_build；任一拒绝或异常均保留现场并停止。
+
+本记录封存本次安装时间点事实，不回改为后续执行结论。后续状态以独立安装报告、编译执行记录及独立构建审计为准。

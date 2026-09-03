@@ -1,0 +1,14 @@
+{
+  "schema": "m9-mpi-recovery-frozen-v1",
+  "files": {
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/controllers/m9_source_build_mpi_recovery_v1.py": "2df09743fbcab63824cec6d3768e10df3ace7b53af8167080c07a946f2927aa9",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/controllers/m9_openmx_mpi_repair_v1.py": "e7b9f13ced60697e62417128c0145d98b9262b614671f4247bcbde19a1f6b027",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/tests/test_m9_source_build_mpi_recovery_v1.py": "44dc10b6e4c42e619973a151672d5e60e607c2cc3f3d004dd941b1c8d98854b4",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/tests/test_m9_openmx_mpi_repair_v1.py": "6634185a53bc5f31a863ba97c0a745cea172d953d1b6bc761797a7c50f3b950c",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_build_mpi_recovery_v1_work_package.md": "7dae7ae0061dd28a2146ecd0a51161f3ae6d01e8fb8e71724afeb48654a687c0",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_build_mpi_recovery_v1_user_authorization.md": "5b62617dd9a236c062c1df6a95ccb245484634518d0fbfa029d82f1ca081ac83",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_build_v2_postexecution_evidence.json": "e6f02744745837ae200998cf6d1e7701283721e8ed64c550e98d58b416f5f325",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_build_v2_execution_independent_audit.md": "2bcf74043ae31d6cbe5e7165be139b0d7056f90a80451fb31cc1d5deed727829",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/controllers/m9_source_build_v2_consumer.py": "1b425c04d98549a7a9a5ea502411379e36bee3968a0eec66f205796a222e36e4"
+  }
+}

@@ -26,6 +26,7 @@ from m9_overlap_common import (
     save_workflow_state,
     tree_inventory,
     verify_frozen_project_files,
+    write_utf8_lf,
     workflow_lock,
 )
 
@@ -531,14 +532,13 @@ def prepare_sources(contract: dict[str, object]) -> None:
         make_contract = software["openmx_makefile"]
         assert isinstance(make_contract, dict)
         makefile = openmx_root / "source/makefile"
-        makefile.write_text(
+        write_utf8_lf(
+            makefile,
             render_makefile(
                 makefile.read_text(encoding="utf-8"),
                 runtime_path(contract, "hdf5_prefix").as_posix(),
                 make_contract,
             ),
-            encoding="utf-8",
-            newline="\n",
         )
         source_paths = source_files_for_manifest(openmx_root)
         official_manifest: dict[str, object] = {

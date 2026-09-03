@@ -1,0 +1,14 @@
+{
+  "schema": "m9-host-shutdown-recovery-frozen-v1",
+  "files": {
+    "/mnt/e/Projects/Codex/DeepH/00_scope/D019_standing_execution_authorization.md": "4f44e839d2deccf8a4fd172ad9a45243ad446c1009d1f09666f26f2c23ba28e0",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/controllers/m9_py39_consumer_gate_completion.py": "c2c235c444bae0f613078a060efa9733f869533385fa84268bfd2cc2b3c3ef55",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/controllers/m9_source_build_host_shutdown_recovery_v1.py": "4df3b47671b0d824631ed0acae27d8b1e1bea77c537794319d34c43e3944af8a",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_source_build_v3_frozen_hashes.json": "01a2a8f438d27d582abcf4536775b54605051a3458b06f2bc29c2c56222d4e58",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/tests/test_m9_source_build_host_shutdown_recovery_v1.py": "6da8860d27eb24b578abdc1bc55b4adcde853d791ec33b312d3fc2eaf212807a",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_build_host_shutdown_recovery_v1_work_package.md": "a59ac5b95226c5e2eb1eaf99b17192db36656d80d750741779d3f056eb6c4b1e",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_build_v3_interruption_independent_audit.md": "410468cea26e8d7359f400d3a3e1dbeb7723e2120560c89a2f093c0009d07104",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_build_v3_interruption_postexecution_evidence.json": "12907e82278f114e228c0b9e930564dafd18ab761159f70edd01ac2200f2f3d2",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_build_v3_preexecution_evidence.json": "822e0fc61599db3b1b1135b2e384050ca373f0c4c08aea84bee70d7a3cee3b43"
+  }
+}

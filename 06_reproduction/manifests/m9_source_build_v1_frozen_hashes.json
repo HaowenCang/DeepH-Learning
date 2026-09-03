@@ -1,0 +1,15 @@
+{
+  "schema": "m9-source-build-frozen-v1",
+  "files": {
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/controllers/m9_source_build_consumer.py": "2dc69a146221016136862e84227222424bca8552a2590020f06a155b775931b9",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/controllers/m9_source_build_install.py": "f6c0f0e1edfa1aa6167ffa540e90c98b7378bb60d79567597f93cdc3c5c18cf5",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/tests/test_m9_source_build_consumer.py": "4b3ed95623ff3af62a6c6c34161eca87811e1eee78f880181f58d6478215798a",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_build_v1_work_package.md": "a930498f59cbd35e98552caf4c55f39f8ed3f919d211a9869687b18bc3742ca9",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_build_v1_user_authorization.md": "d0582a1b2a581ddd990f1114e8742f70e3b0afee2fa57b6a5142c859f3db9d1b",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_prepare_py39_fresh_postexecution_evidence.json": "ee4d593ddb277a252cbd3a90b0e59f94b96fc1d614e2544dde22bb5b217f8455",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_prepare_py39_fresh_execution_independent_audit.md": "89418b784d800e25d895b05360ecd086be217e5a820dcdca526ef0205b1cde71",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/controllers/m9_py39_consumer_gate_completion.py": "c2c235c444bae0f613078a060efa9733f869533385fa84268bfd2cc2b3c3ef55",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_source_prepare_py39_uid1000_consumer_frozen_hashes.json": "765dcf5c09c90ae8d9c2789df1c16f379eca397f18d1dade55167c1b5df207e7",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_overlap_py39_recovery_frozen_hashes.json": "8a3166d61c4f777424f0509ae2d9aae3cc0a6c7f90a725fb9126f5cc25147e3a"
+  }
+}

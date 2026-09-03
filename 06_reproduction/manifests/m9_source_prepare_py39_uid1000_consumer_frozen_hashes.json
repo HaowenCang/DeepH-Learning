@@ -1,0 +1,32 @@
+{
+  "schema_version": "m9-source-prepare-py39-uid1000-consumer-frozen-v1",
+  "decision_id": "D-018-PY39-CONSUMER-REPLACEMENT",
+  "issue_id": "M9-SP-PY39-B01",
+  "files": {
+    "/mnt/e/Projects/Codex/DeepH/00_scope/master_execution_plan.md": "a54a720db0dc4a1322ae3181c42f86737c907fd44ed0a03fab5e43063880af19",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/configs/m9_overlap_only_contract.json": "a0e6d017f568e5caa7fe7a49939330c88263058066af14ce8809ef625b36abb0",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/controllers/m9_budget_uid1000_consumer.py": "a47127b937ebb69584465ccbb00b0307c77a718ec312c6509aca7b228cec2afa",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/controllers/m9_uid1000_consumer_bootstrap.py": "17900305048639774287e1b912da1f3ef0df83d7346b11ee8aaa5f398cfbfb78",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/controllers/m9_uid1000_consumer_install.py": "991d1dcfddfc1ef0f16bfaadfd05411e555dfaa77b4dccfe2bc6bb2973c6a3b6",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/budget_contract.json": "0d281270160b7a127ab99035fa6f54cd83d220bb15a029a690e70aea6b5bd7a0",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_overlap_py39_recovery_frozen_hashes.json": "8a3166d61c4f777424f0509ae2d9aae3cc0a6c7f90a725fb9126f5cc25147e3a",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_source_prepare_py39_uid1000_consumer_contract.json": "70ab5c166f994bcb495c4cff3ad6c7e894d649c07284d38cc559aa32a5690110",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_unlimited_wall_clock_contract.json": "2b451c42c2401a220d19038af2ee6ba1843106508f8b057b8ce5dd2584fccff4",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_unlimited_wall_clock_frozen_hashes.json": "f41553b6112482df1cb0bbb52e3311d6a60514b6f61252526924fa930489f4f9",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_budget.py": "a94902a942f98217171be5d9967f469a4dd4563c80e6e6ef3d68e6cede71168d",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_overlap_common.py": "fc8c16ed37072c6410c1d4bc942716fad66be4d3d22c2f72cc299b7fce55e07f",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/scripts/m9_overlap_source_launcher.py": "57f7faf7a1d404cf7df482a367a641d6b09cff223e7e0a57eb7a56562936dc06",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/tests/test_m9_overlap_controls.py": "2e4a1c235e45764200c7a77ada852bd5a628a775dd43bcefa017d2bdd4caa86e",
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/tests/test_m9_uid1000_consumer.py": "1436fe4352c5b5603c53d4cc98d1242a90336de89ff1cd975d2842263c0dd311",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_prepare_py39_consumer_replacement_work_package.md": "dc1d0d992f7e1328f79a4436eb4535b79ba2ab48fcee1b44fa498c31c30e91a2",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_prepare_py39_recovery_execution_independent_audit.md": "bdc3b023423e8e2215643509033ea50c3920cc3d8420c17a2a94cb44d249aa19",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_prepare_py39_recovery_final_verdict.json": "665d83d24dee5ae894afd48e4b24c228ac84ca8a05f89b8add649f8573efb508",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_unlimited_wall_clock_execution_gate_fact_audit.md": "f64634e63f2ade35c070f4f4efc2389b831fa0b35669b0a75859bb0a974fb7fa",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_unlimited_wall_clock_migration_execution_final_verdict.json": "d6c0939a3f369d570c3db4c6fae5d9104efee886c19830a0df2b11427e43cefb",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_unlimited_wall_clock_migration_execution_independent_audit.md": "899d77448183a6b79c8f870c0473b18c4601274f0b6a0db78760519ce6d5090c",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_unlimited_wall_clock_uid1000_consumer_second_targeted_reaudit.md": "e74f2207f71c83607f5fe853001b21e03168d81c2f714e1207b85a2e2040f2b9",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/M9_unlimited_wall_clock_uid1000_consumer_targeted_reaudit.md": "3ef2389280e0b566c495acf4694578a6c06cf1e2c74947bfc7e9400f5350df3a",
+    "/mnt/e/Projects/Codex/DeepH/08_audits/progress_tracker.md": "a02ee196ab8a8a9c77ae7fa6cc0813d6f31b69776ddaaf4128bba42de3ca4a38",
+    "/mnt/e/Projects/Codex/DeepH/decisions.md": "a8ddad78edb21c0bb304bb2a9922b31caabe6e699dea199dc4c8d44dff54260c"
+  }
+}

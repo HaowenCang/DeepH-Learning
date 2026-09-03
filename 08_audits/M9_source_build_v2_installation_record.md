@@ -1,0 +1,13 @@
+# M9 source_build v2 主实施安装记录
+
+日期：2026-08-31。主agent记录，不替代独立安装审计或执行许可。
+
+用户新的批准见 `M9_source_build_v2_user_authorization.md`，SHA `fc3031ea4c14d37c219002ea3eb534d80a39829c7b8243472acbcc68d1012e24`。v2实施独立审计为PASS/0/0；报告SHA `ba520a61bb95933f02d5768a21f8c0c00a856c8911739c5b72b589106b156cdc`，verdict SHA `1a24cbd113c3ec1b0becfb95daffb9b16f1d35595e4735b00af91cca9a643141`，12文件frozen SHA `bc80d1d939527818c7eec747a60cd17c6000f9015374ff33192f34c2f3ae7614`。独立218项测试及实际147对象权限/历史只读验证通过后，才执行本次机械步骤。
+
+主端使用固定Python3.9.23 `-I -S -B`、真实root和原工作包精确single-FD loader。工作包SHA `dc1d0d992f7e1328f79a4436eb4535b79ba2ab48fcee1b44fa498c31c30e91a2`，loader SHA `c68e43b5de4fdadb44254fbfdd543f5ba2a29b6e41994021c55a3287b5f7491f`，installer SHA `fd6ceb70241053d1c07b7e895ab977941a3831d1c508a83835bf8a9a950c6453`，consumer SHA `1b425c04d98549a7a9a5ea502411379e36bee3968a0eec66f205796a222e36e4`。loader参数中的frozen、实施verdict和report均为上述最终SHA，没有使用项目路径直接运行未核验root脚本。
+
+先执行action=preflight，工具session89949，退出码0，返回preflight_pass及writes=0；预期gate SHA `05bbe471d46408de8beb94594907b6c6371a3663359dbf8ae0540cc51713356b`，snapshot_manifest SHA `d46a6ff5f742a6331267ffef368bab0eb9303ed9f124e2e7db7f5d1349b98f6f`。随后在独立只读审计结束后执行action=install恰一次，退出码0，返回build_snapshot_and_readiness_installed；两实际SHA与预测完全相同，execution_permit_present=false。
+
+正式新目录为 `/home/evan-williams/deeph-m9/controls/source-build-v2`，readiness为 `manifests/source_build_v2_gate.json`。本次命令内部在原锁内执行来源、完整历史、准备树及预算检查，并核验安装结果；这些主端返回不替代真实UID1000独立安装验收。安装后立即交独立审计，主端未调用permit、consumer run或任何构建动作。
+
+v1、旧25/16/10闭集、8项root-only权限及全部历史用量保留。未下载、未计算材料结构、未训练。后续须独立安装事实PASS、许可签发和执行前复核通过，才执行已批准的唯一source_build；任一非预期失败后保留现场，不自动重试。本记录封存安装时点，不改写为后续编译结论。

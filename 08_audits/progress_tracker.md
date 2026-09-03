@@ -11,10 +11,10 @@
 - 最后更新时间：2026-08-21
 - 当前阶段：M9 最小 DeepH 复现闭环
 - 当前里程碑：M9-04 官方 graphene 数据下载与数据契约
-- 当前主任务：关闭 UID1000 consumer 第三次定点复核阻塞 `D018-UID-B06`
+- 当前主任务：建设并审计恢复后的版本化 active gate 与 UID1000 consumer 替代闭集
 - 当前里程碑状态：`IN_PROGRESS`
-- 当前主任务状态：`IMPLEMENTED_AWAITING_THIRD_INDEPENDENT_REAUDIT`
-- 下一门控：UID1000 消费证明实现独立审计 `PASS` 且问题为 0；机械建 gate 后完成真实 UID1000 事实复核，才允许 `source_prepare`
+- 当前主任务状态：`IMPLEMENTING_RECOVERY_AWAITING_INDEPENDENT_AUDIT`
+- 下一门控：替代闭集独立实施审计 `PASS/0/0`，随后才可机械安装 active gate、snapshot 与 consumer gate
 - 当前限制：只允许 same-basis overlap 和必要 provenance；禁止 Hamiltonian、SCF、能量、力、密度矩阵及其他 DFT 标签，不自动重启，不静默更换 DeepH、数据、材料、basis、总体预算或高级物理范围
 
 ## 里程碑状态
@@ -32,7 +32,7 @@
 | M7 | 群表示与等变网络 | `COMPLETED` | `M7_stageE_final_independent_audit.md`：总审计 `PASS`、问题为 0，明确允许进入 M7-I | 保持阶段 E 对象链与哈希可追溯 |
 | M7-I | 阶段 A—E 全量独立总审计 | `COMPLETED` | 同一 `gpt-5.6-sol`、`max` 审计员定点复核：N01—N03 全部关闭，新增及剩余问题 0 | 保持审计报告与哈希迁移台账可追溯 |
 | M8 | 实践方案冻结 | `COMPLETED` | D-013；`00_scope/M8_decision_package.md` | 保持冻结对象和授权边界可追溯 |
-| M9 | 最小 DeepH 复现闭环 | `IN_PROGRESS` | M9-01—03 通过；M9-04 下载/安全/结构合同通过；D-017 恢复链通过；D-018 迁移与执行事实审计通过 | 关闭 `D018-UID-B06`，完成 consumer 机械安装与真实 UID1000 gate 事实复核，再执行 `source_prepare` |
+| M9 | 最小 DeepH 复现闭环 | `IN_PROGRESS` | M9-01—03 通过；M9-04 下载/安全/结构合同通过；Python 3.9 失败 recovery 已执行并通过独立事实审计；替代 consumer 初审六项阻塞修复后待复核 | 同一审计员定点复核；通过后安装替代 active gate/snapshot/consumer gate并做事实审计，再请求新的单次 source_prepare 授权 |
 | M10 | 方法谱系深读 | `PLANNED` | M1 提供初始地图 | M9 基线形成后开展代码级比较 |
 | M11 | 受控研究改进 | `PLANNED` | 尚无 | M9、M10 完成后开始 |
 | M12 | 教材与项目总验收 | `PLANNED` | 尚无 | M3—M11 完成后执行 |
@@ -164,7 +164,7 @@ M9 只执行 D-013/D-014 冻结的 DeepH-pack v0.2.2、官方 graphene 处理数
 
 ## 决策提醒
 
-计算资源、数据、DeepH 软件对象、首个材料体系和高级物理范围已由 D-013 冻结，原 M9 外部动作由 D-014 授权。M9-04 的独立审计确认发布包缺少非正交物理验收所需 overlap；用户随后通过 D-017 只授权受限 overlap-only OpenMX 路线。工作包、离线 apt 恢复和 source-control recovery 已通过独立审计；正式 `source_prepare` 尚未执行。用户通过 D-018 仅取消总墙钟约束，CPU/GPU/存储预算与全部历史证据不变；一次性迁移及执行事实审计已经通过。当前门控是 `D018-UID-B06` 的第三次定点复核、consumer 机械安装及真实 UID1000 gate 事实复核；`M9-DATA-B01` 仍为 `OPEN`，M9-05 仍不得启动。
+计算资源、数据、DeepH 软件对象、首个材料体系和高级物理范围已由 D-013 冻结，原 M9 外部动作由 D-014 授权。M9-04 的独立审计确认发布包缺少非正交物理验收所需 overlap；用户随后通过 D-017 只授权受限 overlap-only OpenMX 路线。D-018 仅取消总墙钟约束，CPU/GPU/存储预算与全部历史证据不变。首次完整 `source_prepare` 的 Python 3.9 兼容失败已经一次性 recovery 完整恢复并通过独立事实审计。由于旧 active gate 与 UID1000 snapshot 绑定修复前源码，当前不得直接重试；版本化替代闭集必须先通过独立实施审计、机械安装与独立事实审计，再向用户请求新的单次执行授权。`M9-DATA-B01` 仍为 `OPEN`，M9-05 仍不得启动。
 
 ## 更新记录
 
@@ -175,6 +175,13 @@ M9 只执行 D-013/D-014 冻结的 DeepH-pack v0.2.2、官方 graphene 处理数
 | 2026-08-20 | D-018 第二次定点复核 `PASS`；一次性迁移执行成功，随后执行事实独立审计 `PASS`。迁移仅把 wall-clock policy 改为 `UNLIMITED` 并追加唯一 ledger 事件，原 59097-byte ledger 前缀、CPU/GPU/存储预算、历史用量、workflow、D-017 证据及旧 gate 退休收据保持闭合 | `M9_unlimited_wall_clock_migration_second_targeted_reaudit.md`，SHA-256 `5209D6BDA24E00634A27F60FC409EB1D792F334F0CACB3FFC6EF515290759292`；`M9_unlimited_wall_clock_migration_execution_independent_audit.md`，SHA-256 `899D77448183A6B79C8F870C0473B18C4601274F0B6A0DB78760519CE6D5090C` |
 | 2026-08-20 | 正式 execution-fact gate 已机械创建，但真实 UID1000 事实审计为 `FAIL`（`BLOCKING=1`、`NON_BLOCKING=0），冻结 `D018-EGF-B01`。首次消费层实现审计新增 `D018-UID-B01`—`B03`；第一次定点复核仍为 `FAIL`（`BLOCKING=3`、`NON_BLOCKING=0`），冻结 `D018-UID-B02-R01`、`B04`、`B05`：项目侧 adapter 在验证前被 root installer 导入、悬空产品 symlink 被误判缺席、封存 staging 的 rename 失败不可续提。主 agent 已加入审计哈希驱动的 single-FD root bootstrap、`lexists` 产品闭集和 bootstrap/snapshot 两级可恢复 staging；等待同一审计员第二次定点复核 | `M9_unlimited_wall_clock_execution_gate_fact_audit.md`，SHA-256 `F64634E63F2ADE35C070F4F4EFC2389B831FA0B35669B0A75859BB0A974FB7FA`；`M9_unlimited_wall_clock_uid1000_consumer_independent_audit.md`，SHA-256 `5B034B772F6A03FD093968690873042F0A73DD0ACAE30C27A263BBC0C17D9BAD`；`M9_unlimited_wall_clock_uid1000_consumer_targeted_reaudit.md`，SHA-256 `3EF2389280E0B566C495ACF4694578A6C06CF1E2C74947BFC7E9400F5350DF3A` |
 | 2026-08-21 | UID1000 consumer 第二次定点复核确认 `D018-UID-B02-R01`、`B04`、`B05` 已关闭，但判定 `FAIL`（`BLOCKING=1`、`NON_BLOCKING=0`）并冻结 `D018-UID-B06`：项目侧 installer 直接执行时，在 trusted-path 拒绝前执行项目 adapter。主 agent 已将 `__main__` trusted-path 拒绝前移到任何 adapter loader 之前，并加入真实子进程负例；第三次定点复核通过前不创建 consumer gate、不执行 `source_prepare` | `M9_unlimited_wall_clock_uid1000_consumer_second_targeted_reaudit.md`，SHA-256 `E74F2207F71C83607F5FE853001B21E03168D81C2F714E1207B85A2E2040F2B9` |
+| 2026-08-21 | UID1000 consumer 第三次定点复核、机械安装事实审计均 `PASS/0/0`。首次缺参调用经事实审计确认为 argparse 零写；随后按唯一完整 argv 执行 `source_prepare`，在冻结 Python 3.9 上因 `Path.write_text(newline=...)` 失败。失败已规范提交为 `FAILED_COMMITTED`、state/workflow 双 HARD_STOP、唯一 ledger 事件；capability、FAIL receipt、CPU 用量和约 632 MB staging 全部保留。登记 `M9-SP-PY39-B01`，禁止清理、恢复、重试或 build，等待兼容性修复与一次性 recovery 独立审计 | `M9_unlimited_wall_clock_uid1000_consumer_third_targeted_reaudit.md`，SHA-256 `602C47CF4B4C8504B32AC747F75397A33561214F3D20E736F0543EA004920D75`；`M9_unlimited_wall_clock_uid1000_consumer_installation_execution_independent_audit.md`，SHA-256 `5839FC51111DBD8906EABE2ABDBE340A850300D8EBA114BCAE3E348345A43F44`；`M9_source_prepare_python39_failure_independent_audit.md`，SHA-256 `BB4182F555DBD93B04EAE50C79BA8E9E855CEC75393465AC56EF23E505406BED` |
+| 2026-08-27 | Python 3.9 recovery 初审为 `FAIL/BLOCKING=4`；第一次定点复核关闭 B01—B04，但新增 R01：已持久化阶段 receipt 可被同字节新 inode 重绑定。主 agent 已建立允许的 journal/transaction phase-pair并禁止 ledger/state/workflow post receipt 重定义，专用测试扩展至 15 项；等待原审计员第二次定点复核。正式现场保持 19 个预恢复 receipt、双 HARD_STOP、61,248-byte ledger 和 staging 不变，未创建 recovery gate | `M9_source_prepare_py39_recovery_implementation_audit.md`，第一次定点复核 SHA-256 `808B22BE5BBC18678241600AAB7DA30BA587733CBBB77D18308E26A5F221C9F9` |
+| 2026-08-28 | 第二次定点复核关闭 R01 并判定 `PASS/0/0`。正式 gate 创建前的重复只读预检随即发现 R02：历史 `child_pid=391` 已结束，但 WSL 可复用该 PID，原 `/proc/<pid>` 存在性判断会把无关进程误判为失败 launcher。首次 R02 定点复核判定 `FAIL/BLOCKING=1/NON_BLOCKING=0`：解析 cmdline 时删除空字段，末尾/中间额外空参数会误接受，expected 合法空参数会误拒绝。主 agent 已改为 canonical cmdline 原始 bytes 直接比较并拒绝 expected 内嵌 NUL，补齐四类边界测试；再次零问题复核前仍不创建 recovery gate | `M9_source_prepare_py39_recovery_pid_reuse_targeted_reaudit.md`，FAIL 报告 SHA-256 `319FA1404C48DAE6062AD3510534851FF6BF7FFEC70E197C2C87118EECA2433D` |
+| 2026-08-28 | R02 第二次定点复核 `PASS/0/0`；主 agent 创建 root-only recovery gate 并恰好执行一次 `recover`。独立执行事实审计确认 journal/transaction `SUCCESS_COMMITTED`、旧失败证据不变、staging 以 5,319-record 原闭集退休、ledger 61,248-byte 前缀后只增加一个 578-byte recovery 事件、state/workflow 仅恢复为非 hard-stop/AUDIT_PASSED，预算历史全部保留。该 PASS 不授权 source_prepare | R02 报告 SHA `B5D7A15C...0039C3`；recovery fact 报告 SHA `BDC3B023...9AA19` |
+| 2026-08-29 | 版本化替代闭集初审判定 `FAIL/BLOCKING=6/NON_BLOCKING=0`，冻结 CONS-B01—B06：common/合同仍读旧 manifest、未来单次授权未机器门控、refresh 接受非法 phase、首次写入前 preflight 不完整、旧 active inode 未闭合、consumer-gate 悬空 symlink 可被覆盖。主 agent 已统一新 manifest，增加默认缺席且精确绑定 operation/runtime 的 root authorization object，重写 inode 继承五阶段状态机，把 recovery/预算/锁完整 preflight 前移至 bootstrap 与 snapshot 首写之前，并补齐真实 post-rename、非法 phase、same-byte inode、悬空 gate 和缺授权零写负例。固定 Python 3.9.23 下 21 项 consumer 与 110 项控制回归通过；等待同一审计员定点复核 | `M9_source_prepare_py39_consumer_replacement_independent_audit.md`，初审 SHA `FB193062...41DD4`；修订工作包、合同与两个 frozen manifest |
+| 2026-08-29 | consumer 替代闭集第一次定点复核关闭 B01/B04/B05/B06，但判定 `FAIL/BLOCKING=2/NON_BLOCKING=0`：R01 为 operation id 与冻结布尔 `--overlap-operation` 不兼容，R02 为 installer 顶层 preflight 阻断 rename 窗口和终态 gate 缺失重入。主 agent 已加入专用 `--consumer-operation-id` 并在移除该字段后以真实冻结 parser/validator 验证原生 `source_prepare`；installer 将 recovery 不可变核心与 refresh 相位检查分离，顶层只读识别并续提 post-retire、post-activate 和 `SUCCESS_COMMITTED` 后 gate 缺失三态。固定 Python 3.9.23 consumer 回归 22/22 通过，尚待全量冻结与同一审计员复核；正式 WSL 未写入 | 定点复核报告 SHA `DB437A09...904EA`；R01/R02 修订代码、合同与工作包 |
+| 2026-08-29 | consumer 替代闭集第二次定点复核关闭 R01/R02，但判定 `FAIL/BLOCKING=1/NON_BLOCKING=0`，新增 R03：pristine installer 在锁内完整历史闭集和 authorization 缺席复核前可能写 replacement snapshot。主 agent 已把完整 guard 移到 `prepare_snapshot_for_refresh()` 之前，并保留 snapshot 后、refresh 后与 consumer-gate 后复核；新增顺序探针证明 `history -> authorization -> prepare_snapshot`，历史漂移或授权对象存在时 prepare 零次调用。固定 Python 3.9.23 consumer 回归 23/23 通过；等待同一审计员关闭 R03，正式 WSL 仍零写 | 第二次定点复核报告 SHA `75DB2EA8...08CFE`；R03 定点修订 |
 | 2026-08-20 | source-control recovery 同一事务续提已完成并通过独立执行事实审计：同一 transaction/event 收敛为 `SUCCESS_COMMITTED/COMMITTED`，ledger 事件恰好一次，state/workflow 恢复为非 hard-stop/AUDIT_PASSED，六项 source/build 产品缺席；只允许进入 D-018 门控后的 UID1000 `source_prepare` | `M9_source_control_recovery_resume_execution_independent_audit.md`，SHA-256 `067394EBC9E3FB9904E0B4354C7B3B2E18E376F720D4DA89057EC30B7E5EE4A4` |
 | 2026-08-12 | M9-04 完成官方 graphene ZIP 的 Range 安全下载、字节/MD5/SHA-256、4050 成员 CRC、安全路径、原子解压、3600 文件逐项 SHA 和 450 结构全量数据合同。结构训练合同通过；但 450/450 均为 `isorthogonal=false` 且发布包无 overlap/参考能带，登记 `M9-DATA-B01`，M9/M9-04 转为 `BLOCKED`，M9-05 未启动，等待独立复核与用户路线决策 | `06_reproduction/manifests/data_manifest.json`；`06_reproduction/reports/M9_data_contract_report.md`；运行时合同 SHA `A23E84DB...2B31B0` |
 | 2026-08-12 | 新独立审计员全量读取官方 ZIP、3600 个解压文件、1,296,000 个 rc 数组和 1,296,000 个 rh 数组，并核对 DeepH v0.2.2 源码、预算和授权边界；确认 `M9-DATA-B01 OPEN`、`BLOCKING=1`、`NON_BLOCKING=0`，无新增实施缺陷，明确不允许启动 M9-05 | `M9_data_contract_independent_audit.md`，SHA-256 `F2F59785164FC4CA112D30501D181787B7B2DD6D5C077BD17F5BF8813D8CE40D` |

@@ -20,6 +20,7 @@ from m9_overlap_common import (
     runtime_path,
     save_workflow_state,
     verify_frozen_project_files,
+    write_utf8_lf,
     workflow_lock,
 )
 
@@ -322,7 +323,7 @@ def prepare_structure(structure_id: str, contract: dict[str, object], contract_h
             loaded["fractional"],  # type: ignore[arg-type]
             contract,
         )
-        input_path.write_text(input_text, encoding="utf-8", newline="\n")
+        write_utf8_lf(input_path, input_text)
         rendered = verify_rendered_input(
             input_path.read_text(encoding="utf-8"),
             structure_id,

@@ -18,7 +18,10 @@ import traceback
 
 
 PROJECT_ROOT = Path("/mnt/e/Projects/Codex/DeepH")
-FROZEN_HASHES = PROJECT_ROOT / "06_reproduction/manifests/m9_overlap_frozen_hashes.json"
+FROZEN_HASHES = (
+    PROJECT_ROOT
+    / "06_reproduction/manifests/m9_overlap_py39_recovery_frozen_hashes.json"
+)
 CAPABILITY_ROOT = Path("/home/evan-williams/deeph-m9/manifests/overlap_capabilities")
 CONTROL_DIRECTORY = PROJECT_ROOT / "06_reproduction/scripts"
 BOOTSTRAP_MODULE_NAMES = ("argparse", "hashlib", "json", "pathlib")

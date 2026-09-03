@@ -16,9 +16,9 @@ CONTRACT_PATH = Path(
     "/mnt/e/Projects/Codex/DeepH/06_reproduction/configs/m9_overlap_only_contract.json"
 )
 FROZEN_HASHES_PATH = Path(
-    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_overlap_frozen_hashes.json"
+    "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_overlap_py39_recovery_frozen_hashes.json"
 )
-EXPECTED_CONTRACT_SHA256 = "19290a2bfeaf46b35185f0f61f6ee5d8fb688f3c67fefa8430cd143391fee70b"
+EXPECTED_CONTRACT_SHA256 = "a0e6d017f568e5caa7fe7a49939330c88263058066af14ce8809ef625b36abb0"
 WORKFLOW_LOCK = Path("/home/evan-williams/deeph-m9/manifests/overlap_workflow.lock")
 _BUDGET_CONTEXT: dict[str, object] | None = None
 
@@ -29,6 +29,14 @@ def file_sha256(path: Path) -> str:
         while block := handle.read(8 * 1024 * 1024):
             digest.update(block)
     return digest.hexdigest()
+
+
+def write_utf8_lf(path: Path, text: str) -> None:
+    """Write the exact UTF-8 bytes produced by an LF-normalized renderer."""
+    if "\r" in text:
+        raise ValueError("rendered text contains a non-LF line ending")
+    with path.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(text)
 
 
 def install_budget_context(value: dict[str, object]) -> None:

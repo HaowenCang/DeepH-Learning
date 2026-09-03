@@ -1,0 +1,13 @@
+{
+  "schema_version": "m9-source-prepare-py39-recovery-verdict-v1",
+  "decision_id": "D-018",
+  "status": "PASS",
+  "blocking": 0,
+  "non_blocking": 0,
+  "report_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_prepare_py39_recovery_pid_reuse_targeted_reaudit.md",
+  "report_sha256": "b5d7a15ccbb0fa0f80543f29a824265130968496f208e4af8e12c0cccd0039c3",
+  "work_package_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_prepare_py39_recovery_work_package.md",
+  "work_package_sha256": "804406a561b7f86ce46321aa3286552ddeabf07b430e3f29736570f9b9f7a72d",
+  "frozen_hashes_path": "/mnt/e/Projects/Codex/DeepH/06_reproduction/manifests/m9_source_prepare_py39_recovery_frozen_hashes.json",
+  "frozen_hashes_sha256": "9923f68e77e5ad63350af84ed42c9eac1826621f6c5a9a0c9b48df6d4c875d8d"
+}

@@ -1,0 +1,248 @@
+{
+  "schema": "m9-source-build-wsl-shutdown-recovery-v2-postexecution-evidence-v1",
+  "captured_utc": "2026-09-03T03:12:32.3217963Z",
+  "capture_mode": "independent-read-only-fixed-python3.9.23-I-S-B",
+  "audit_artifact_correction": {
+    "reason": "The first edition copied an incorrect consumed-capability digest from an intermediate audit summary instead of the formal object. The incorrect value has been removed and all digest fields have been independently recomputed.",
+    "formal_object_bytes": 4513,
+    "formal_object_sha256": "8d6aff34eec0ee29ce8a7b8e6a8fdf8a76b78ec1fe5a5bd584ee1e2587607204",
+    "formal_object_state": "CONSUMED",
+    "second_digest_mismatch_found": false
+  },
+  "authority": {
+    "controller_sha256": "21cf81c6a63218a6e1de23bf14e2e9d928eb413fd5529a2d18d0b8859d3a1801",
+    "work_package_sha256": "23a3df56569a6ce2197be927878e0b3a46cf9df172f67e7078b416864dacf318",
+    "frozen_sha256": "139fb44a695873f1771fa05bd15bc28a9ac348ee2f6fc8a567080c7e920b1e62",
+    "initial_audit_sha256": "3d4d8c1316d0b76404b032393d2cc8dfc8213fe590a566b6c4184b01f37a886e",
+    "initial_verdict_sha256": "bae4b15404359c7e558650b4a73adb8c59e0c4cc0077c510853b1e27e0fd300b",
+    "targeted_reaudit_sha256": "f39e977092fc5b141507542828fdacb6a045b343a1aebf23a2e95f252fde54f4",
+    "final_verdict_sha256": "9f9331d5ca762f4fb54325a54fe21c9b7d4955d84856598d143e965f2f730fc9",
+    "interruption_evidence_sha256": "9985eff9ec38d5763ace3ede75eef418ed8d57bbf5f7611025154f992debebbb",
+    "interruption_report_sha256": "0bc6d751b11f03f50bb861b143e69116288838dc56765bbc32e52492ad5ce5e4",
+    "preexecution_evidence_sha256": "11c20faeb1069d29804d6ffa5b98705ab6579ced0a62ca7d2b0583eb1c7ecc70",
+    "v4_manifest_sha256": "5862155306e595f268e996a9712194faabd2347e94b73a0118ebb403c763cf09",
+    "execution_record_sha256_untrusted_locator_only": "c28d4de35b72662f30fbb8b804aca39f2846c30550c372ed55185a58ba08ea42"
+  },
+  "formal_namespace": {
+    "before_count": 275,
+    "before_canonical_sha256": "8f904289db590a6bf68d7d62f0e13cda0893cec30321274d67559261758402b9",
+    "after_count": 301,
+    "after_canonical_sha256": "5153de04dd6a33f8851cd898d8af9c8e655a57a161d31f70a7f60dc8032c0f42",
+    "added_count": 26,
+    "removed": [],
+    "added_closure_exact": true,
+    "added_breakdown": {
+      "root_private_directory_and_20_files": 21,
+      "public_snapshot_directory_and_4_files": 5
+    },
+    "existing_changed_only_as_allowed": [
+      "/home/evan-williams/deeph-m9/controls",
+      "/home/evan-williams/deeph-m9/manifests",
+      "/home/evan-williams/deeph-m9/manifests/budget_ledger.jsonl",
+      "/home/evan-williams/deeph-m9/manifests/budget_state.json",
+      "/home/evan-williams/deeph-m9/manifests/overlap_transaction.json",
+      "/home/evan-williams/deeph-m9/manifests/overlap_workflow_state.json",
+      "/root/deeph-m9-control"
+    ],
+    "unexpected_existing_changes": []
+  },
+  "runtime": {
+    "budget_ledger": {
+      "bytes": 70635,
+      "sha256": "24253c63284171f826b6b068053e8bd7fe1fd1a8e2feadbca3f5885f4443ed8b",
+      "dev": 2096,
+      "ino": 50691,
+      "uid": 1000,
+      "gid": 1000,
+      "mode": 420,
+      "nlink": 1,
+      "prefix_bytes": 68599,
+      "prefix_sha256": "f3f44ee5169bbeb44d175ff0aa381cda70684ad66f11ce57725c2e774471d4c7",
+      "prefix_exact": true,
+      "line_count_before": 68,
+      "line_count_after": 69,
+      "recovery_event_count": 1,
+      "suffix_is_exact_generated_event_line": true
+    },
+    "budget_state": {
+      "bytes": 2494,
+      "sha256": "c45337d97584abbce0c885ca233d9fd9bd9b548d17847a52a7f1b398fc9c1dec",
+      "hard_stopped": false,
+      "active": null,
+      "overlap_build_seconds": 7645.646848354001,
+      "overlap_smoke_seconds": 0.0,
+      "overlap_batch_seconds": 0.0,
+      "compatibility_gpu_seconds": 54.84820560599999,
+      "training_gpu_seconds": 0.0,
+      "physical_validation_gpu_seconds": 0.0,
+      "d017_credit_seconds": 7200.075310528,
+      "historical_markers_preserved": true,
+      "wsl_shutdown_recovery_marker": "m9-source-build-wsl-shutdown-recovery-20260902-01"
+    },
+    "workflow": {
+      "bytes": 1105,
+      "sha256": "96778c2501f2d7eca33b973266e4a8e33e22bc65238cd0b9f12d014a3c5c7aa7",
+      "hard_stopped": false,
+      "active": null,
+      "stage": "SOURCES_PREPARED",
+      "historical_markers_preserved": true,
+      "wsl_shutdown_recovery_marker": "m9-source-build-wsl-shutdown-recovery-20260902-01"
+    },
+    "transaction": {
+      "bytes": 2689,
+      "sha256": "cf17e84abf1303438220ad3a872375e779de19052a10cf2cee41055f0d04ed91",
+      "transaction_id": "d52575f446d3c62f0fc93c3c65f3c959",
+      "action": "source_build",
+      "status": "FAILED_COMMITTED",
+      "reason": [
+        "wsl_shutdown_external_interruption"
+      ],
+      "elapsed_seconds": 138.401802566,
+      "elapsed_semantics": "conservative_wall_upper_bound_not_measured_cpu",
+      "exit_code": null,
+      "timed_out": false,
+      "end_utc": "2026-09-01T14:49:10.512965566Z",
+      "launcher_receipt_sha256": null,
+      "historical_identity_and_bindings_preserved": true
+    },
+    "all_four_exact_controller_targets": true
+  },
+  "ledger_event": {
+    "event": "SOURCE_BUILD_WSL_SHUTDOWN_RECOVERY",
+    "event_id": "m9-source-build-wsl-shutdown-recovery-20260902-01",
+    "parent_transaction_id": "d52575f446d3c62f0fc93c3c65f3c959",
+    "elapsed_seconds": 138.401802566,
+    "source_build_authorized": false,
+    "authorization_frozen_sha256": "139fb44a695873f1771fa05bd15bc28a9ac348ee2f6fc8a567080c7e920b1e62",
+    "authorization_report_sha256": "f39e977092fc5b141507542828fdacb6a045b343a1aebf23a2e95f252fde54f4",
+    "authorization_verdict_sha256": "9f9331d5ca762f4fb54325a54fe21c9b7d4955d84856598d143e965f2f730fc9"
+  },
+  "trees": {
+    "interrupted_build_archive": {
+      "count": 7621,
+      "canonical_sha256": "9210f3c37f6b328691b4bed963ee11f57fb481ba48242d2450b8d7df4e174e9f",
+      "relative_identity_mismatches_from_interrupted_build": []
+    },
+    "interrupted_log_archive": {
+      "count": 4,
+      "canonical_sha256": "9ad2f041ace0a8c712febc81b086dff58e6b688155f755c73dd7e32c9658de96",
+      "relative_identity_mismatches_from_interrupted_logs": []
+    },
+    "new_build": {
+      "count": 5319,
+      "canonical_sha256": "c9ac7a5cb34ef582ce06965d568a6fe0ded9ef4f2a51e2c07ab1e5e1898f1521",
+      "portable_sha256": "cf91d95aa8802925da676dab35fe5bb991a6061f809b871bca488f4c50347cc0",
+      "regular_file_nlink_violations": [],
+      "regular_inode_intersection_with_clean": 0
+    },
+    "clean": {
+      "count": 5319,
+      "canonical_sha256": "060012bff89f774648f090271e7c8d1b7f54802954fad51503704569d456a359",
+      "portable_sha256": "cf91d95aa8802925da676dab35fe5bb991a6061f809b871bca488f4c50347cc0"
+    },
+    "prior_build_archive": {
+      "count": 7640,
+      "canonical_sha256": "82bc6705ef8a507d2580630592f4903726622768aebb5bd7b1d22d93afa12515",
+      "unchanged": true
+    },
+    "prior_log_archive": {
+      "count": 4,
+      "canonical_sha256": "5ea65a500eaadc665b4d282ce8b8c55019629b722020b7baa73259c9f862d4de",
+      "unchanged": true
+    }
+  },
+  "root_private": {
+    "receipt_count": 21,
+    "file_count": 20,
+    "canonical_sha256": "92b5f2b1dfa82ee58accaaf2278434d933029170fc2b1a770e6342d122a8f7eb",
+    "closure_exact": true,
+    "metadata_violations": [],
+    "payload_mismatches": [],
+    "before_runtime_copies_exact": true,
+    "journal_sha256": "9ba4f235a9a4c4fb543ddf8ae47141b5d1c3cdddc592843dc187d22e0c234677",
+    "journal_phase": "SUCCESS_COMMITTED",
+    "journal_history": [
+      "PREPARED",
+      "INTERRUPTED_ARCHIVED",
+      "LOGS_ARCHIVED",
+      "CLEAN_TREE_CLONED",
+      "LEDGER_COMMITTED",
+      "TRANSACTION_COMMITTED",
+      "STATE_COMMITTED",
+      "WORKFLOW_COMMITTED",
+      "SUCCESS_COMMITTED"
+    ],
+    "history_runtime_hash_vectors_exact": true,
+    "target_hashes_exact": true,
+    "event_and_event_line_exact": true,
+    "source_build_authorized": false,
+    "control_elapsed_seconds": 35.40487090500005
+  },
+  "public_snapshot": {
+    "receipt_count": 5,
+    "file_count": 4,
+    "canonical_sha256": "3ce9732ce3629bead3826647c255cb25e7e98fb34d98d46416d4303aefd68a38",
+    "closure_exact": true,
+    "source_bytes_exact": true,
+    "manifest_exact": true,
+    "metadata_violations": [],
+    "directory_uid_gid_mode": [
+      0,
+      1000,
+      360
+    ],
+    "files_uid_gid_mode_nlink": [
+      0,
+      1000,
+      288,
+      1
+    ],
+    "contains_execution_authority": false
+  },
+  "preserved_authority": {
+    "consumed_capability_bytes": 4513,
+    "consumed_capability_sha256": "8d6aff34eec0ee29ce8a7b8e6a8fdf8a76b78ec1fe5a5bd584ee1e2587607204",
+    "consumed_capability_state": "CONSUMED",
+    "v4_gate_sha256": "dcd0a0ed3307add49df5b7586ba0bf01b2fc55b0469a42067893e563ba2ff3c1",
+    "v4_permit_sha256": "c3aae6ff0c5aaffb3d5a711b48e7dc505061959eb144509995f8e9890f5853d4",
+    "all_unchanged": true
+  },
+  "negative_and_absence_checks": {
+    "staging_absent": true,
+    "current_build_logs_absent": true,
+    "launcher_receipt_absent": true,
+    "six_final_products_absent": true,
+    "related_processes": [],
+    "cache_objects": [],
+    "new_permit_or_build_authority_absent": true,
+    "downloads_data_training_or_structure_calculation_observed": false,
+    "one_gib_storage_forecast_violations": []
+  },
+  "old_v4_replay": {
+    "uid": 1000,
+    "interpreter": "/home/evan-williams/deeph-m9/env/deeph-v022/bin/python3.9",
+    "flags": [
+      "-I",
+      "-S",
+      "-B"
+    ],
+    "installed_consumer": "/home/evan-williams/deeph-m9/controls/source-build-v4/m9_source_build_v4_consumer.py",
+    "argv": [
+      "verify-execution"
+    ],
+    "rc": 1,
+    "message": "build historical namespace closure mismatch",
+    "before_after_formal_equal": true,
+    "before_after_runtime_equal": true,
+    "before_after_six_tree_summaries_equal": true,
+    "formal_sha256_before_after": "5153de04dd6a33f8851cd898d8af9c8e655a57a161d31f70a7f60dc8032c0f42"
+  },
+  "call_count_evidence_boundary": {
+    "persistent_state_proves_exact_preflight_invocation_count": false,
+    "reason_preflight": "A contract-conforming preflight is zero-write, so its invocation count is not encoded in persistent WSL state.",
+    "persistent_state_proves_one_successful_recovery_commit": true,
+    "successful_recovery_proof": "Exact old ledger prefix plus one recovery event, one nine-phase SUCCESS_COMMITTED journal, one recovery marker, and unique archive/private/snapshot closures.",
+    "persistent_state_proves_total_recover_attempt_count": false,
+    "reason_recover_attempts": "Rejected zero-write attempts are intentionally not persistent; the evidence proves one successful commit, not the number of attempted invocations."
+  }
+}

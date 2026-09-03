@@ -1,0 +1,14 @@
+{
+  "schema_version": "m9-source-prepare-py39-single-run-authorization-v1",
+  "decision_id": "D-018-PY39-CONSUMER-REPLACEMENT",
+  "status": "AUTHORIZED",
+  "scope": "ALLOW_EXACTLY_ONE_SOURCE_PREPARE",
+  "action": "source_prepare",
+  "operation_id": "f9824f0eb63e41f19699c1114b13537e",
+  "authorization_nonce": "2c1c2cd40cdd5d0823fb7ad7f6ac5d6f9d39d4fa762f9d7588a5e1ebe92f1c33",
+  "authorization_record_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_prepare_py39_fresh_user_authorization.md",
+  "authorization_record_sha256": "258212b82ccf0fc6bcd23ce93486f692d2e092d11e502f8b09926f0575bbf368",
+  "consumer_gate_sha256": "520a8cffcab9c91400647e486de796853d8a00073892e3a4b0472cafbf9dd5c9",
+  "active_overlap_gate_sha256": "229f0846c3d22917ccb955729a577168880bca6a53ad07f32502b0ae4a4e27ab",
+  "runtime_sha256": "24a952d229fb39fa0c0198b0361e5f02955cbff74182af97a7dfb24da9075db4"
+}

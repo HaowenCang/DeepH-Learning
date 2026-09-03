@@ -9,6 +9,7 @@ into a root-owned read-only directory before either module is imported.
 from __future__ import annotations
 
 import hashlib
+import fcntl
 import json
 import os
 from pathlib import Path
@@ -23,17 +24,19 @@ PROJECT_INSTALLER = REPRODUCTION / "controllers/m9_uid1000_consumer_install.py"
 PROJECT_ADAPTER = REPRODUCTION / "controllers/m9_budget_uid1000_consumer.py"
 PROJECT_VERDICT = (
     PROJECT_ROOT
-    / "08_audits/M9_unlimited_wall_clock_uid1000_consumer_final_verdict.json"
+    / "08_audits/M9_source_prepare_py39_consumer_replacement_final_verdict.json"
 )
 PROJECT_REPORT = (
     PROJECT_ROOT
-    / "08_audits/M9_unlimited_wall_clock_uid1000_consumer_third_targeted_reaudit.md"
+    / "08_audits/M9_source_prepare_py39_consumer_replacement_independent_audit.md"
 )
 FROZEN_HASHES = (
     REPRODUCTION
-    / "manifests/m9_unlimited_wall_clock_uid1000_consumer_frozen_hashes.json"
+    / "manifests/m9_source_prepare_py39_uid1000_consumer_frozen_hashes.json"
 )
-TRUSTED_ROOT = Path("/home/evan-williams/deeph-m9/controls/uid1000-consumer-bootstrap")
+TRUSTED_ROOT = Path(
+    "/home/evan-williams/deeph-m9/controls/uid1000-consumer-py39-v2-bootstrap"
+)
 STAGING_ROOT = TRUSTED_ROOT.with_name(TRUSTED_ROOT.name + ".staging")
 TRUSTED_BOOTSTRAP = TRUSTED_ROOT / PROJECT_BOOTSTRAP.name
 TRUSTED_INSTALLER = TRUSTED_ROOT / PROJECT_INSTALLER.name
@@ -42,6 +45,39 @@ TRUSTED_VERDICT = TRUSTED_ROOT / PROJECT_VERDICT.name
 TRUSTED_REPORT = TRUSTED_ROOT / PROJECT_REPORT.name
 TRUSTED_RECEIPT = TRUSTED_ROOT / "bootstrap_receipt.json"
 FROZEN_PYTHON = Path("/home/evan-williams/deeph-m9/env/deeph-v022/bin/python3.9")
+LOCK_PATH = Path("/home/evan-williams/deeph-m9/manifests/budget.lock")
+RECOVERY_GATE = Path("/root/deeph-m9-control/source-prepare-py39-recovery-gate.json")
+RECOVERY_TRANSACTION = Path(
+    "/root/deeph-m9-control/source-prepare-py39-recovery-transaction.json"
+)
+RECOVERY_FAILURE_SNAPSHOT = Path(
+    "/root/deeph-m9-control/source-prepare-py39-failure-transaction.json"
+)
+EXPECTED_RECOVERY_GATE_SHA256 = (
+    "6a887aafc84ec6bbb558423159faac86f971265497ea79d5d9bd147a8263b73d"
+)
+EXPECTED_RECOVERY_TRANSACTION_SHA256 = (
+    "75daebc349615fb9599120002f2df11a8acd01e630aa6a703cc9fe5aad1a6a8b"
+)
+EXPECTED_FAILURE_SHA256 = (
+    "0a982e876e43768c6069fdeafd07e6e43ae03be3b1a0abc8584aa8d137bbcae7"
+)
+FORBIDDEN_INSTALL_PATHS = (
+    Path("/home/evan-williams/deeph-m9/controls/uid1000-consumer-py39-v2"),
+    Path("/home/evan-williams/deeph-m9/manifests/overlap_source_prepare_py39_uid1000_consumer_gate.json"),
+    Path("/home/evan-williams/deeph-m9/manifests/overlap_source_prepare_py39_single_run_authorization.json"),
+    Path("/root/deeph-m9-control/source-prepare-py39-consumer-refresh.json"),
+    Path("/home/evan-williams/deeph-m9/manifests/overlap_work_package_audit_gate.pre-py39-recovery.retired.json"),
+    Path("/home/evan-williams/deeph-m9/manifests/overlap_work_package_audit_gate.py39-recovery.staging.json"),
+)
+SOURCE_PRODUCTS = (
+    Path("/home/evan-williams/deeph-m9/software/openmx-overlap-src"),
+    Path("/home/evan-williams/deeph-m9/software/openmx-overlap-build.staging"),
+    Path("/home/evan-williams/deeph-m9/software/openmx-overlap-build"),
+    Path("/home/evan-williams/deeph-m9/manifests/openmx_source_receipt.json"),
+    Path("/home/evan-williams/deeph-m9/manifests/openmx_build_receipt.json"),
+    Path("/home/evan-williams/deeph-m9/manifests/openmx_overlap_source_control_report.json"),
+)
 
 
 def stable_bytes(path: Path, expected_sha256: str) -> bytes:
@@ -70,6 +106,117 @@ def stable_bytes(path: Path, expected_sha256: str) -> bytes:
         return bytes(payload)
     finally:
         os.close(descriptor)
+
+
+def full_inode_receipt(path: Path) -> tuple[dict[str, object], bytes]:
+    flags = os.O_RDONLY | getattr(os, "O_CLOEXEC", 0) | getattr(os, "O_NOFOLLOW", 0)
+    descriptor = os.open(path, flags)
+    try:
+        before = os.fstat(descriptor)
+        if not stat.S_ISREG(before.st_mode) or before.st_nlink != 1:
+            raise SystemExit(f"bootstrap preflight object metadata mismatch: {path}")
+        chunks: list[bytes] = []
+        while True:
+            chunk = os.read(descriptor, 1024 * 1024)
+            if not chunk:
+                break
+            chunks.append(chunk)
+        payload = b"".join(chunks)
+        after = os.fstat(descriptor)
+        linked = os.lstat(path)
+        fields = ("st_dev", "st_ino", "st_mode", "st_uid", "st_gid", "st_nlink", "st_size")
+        if (
+            any(getattr(before, key) != getattr(after, key) for key in fields)
+            or any(getattr(after, key) != getattr(linked, key) for key in fields)
+            or stat.S_ISLNK(linked.st_mode)
+            or len(payload) != after.st_size
+        ):
+            raise SystemExit(f"bootstrap preflight object changed: {path}")
+    finally:
+        os.close(descriptor)
+    return ({
+        "path": path.as_posix(), "sha256": hashlib.sha256(payload).hexdigest(),
+        "bytes": len(payload), "uid": after.st_uid, "gid": after.st_gid,
+        "mode": stat.S_IMODE(after.st_mode), "nlink": after.st_nlink,
+        "st_dev": int(after.st_dev), "st_ino": int(after.st_ino),
+    }, payload)
+
+
+def verify_bootstrap_runtime(lock_handle: object) -> dict[str, object]:
+    """Verify the recovered runtime before any trust-root staging write."""
+    lock_receipt, lock_payload = full_inode_receipt(LOCK_PATH)
+    opened = os.fstat(lock_handle.fileno())  # type: ignore[attr-defined]
+    if (
+        lock_payload != b""
+        or (opened.st_dev, opened.st_ino) != (lock_receipt["st_dev"], lock_receipt["st_ino"])
+    ):
+        raise SystemExit("bootstrap budget lock identity mismatch")
+    gate_receipt, gate_payload = full_inode_receipt(RECOVERY_GATE)
+    transaction_receipt, transaction_payload = full_inode_receipt(RECOVERY_TRANSACTION)
+    failure_receipt, failure_payload = full_inode_receipt(RECOVERY_FAILURE_SNAPSHOT)
+    if (
+        gate_receipt.get("sha256") != EXPECTED_RECOVERY_GATE_SHA256
+        or transaction_receipt.get("sha256") != EXPECTED_RECOVERY_TRANSACTION_SHA256
+        or failure_receipt.get("sha256") != EXPECTED_FAILURE_SHA256
+        or any(
+            receipt.get("uid") != 0 or receipt.get("gid") != 0
+            or receipt.get("mode") != 0o600 or receipt.get("nlink") != 1
+            for receipt in (gate_receipt, transaction_receipt, failure_receipt)
+        )
+    ):
+        raise SystemExit("bootstrap fixed recovery receipt mismatch")
+    gate = json.loads(gate_payload.decode("utf-8"))
+    transaction = json.loads(transaction_payload.decode("utf-8"))
+    if (
+        transaction.get("schema_version")
+        != "m9-source-prepare-py39-recovery-transaction-v1"
+        or transaction.get("state") != "SUCCESS_COMMITTED"
+        or transaction.get("gate") != gate_receipt
+        or gate.get("status") != "PASS"
+        or int(gate.get("blocking", -1)) != 0
+        or int(gate.get("non_blocking", -1)) != 0
+        or not isinstance(transaction.get("pre_runtime"), dict)
+        or transaction["pre_runtime"].get("lock") != lock_receipt
+    ):
+        raise SystemExit("bootstrap recovery transaction binding mismatch")
+    current: dict[str, object] = {}
+    payloads: dict[str, bytes] = {}
+    for name, expected in (
+        ("state", transaction["post_state"]),
+        ("workflow", transaction["post_workflow"]),
+        ("ledger", transaction["post_ledger"]),
+    ):
+        receipt, payload = full_inode_receipt(Path(str(expected["path"])))
+        if receipt != expected:
+            raise SystemExit(f"bootstrap recovered post-{name} drift")
+        current[name] = receipt; payloads[name] = payload
+    for name, expected in transaction["pre_runtime"].items():
+        if name in {"lock", "state", "workflow", "ledger"}:
+            continue
+        receipt, payload = full_inode_receipt(Path(str(expected["path"])))
+        if receipt != expected:
+            raise SystemExit(f"bootstrap immutable recovery drift: {name}")
+        current[name] = receipt; payloads[name] = payload
+    if payloads["failure_transaction"] != failure_payload:
+        raise SystemExit("bootstrap failure snapshot mismatch")
+    state = json.loads(payloads["state"].decode("utf-8"))
+    workflow = json.loads(payloads["workflow"].decode("utf-8"))
+    if (
+        state.get("wall_clock_policy", {}).get("mode") != "UNLIMITED"
+        or state.get("hard_stopped")
+        or state.get("active_overlap_transaction") is not None
+        or workflow.get("stage") != "AUDIT_PASSED"
+        or workflow.get("hard_stopped")
+        or workflow.get("active_transaction") is not None
+        or any(os.path.lexists(path) for path in SOURCE_PRODUCTS)
+        or any(os.path.lexists(path) for path in FORBIDDEN_INSTALL_PATHS)
+    ):
+        raise SystemExit("bootstrap recovered runtime semantics or namespace mismatch")
+    return {
+        "lock": lock_receipt, "gate": gate_receipt,
+        "transaction": transaction_receipt, "failure": failure_receipt,
+        "current": current,
+    }
 
 
 def durable_member(path: Path, payload: bytes) -> None:
@@ -143,7 +290,7 @@ def verify_tree(
         for destination, digest in expected.items()
     }
     expected_receipt = {
-        "schema_version": "m9-uid1000-consumer-bootstrap-v1",
+        "schema_version": "m9-source-prepare-py39-consumer-bootstrap-v1",
         "decision_id": "D-018",
         "frozen_hashes_sha256": frozen_sha256,
         "members": members,
@@ -157,7 +304,8 @@ def verify_tree(
     )
     receipt = json.loads(receipt_payload.decode("utf-8"))
     if (
-        receipt.get("schema_version") != "m9-uid1000-consumer-bootstrap-v1"
+        receipt.get("schema_version")
+        != "m9-source-prepare-py39-consumer-bootstrap-v1"
         or receipt.get("decision_id") != "D-018"
         or receipt.get("frozen_hashes_sha256") != frozen_sha256
         or receipt != expected_receipt
@@ -170,7 +318,7 @@ def verify_installed(expected: dict[Path, str], frozen_sha256: str) -> dict[str,
     return verify_tree(TRUSTED_ROOT, expected, frozen_sha256)
 
 
-def main() -> int:
+def _install_trust_root() -> int:
     if not hasattr(os, "geteuid") or os.geteuid() != 0:
         raise SystemExit("consumer bootstrap requires root")
     if (
@@ -268,7 +416,7 @@ def main() -> int:
             "sha256": digest, "bytes": len(payloads[source])
         }
     receipt = {
-        "schema_version": "m9-uid1000-consumer-bootstrap-v1",
+        "schema_version": "m9-source-prepare-py39-consumer-bootstrap-v1",
         "decision_id": "D-018",
         "frozen_hashes_sha256": frozen_sha,
         "members": members,
@@ -295,6 +443,28 @@ def main() -> int:
     verify_installed(destination_hashes, frozen_sha)
     print(json.dumps({"status": "consumer_bootstrap_installed", "receipt": receipt}, sort_keys=True))
     return 0
+
+
+def main() -> int:
+    if not hasattr(os, "geteuid") or os.geteuid() != 0:
+        raise SystemExit("consumer bootstrap requires root")
+    if (
+        Path(sys.executable).resolve(strict=True) != FROZEN_PYTHON.resolve(strict=True)
+        or not sys.flags.isolated
+        or not sys.flags.no_site
+        or not sys.flags.dont_write_bytecode
+        or len(sys.argv) != 7
+    ):
+        raise SystemExit("consumer bootstrap requires frozen Python -I -S -B and six hashes")
+    flags = os.O_RDWR | getattr(os, "O_CLOEXEC", 0) | getattr(os, "O_NOFOLLOW", 0)
+    descriptor = os.open(LOCK_PATH, flags)
+    with os.fdopen(descriptor, "r+") as lock_handle:
+        fcntl.flock(lock_handle, fcntl.LOCK_EX)
+        preflight = verify_bootstrap_runtime(lock_handle)
+        result = _install_trust_root()
+        if verify_bootstrap_runtime(lock_handle) != preflight:
+            raise SystemExit("bootstrap runtime drift after trust-root installation")
+        return result
 
 
 if __name__ == "__main__":

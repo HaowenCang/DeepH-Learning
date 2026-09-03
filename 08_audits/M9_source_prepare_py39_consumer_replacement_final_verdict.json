@@ -1,0 +1,11 @@
+{
+  "schema_version": "m9-source-prepare-py39-consumer-replacement-verdict-v1",
+  "decision_id": "D-018-PY39-CONSUMER-REPLACEMENT",
+  "verdict": "PASS",
+  "blocking": 0,
+  "non_blocking": 0,
+  "report_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_prepare_py39_consumer_replacement_independent_audit.md",
+  "report_sha256": "798dad58c7674a7af66d845272a355feb4500ca5824eb9d8a2a1f72723cb9487",
+  "work_package_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_prepare_py39_consumer_replacement_work_package.md",
+  "work_package_sha256": "dc1d0d992f7e1328f79a4436eb4535b79ba2ab48fcee1b44fa498c31c30e91a2"
+}

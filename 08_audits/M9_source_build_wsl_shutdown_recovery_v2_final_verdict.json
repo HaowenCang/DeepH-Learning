@@ -1,0 +1,9 @@
+{
+  "schema": "m9-wsl-shutdown-recovery-implementation-verdict-v2",
+  "status": "PASS",
+  "blocking": 0,
+  "non_blocking": 0,
+  "frozen_sha256": "139fb44a695873f1771fa05bd15bc28a9ac348ee2f6fc8a567080c7e920b1e62",
+  "report_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_source_build_wsl_shutdown_recovery_v2_targeted_reaudit.md",
+  "report_sha256": "f39e977092fc5b141507542828fdacb6a045b343a1aebf23a2e95f252fde54f4"
+}

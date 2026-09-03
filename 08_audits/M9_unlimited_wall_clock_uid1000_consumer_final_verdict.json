@@ -1,0 +1,11 @@
+{
+  "schema_version": "m9-unlimited-wall-clock-uid1000-consumer-audit-verdict-v1",
+  "decision_id": "D-018",
+  "verdict": "PASS",
+  "blocking": 0,
+  "non_blocking": 0,
+  "work_package_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_unlimited_wall_clock_uid1000_consumer_work_package.md",
+  "work_package_sha256": "cf545ae65954f4bd6978abe0429d66b7a209ca8be11b2e76f45b15a7765193e2",
+  "report_path": "/mnt/e/Projects/Codex/DeepH/08_audits/M9_unlimited_wall_clock_uid1000_consumer_third_targeted_reaudit.md",
+  "report_sha256": "602c47cf4b4c8504b32ac747f75397a33561214f3d20e736f0543ea004920d75"
+}
